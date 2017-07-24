@@ -1,0 +1,202 @@
+set $mod mod4
+
+font pango:Terminus 8
+
+# Espresso Dark color scheme
+set $background #ffffff
+set $foreground #606060
+set $black      #5b4848
+set $red	    #cb6077
+set $green		#bec55b
+set $yellow		#e4bc87
+set $blue		#8ab3d5
+set $magenta    #a89bb9
+set $cyan	    #7bcdb4
+set $white	    #e0d8d6
+
+# Set workspaces
+set $ws1  "1: 1"
+set $ws2  "2: 2"
+set $ws3  "3: 3"
+set $ws4  "4: 4"
+set $ws5  "5: 5"
+set $ws6  "6: 6"
+set $ws7  "7: 7"
+set $ws8  "8: 8"
+set $ws9  "9: 9"
+set $ws10 "10: 10"
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#autostart
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfsettingsd
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id compton -b
+#exec --no-startup-id nm-applet
+
+# set wallpaper
+exec --no-startup-id nitrogen --restore
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# start alternative terminal
+bindsym $mod+Shift+Return exec urxvt
+
+# start a web browser
+bindsym $mod+w exec firefox
+
+# file manager
+bindsym $mod+f exec thunar
+
+# kill focused window
+bindsym $mod+Escape kill
+
+#change volume
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master '5%+'
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master '5%-'
+
+# music control
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc play
+bindsym XF86AudioPause exec mpc pause
+bindsym XF86AudioStop exec mpc stop
+
+#screenshots
+bindsym Print exec --no-startup-id scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Control+Print exec --no-startup-id xfce4-screenshooter
+
+# program launcher
+bindsym $mod+d exec rofi -show run -font "Roboto 9" -fullscreen True 
+
+# change focus
+bindsym $mod+Control+Left focus left
+bindsym $mod+Control+Down focus down
+bindsym $mod+Control+Up focus up
+bindsym $mod+Control+Right focus right
+
+# my own move
+bindsym $mod+Left move left
+bindsym $mod+Down move down
+bindsym $mod+Up move up
+bindsym $mod+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Control+f fullscreen
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Control+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+Control+c focus parent
+ 
+# focus the child container
+bindsym $mod+Shift+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+BackSpace reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Control+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Delete exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Tab mode "default"
+}
+
+mode "gaps" {
+        bindsym Down gaps inner all minus 2
+        bindsym Left gaps outer all minus 2
+        bindsym Up gaps inner all plus 2
+        bindsym Right gaps outer all plus 2
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Tab    mode "default"
+}
+
+bindsym $mod+r mode "resize"
+bindsym $mod+g mode "gaps"
+
+# COLORS                BORDER      	BACKGROUND		TEXT        	INDICATOR
+client.focused          $background    	$background   	$background 	$background
+client.focused_inactive $background		$background 	$foreground 	$background
+client.unfocused        $background   	$background  	$background 	$background
+client.urgent           $background     $background   	$foreground 	$background  
+
+# Start Polybar
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Start i3bar to display a workspace bar (plus the system information i3status)
+bar {
+    i3bar_command     i3bar  
+    status_command    i3blocks
+    position          top
+    workspace_buttons yes
+    tray_output none
+    font pango: Terminus, uushi, fontawesome 8
+    colors {
+        background $background
+        statusline $foreground
+        
+        # <border name>			<border>		<background>	<text>
+        focused_workspace		$background		$red			$background
+        active_workspace		$background		$background		$foreground
+        inactive_workspace		$background		$background		$foreground
+        urgent_workspace		$background		$background		$foreground
+    }
+}
+
+#removes window titles
+for_window [class=".*"] border pixel 4
+gaps inner 12
+gaps outer 0
+
+# start mpd
+exec --no-startup-id mpd

@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/">
+  <menu id="root-menu" label="Applications">
+    <separator label="MAIN MENU"/>
+    <item label="Run Program" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/system-run.svg">
+      <action name="Execute">
+        <command>rofi -modi drun,run -show drun -fullscreen -font "Roboto Regular 8"</command>
+      </action>
+    </item>
+    <separator/>
+    <item label="Terminal" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/terminal.svg">
+      <action name="Execute">
+        <command>exo-open --launch TerminalEmulator</command>
+      </action>
+    </item>
+    <item label="Web Browser" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/firefox.svg">
+      <action name="Execute">
+        <command>exo-open --launch WebBrowser</command>
+      </action>
+    </item>
+    <item label="File Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/file-manager.svg">
+      <action name="Execute">
+        <command>exo-open --launch FileManager</command>
+      </action>
+    </item>
+    <separator/>
+    <menu id="Accessories" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-utilities.svg" label="Accessories">
+      <separator label="Accessories"/>
+      <item label="Archive Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/file-roller.svg">
+        <action name="Execute">
+          <command>file-roller</command>
+        </action>
+      </item>
+      <item label="Bulk Rename" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/Thunar.svg">
+        <action name="Execute">
+          <command>/usr/lib/Thunar/ThunarBulkRename</command>
+        </action>
+      </item>
+      <item label="Catfish File Search" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/catfish.svg">
+        <action name="Execute">
+          <command>/usr/bin/catfish</command>
+        </action>
+      </item>
+      <item label="Character Map" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/accessories-character-map.svg">
+        <action name="Execute">
+          <command>gucharmap</command>
+        </action>
+      </item>
+      <item label="ClipIt" icon="/usr/share/icons/Sardi-Ghost-Flexible/16/apps/clipit-trayicon.svg">
+        <action name="Execute">
+          <command>clipit</command>
+        </action>
+      </item>
+      <item label="Font Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-font.svg">
+        <action name="Execute">
+          <command>font-manager</command>
+        </action>
+      </item>
+      <item label="Galculator" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/galculator.svg">
+        <action name="Execute">
+          <command>galculator</command>
+        </action>
+      </item>
+      <item label="Htop" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/htop.svg">
+        <action name="Execute">
+          <command>termite -e 'htop'</command>
+        </action>
+      </item>
+      <item label="Nitrogen" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/nitrogen.svg">
+        <action name="Execute">
+          <command>nitrogen</command>
+        </action>
+      </item>
+      <item label="Plank" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/plank.svg">
+        <action name="Execute">
+          <command>plank</command>
+        </action>
+      </item>
+      <item label="Redshift" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/redshift.svg">
+        <action name="Execute">
+          <command>redshift-gtk</command>
+        </action>
+      </item>
+      <item label="Task Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/utilities-system-monitor.svg">
+        <action name="Execute">
+          <command>xfce4-taskmanager</command>
+        </action>
+      </item>
+      <item label="Temps" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/Temps.svg">
+        <action name="Execute">
+          <command>temps</command>
+        </action>
+      </item>
+      <item label="Terminator" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/terminator.svg">
+        <action name="Execute">
+          <command>terminator</command>
+        </action>
+      </item>
+      <item label="Termite" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/utilities-terminal.svg">
+        <action name="Execute">
+          <command>termite</command>
+        </action>
+      </item>
+      <item label="Urxvt" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/utilities-terminal.svg">
+        <action name="Execute">
+          <command>urxvt</command>
+        </action>
+      </item>
+      <item label="USB Image Writer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/usb-creator.svg">
+        <action name="Execute">
+          <command>mintstick -m iso</command>
+        </action>
+      </item>
+      <item label="USB Stick Formatter" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/usb-creator.svg">
+        <action name="Execute">
+          <command>mintstick -m format</command>
+        </action>
+      </item>
+      <item label="UXTerm" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/xterm-color_48x48.svg">
+        <action name="Execute">
+          <command>uxterm</command>
+        </action>
+      </item>
+      <item label="Variety" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/variety.svg">
+        <action name="Execute">
+          <command>variety</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Development" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-development.svg" label="Development">
+      <separator label="DEVELOPMENT"/>
+      <item label="CMake" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/CMakeSetup.svg">
+        <action name="Execute">
+          <command>cmake-gui</command>
+        </action>
+      </item>
+      <item label="Geany" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/geany.svg">
+        <action name="Execute">
+          <command>geany</command>
+        </action>
+      </item>
+      <item label="Icon Browser" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/yad.svg">
+        <action name="Execute">
+          <command>yad-icon-browser</command>
+        </action>
+      </item>
+      <item label="Meld" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/meld.svg">
+        <action name="Execute">
+          <command>meld</command>
+        </action>
+      </item>
+      <item label="Qt Assistant" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/assistant.svg">
+        <action name="Execute">
+          <command>assistant</command>
+        </action>
+      </item>
+      <item label="Qt Designer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/QtProject-designer.svg">
+        <action name="Execute">
+          <command>designer</command>
+        </action>
+      </item>
+      <item label="Qt Linguist" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/linguist.svg">
+        <action name="Execute">
+          <command>linguist</command>
+        </action>
+      </item>
+      <item label="Qt QDbusViewer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/qdbusviewer.svg">
+        <action name="Execute">
+          <command>qdbusviewer</command>
+        </action>
+      </item>
+      <item label="Qt4 Assistant" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/assistant-qt4.svg">
+        <action name="Execute">
+          <command>assistant-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 Designer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/designer-qt4.svg">
+        <action name="Execute">
+          <command>designer-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 Linguist" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/linguist-qt4.svg">
+        <action name="Execute">
+          <command>linguist-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 QDbusViewer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/qdbusviewer-qt4.svg">
+        <action name="Execute">
+          <command>qdbusviewer-qt4</command>
+        </action>
+      </item>
+      <item label="Sublime Text 3 Dev" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/sublime-text.svg">
+        <action name="Execute">
+          <command>subl3</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Graphics" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-graphics.svg" label="Graphics">
+      <separator label="GRAPHICS"/>
+      <item label="GIMP" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gimp.svg">
+        <action name="Execute">
+          <command>gimp-2.8</command>
+        </action>
+      </item>
+      <item label="Gpick" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gpick.svg">
+        <action name="Execute">
+          <command>gpick</command>
+        </action>
+      </item>
+      <item label="GPicView" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gpicview.svg">
+        <action name="Execute">
+          <command>gpicview</command>
+        </action>
+      </item>
+      <item label="Inkscape" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/inkscape.svg">
+        <action name="Execute">
+          <command>inkscape</command>
+        </action>
+      </item>
+      <item label="Peek" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/com.uploadedlobster.peek.svg">
+        <action name="Execute">
+          <command>peek</command>
+        </action>
+      </item>
+      <item label="Viewnior" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/viewnior.svg">
+        <action name="Execute">
+          <command>viewnior</command>
+        </action>
+      </item>
+      <separator label="SCREENSHOT"/>
+      <menu id="screenshot" label="Screenshot in.." icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+        <separator label="SCREENSHOT IN.."/>
+        <item label="Screenshot Now" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+          <action name="Execute">
+            <command>scrot -d 0 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="5 Seconds" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+          <action name="Execute">
+            <command>scrot -d 5 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="10 Seconds" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+          <action name="Execute">
+            <command>scrot -d 10 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="Shot With Selection" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+          <action name="Execute">
+            <execute>scrot -s 'ARCHLabs-Selection.png' -e 'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</execute>
+          </action>
+        </item>
+      </menu>
+      <item label="Xf Screnshoter" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applets-screenshooter.svg">
+        <action name="Execute">
+          <command>xfce4-screenshooter</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Multimedia" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-multimedia.svg" label="Multimedia">
+      <separator label="MULTIMEDIA"/>
+      <item label="Audacity" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/audacity.svg">
+        <action name="Execute">
+          <command>env UBUNTU_MENUPROXY=0 audacity</command>
+        </action>
+      </item>
+      <item label="DeaDBeeF" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/deadbeef.svg">
+        <action name="Execute">
+          <command>deadbeef</command>
+        </action>
+      </item>
+      <item label="EasyTAG" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/easytag.svg">
+        <action name="Execute">
+          <command>easytag</command>
+        </action>
+      </item>
+      <item label="HandBrake" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/hb-icon.svg">
+        <action name="Execute">
+          <command>ghb</command>
+        </action>
+      </item>
+      <item label="MPV Media Player" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/mpv.svg">
+        <action name="Execute">
+          <command>mpv --player-operation-mode=pseudo-gui --</command>
+        </action>
+      </item>
+      <item label="PAVU Control" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/multimedia-volume-control.svg">
+        <action name="Execute">
+          <command>pavucontrol</command>
+        </action>
+      </item>
+      <item label="Qt V4L2 Utility" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/qv4l2.svg">
+        <action name="Execute">
+          <command>qv4l2</command>
+        </action>
+      </item>
+      <item label="Simple Recorder" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/simplescreenrecorder.svg">
+        <action name="Execute">
+          <command>simplescreenrecorder --logfile</command>
+        </action>
+      </item>
+      <item label="SMPlayer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/smplayer.svg">
+        <action name="Execute">
+          <command>smplayer</command>
+        </action>
+      </item>
+      <item label="VLC media player" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/vlc.svg">
+        <action name="Execute">
+          <command>/usr/bin/vlc --started-from-file</command>
+        </action>
+      </item>
+      <item label="Xfburn" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/media-cdrom.svg">
+        <action name="Execute">
+          <command>xfburn</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Network" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-internet.svg" label="Network">
+      <separator label="NETWORK"/>
+      <item label="Avahi SSH Server" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/network-wired.svg">
+        <action name="Execute">
+          <command>/usr/bin/bssh</command>
+        </action>
+      </item>
+      <item label="Avahi VNC Server" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/network-wired.svg">
+        <action name="Execute">
+          <command>/usr/bin/bvnc</command>
+        </action>
+      </item>
+      <item label="Chromium" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/chromium.svg">
+        <action name="Execute">
+          <command>chromium</command>
+        </action>
+      </item>
+      <item label="ELinks" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/mimetypes/html.svg">
+        <action name="Execute">
+          <command>termite -e '/usr/bin/elinks'</command>
+        </action>
+      </item>
+      <item label="FileZilla" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/filezilla.svg">
+        <action name="Execute">
+          <command>filezilla</command>
+        </action>
+      </item>
+      <item label="Firefox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/firefox.svg">
+        <action name="Execute">
+          <command>/usr/lib/firefox/firefox</command>
+        </action>
+      </item>
+      <item label="HexChat" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/hexchat.svg">
+        <action name="Execute">
+          <command>hexchat --existing</command>
+        </action>
+      </item>
+      <item label="Mail Reader" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/internet-mail.svg">
+        <action name="Execute">
+          <command>exo-open --launch MailReader</command>
+        </action>
+      </item>
+      <item label="Opera" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/opera.svg">
+        <action name="Execute">
+          <command>opera</command>
+        </action>
+      </item>
+      <item label="Transmission" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/transmission.svg">
+        <action name="Execute">
+          <command>transmission-gtk</command>
+        </action>
+      </item>
+      <item label="Vivaldi" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/vivaldi-snapshot.svg">
+        <action name="Execute">
+          <command>/usr/bin/vivaldi-snapshot</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Office" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/applications-office.svg" label="Office">
+      <separator label="OFFICE"/>
+      <item label="Document Viewer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/evince.svg">
+        <action name="Execute">
+          <command>evince</command>
+        </action>
+      </item>
+      <item label="LibreOffice Base" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-base.svg">
+        <action name="Execute">
+          <command>libreoffice --base</command>
+        </action>
+      </item>
+      <item label="LibreOffice Calc" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-calc.svg">
+        <action name="Execute">
+          <command>libreoffice --calc</command>
+        </action>
+      </item>
+      <item label="LibreOffice Draw" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-draw.svg">
+        <action name="Execute">
+          <command>libreoffice --draw</command>
+        </action>
+      </item>
+      <item label="LibreOffice Impress" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-impress.svg">
+        <action name="Execute">
+          <command>libreoffice --impress</command>
+        </action>
+      </item>
+      <item label="LibreOffice Math" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-math.svg">
+        <action name="Execute">
+          <command>libreoffice --math</command>
+        </action>
+      </item>
+      <item label="LibreOffice Writer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-writer.svg">
+        <action name="Execute">
+          <command>libreoffice --writer</command>
+        </action>
+      </item>
+      <item label="LibreOffice" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/libreoffice-startcenter.svg">
+        <action name="Execute">
+          <command>libreoffice</command>
+        </action>
+      </item>
+      <item label="WPS Presentation" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/wps-office-wppmain.svg">
+        <action name="Execute">
+          <command>/usr/bin/wpp</command>
+        </action>
+      </item>
+      <item label="WPS Spreadsheets" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/wps-office-etmain.svg">
+        <action name="Execute">
+          <command>/usr/bin/et</command>
+        </action>
+      </item>
+      <item label="WPS Writer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/wps-office-wpsmain.svg">
+        <action name="Execute">
+          <command>/usr/bin/wps</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Settings" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gnome-settings.svg" label="Settings">
+      <separator label="SETTINGS"/>
+      <item label="Accessibility" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-accessibility.svg">
+        <action name="Execute">
+          <command>xfce4-accessibility-settings</command>
+        </action>
+      </item>
+      <item label="Adobe Flash Player" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/flash-player-properties.svg">
+        <action name="Execute">
+          <command>flash-player-properties</command>
+        </action>
+      </item>
+      <item label="Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-theme.svg">
+        <action name="Execute">
+          <command>xfce4-appearance-settings</command>
+        </action>
+      </item>
+      <item label="ARandR" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/display.svg">
+        <action name="Execute">
+          <command>arandr</command>
+        </action>
+      </item>
+      <item label="Bluetooth" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/bluetooth.svg">
+        <action name="Execute">
+          <command>blueberry</command>
+        </action>
+      </item>
+      <item label="Display" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/video-display.svg">
+        <action name="Execute">
+          <command>xfce4-display-settings</command>
+        </action>
+      </item>
+      <item label="Keyboard" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-keyboard.svg">
+        <action name="Execute">
+          <command>xfce4-keyboard-settings</command>
+        </action>
+      </item>
+      <item label="LXrandr" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/video-display.svg">
+        <action name="Execute">
+          <command>lxrandr</command>
+        </action>
+      </item>
+      <item label="MIME Type Editor" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/mimetypes/application-x-executable.svg">
+        <action name="Execute">
+          <command>xfce4-mime-settings</command>
+        </action>
+      </item>
+      <item label="Mouse and Touchpad" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-peripherals.svg">
+        <action name="Execute">
+          <command>xfce4-mouse-settings</command>
+        </action>
+      </item>
+      <item label="Network Connections" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-system-network.svg">
+        <action name="Execute">
+          <command>nm-connection-editor</command>
+        </action>
+      </item>
+      <item label="Notifications" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/xfce4-notifyd.svg">
+        <action name="Execute">
+          <command>xfce4-notifyd-config</command>
+        </action>
+      </item>
+      <item label="Panel" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/xfce4-panel.svg">
+        <action name="Execute">
+          <command>xfce4-panel --preferences</command>
+        </action>
+      </item>
+      <item label="Power Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/xfce4-power-manager-settings.svg">
+        <action name="Execute">
+          <command>xfce4-power-manager-settings</command>
+        </action>
+      </item>
+      <item label="Preferred Applications" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferred-applications.svg">
+        <action name="Execute">
+          <command>exo-preferred-applications</command>
+        </action>
+      </item>
+      <item label="Print Settings" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/printer.svg">
+        <action name="Execute">
+          <command>system-config-printer</command>
+        </action>
+      </item>
+      <item label="Privilege granting" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gksu.svg">
+        <action name="Execute">
+          <command>gksu-properties</command>
+        </action>
+      </item>
+      <item label="Qt5 Settings" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-theme.svg">
+        <action name="Execute">
+          <command>qt5ct</command>
+        </action>
+      </item>
+      <item label="Removable Drives" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/devices/drive-removable-media.svg">
+        <action name="Execute">
+          <command>thunar-volman-settings</command>
+        </action>
+      </item>
+      <item label="Settings Editor" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-system.svg">
+        <action name="Execute">
+          <command>xfce4-settings-editor</command>
+        </action>
+      </item>
+      <item label="Settings Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop.svg">
+        <action name="Execute">
+          <command>xfce4-settings-manager</command>
+        </action>
+      </item>
+      <item label="Thunar Settings" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/system-file-manager.svg">
+        <action name="Execute">
+          <command>thunar-settings</command>
+        </action>
+      </item>
+    </menu>
+    <separator/>
+    <menu id="Preferences" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg" label="Preferences">
+      <separator label="PREFERENCES"/>
+      <menu id="Openbox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/openbox.svg" label="Openbox">
+        <item label="Edit menu.xml" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/mimetypes/text-xml.svg">
+          <action name="Execute">
+            <command>geany ~/.config/openbox/menu.xml</command>
+          </action>
+        </item>
+        <item label="Edit rc.xml" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/mimetypes/text-xml.svg">
+          <action name="Execute">
+            <command>geany ~/.config/openbox/rc.xml</command>
+          </action>
+        </item>
+        <item label="Edit autostart" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/mimetypes/text-xml.svg">
+          <action name="Execute">
+            <command>geany ~/.config/openbox/autostart</command>
+          </action>
+        </item>
+        <separator/>
+        <item label="GUI Menu Editor" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+          <action name="Execute">
+            <command>obmenu3</command>
+          </action>
+        </item>
+        <item label="GUI Config Tool" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+          <action name="Execute">
+            <command>obconf</command>
+          </action>
+        </item>
+        <item label="GUI Keybinds" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+          <action name="Execute">
+            <command>obkey</command>
+          </action>
+        </item>
+        <separator/>
+        <item label="Restart Openbox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/openbox.svg">
+          <action name="Execute">
+            <command>openbox --restart</command>
+          </action>
+        </item>
+        <item label="Reconfigure Openbox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/openbox.svg">
+          <action name="Execute">
+            <command>openbox --reconfigure</command>
+          </action>
+        </item>
+      </menu>
+      <menu id="Compositor" label="Compositor" execute="al-compositor" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/compton.svg"/>
+      <menu id="Conky" label="Conky" execute="al-conky-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/conky.svg"/>
+      <menu id="Tint2" label="Tint2" execute="al-tint2-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/tint2.svg"/>
+      <item label="Tint2 GUI" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/tint2conf.svg">
+        <action name="Execute">
+          <command>tint2conf</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="Choose wallpaper" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/nitrogen.svg">
+        <action name="Execute">
+          <command>nitrogen</command>
+        </action>
+      </item>
+      <item label="Lxappearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>lxappearance</command>
+        </action>
+      </item>
+      <item label="Xfce4 Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-theme.svg">
+        <action name="Execute">
+          <command>xfce4-appearance-settings</command>
+        </action>
+      </item>
+      <item label="Rofi Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>rofi-theme-selector</command>
+        </action>
+      </item>
+      <item label="Termite Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>geany ~/.config/termite/config</command>
+        </action>
+      </item>
+      <item label="LightDM Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>gksudo lightdm-gtk-greeter-settings</command>
+        </action>
+      </item>
+      <item label="Slim Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>gksudo geany /etc/slim.conf</command>
+        </action>
+      </item>
+      <item label="Exit Appearance" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/theme.svg">
+        <action name="Execute">
+          <command>gksudo geany /etc/oblogout.conf</command>
+        </action>
+      </item>
+      <item label="Dmenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/alacarte.svg">
+        <action name="Execute">
+          <command>dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'</command>
+        </action>
+      </item>
+      <item label="Oomox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/preferences-desktop-theme.svg">
+        <action name="Execute">
+          <command>oomox-gui</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="System Settings" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/settings.svg" label="System Settings">
+      <separator label="SYSTEM SETTINGS"/>
+      <item label="Pamac Manager" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/pamac.svg">
+        <action name="Execute">
+          <command>pamac-manager</command>
+        </action>
+      </item>
+      <item label="Pamac Updater" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/pamac.svg">
+        <action name="Execute">
+          <command>pamac-updater</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="File Manager As Root" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/thunar.svg">
+        <action name="Execute">
+          <command>gksudo thunar</command>
+        </action>
+      </item>
+      <item label="Text Editor As Root" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/geany.svg">
+        <action name="Execute">
+          <command>gksudo geany</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="Disks" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gnome-disks.svg">
+        <action name="Execute">
+          <command>gnome-disks</command>
+        </action>
+      </item>
+      <item label="Login Config" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/login.svg">
+        <action name="Execute">
+          <command>gksudo geany /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm.conf</command>
+        </action>
+      </item>
+      <item label="GParted" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/gparted.svg">
+        <action name="Execute">
+          <command>gksudo gparted</command>
+        </action>
+      </item>
+      <item label="Grub Customizer" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/grub-customizer.svg">
+        <action name="Execute">
+          <command>grub-customizer</command>
+        </action>
+      </item>
+      <item label="System Profiler" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/hardinfo.svg">
+        <action name="Execute">
+          <command>hardinfo</command>
+        </action>
+      </item>
+    </menu>
+    <separator/>
+    <menu id="Places" label="Places" execute="al-places-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/places/folder.svg"/>
+    <menu id="Recent Files" label="Recent Files" execute="al-recent-files-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/places/folder-recent.svg"/>
+    <separator/>
+    <menu id="Help &amp; Resources" label="Help &amp; Resources" execute="al-help-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/status/info.svg"/>
+    <menu id="Display Keybinds" label="Display Keybinds" execute="al-kb-pipemenu" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/apps/cs-keyboard.svg"/>
+    <separator/>
+    <item label="Exit Openbox" icon="/usr/share/icons/Sardi-Ghost-Flexible/scalable/actions/exit.svg">
+      <action name="Execute">
+        <command>oblogout</command>
+      </action>
+    </item>
+  </menu>
+</openbox_menu>

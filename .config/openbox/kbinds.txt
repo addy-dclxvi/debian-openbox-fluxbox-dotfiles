@@ -1,0 +1,113 @@
+2017-07-02	rc.xml KEYBINDS
+-------------------------------
+
+1 C-S-BackSpace   	openbox --reconfigure
+2 W-KP_1          	UnmaximizeFull
+3 W-KP_2          	UnmaximizeFull
+4 W-KP_3          	UnmaximizeFull
+5 W-KP_4          	UnmaximizeFull
+6 W-KP_5          	MaximizeFull
+7 W-KP_6          	UnmaximizeFull
+8 W-KP_7          	UnmaximizeFull
+9 W-KP_8          	UnmaximizeFull
+10 W-KP_9          	UnmaximizeFull
+11 C-A-Right       	DesktopRight
+12 C-A-Left        	GoToDesktop
+13 C-A-Up          	GoToDesktop
+14 C-A-Down        	GoToDesktop
+15 A-Tab           	NextWindow
+16 A-S-Tab         	PreviousWindow
+17 W-S-Right       	DirectionalCycleWindows
+18 W-S-Left        	DirectionalCycleWindows
+19 W-S-Up          	DirectionalCycleWindows
+20 W-S-Down        	DirectionalCycleWindows
+21 S-A-Left        	SendToDesktopLeft
+22 S-A-Right       	SendToDesktopRight
+23 S-A-Up          	SendToDesktopUp
+24 S-A-Down        	SendToDesktopDown
+25 A-Escape        	Lower
+26 A-space         	client-menu
+27 XF86AudioStop   	playerctl pause
+28 XF86AudioPlay   	playerctl play-pause
+29 XF86AudioPrev   	playerctl previous
+30 XF86AudioNext   	playerctl next
+31 XF86MonBrightnessUp	xbacklight +10
+32 XF86MonBrightnessDown	xbacklight -10
+33 Print           	scrot '%Y-%m-%d-%S_$wx$h_ArchLabs.png' -e 'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'
+34 A-Print         	scrot -d 5 '%Y-%m-%d-%S_$wx$h_ArchLabs.png' -e 'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'
+35 C-Print         	xfce4-screenshooter
+36 A-F2            	gmrun
+37 A-F3            	xfce4-appfinder
+38 W-S-d           	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+39 A-F4            	Close
+40 A-F5            	Iconify
+41 A-F6            	ToggleMaximize
+42 A-F8            	ToggleDecorations
+43 W-d             	ToggleShowDesktop
+44 W-b             	ToggleDecorations
+45 W-f             	thunar
+46 W-t             	termite
+47 W-w             	exo-open --launch webbrowser
+48 W-l             	slimlock
+49 W-r             	rofi-theme-selector
+50 C-A-r           	rofi-theme-selector
+51 W-e             	geany
+52 W-m             	deadbeef
+53 W-h             	urxvt -T 'htop task manager' -e htop
+54 W-v             	pavucontrol
+55 C-A-u           	pavucontrol
+56 W-x             	oblogout
+57 W-Escape        	xkill
+58 W-Tab           	client-list-combined-menu
+59 C-space         	rofi -modi drun,run -show drun -fullscreen -font "Noto Sans 13"
+60 C-Shift-space   	rofi -modi drun,run -show drun -font "Noto Sans 13"
+61 W-F11           	rofi -modi drun,run -show drun -fullscreen -font "Noto Sans 13"
+62 W-F12           	rofi -modi drun,run -show drun -font "Noto Sans 13"
+63 W-space         	root-menu
+64 W-Right         	UnmaximizeFull
+65 W-Left          	UnmaximizeFull
+66 W-Up            	MaximizeFull
+67 W-Down          	UnmaximizeFull
+68 W-A-Left        	UnmaximizeFull
+69 W-A-Right       	UnmaximizeFull
+70 A-r             	Resize
+71 A-m             	Move
+72 A-t             	variety -t
+73 A-f             	variety -f
+74 A-p             	variety -p
+75 A-Left          	variety -p
+76 A-n             	variety -n
+77 A-Right         	variety -n
+78 A-Down          	variety --resume
+79 A-Up            	variety --pause
+80 W-Pause         	oblogout
+81 S-W-q           	Close
+82 W-Return        	termite
+83 S-W-Return      	thunar
+84 W-F1            	exo-open --launch webbrowser
+85 W-F2            	subl3
+86 W-F3            	inkscape
+87 W-F4            	gimp
+88 W-F5            	meld
+89 W-F6            	vlc
+90 W-F7            	virtualbox
+91 W-F8            	thunar
+92 W-F9            	evolution
+93 W-F10           	spotify
+94 C-S-Escape      	xfce4-taskmanager
+95 C-A-q           	root-menu
+96 C-A-m           	xfce4-settings-manager
+97 C-A-j           	obmenu3
+98 C-A-k           	obkey
+99 C-A-a           	xfce4-appfinder
+100 C-A-T           	termite
+101 C-A-d           	ToggleShowDesktop
+102 C-A-V           	vivaldi-snapshot
+103 C-A-B           	thunar
+104 C-A-W           	subl3
+105 C-A-S           	spotify
+106 C-A-C           	catfish
+107 C-A-i           	nitrogen
+108 C-A-O           	obconf
+109 C-A-F           	firefox
+110 C-A-G           	chromium

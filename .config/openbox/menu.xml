@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/">
+  <menu id="root-menu" label="Applications">
+    <separator label="MAIN MENU"/>
+    <item label="Run Program" >
+      <action name="Execute">
+        <command>rofi -modi drun,run -show drun -fullscreen -font "Roboto Regular 8"</command>
+      </action>
+    </item>
+    <separator/>
+    <item label="Terminal" >
+      <action name="Execute">
+        <command>exo-open --launch TerminalEmulator</command>
+      </action>
+    </item>
+    <item label="Web Browser" >
+      <action name="Execute">
+        <command>exo-open --launch WebBrowser</command>
+      </action>
+    </item>
+    <item label="File Manager" >
+      <action name="Execute">
+        <command>exo-open --launch FileManager</command>
+      </action>
+    </item>
+    <separator/>
+    <menu id="Accessories"  label="Accessories">
+      <separator label="Accessories"/>
+      <item label="Archive Manager" >
+        <action name="Execute">
+          <command>file-roller</command>
+        </action>
+      </item>
+      <item label="Bulk Rename" >
+        <action name="Execute">
+          <command>/usr/lib/Thunar/ThunarBulkRename</command>
+        </action>
+      </item>
+      <item label="Catfish File Search" >
+        <action name="Execute">
+          <command>/usr/bin/catfish</command>
+        </action>
+      </item>
+      <item label="Character Map" >
+        <action name="Execute">
+          <command>gucharmap</command>
+        </action>
+      </item>
+      <item label="ClipIt" >
+        <action name="Execute">
+          <command>clipit</command>
+        </action>
+      </item>
+      <item label="Font Manager" >
+        <action name="Execute">
+          <command>font-manager</command>
+        </action>
+      </item>
+      <item label="Galculator" >
+        <action name="Execute">
+          <command>galculator</command>
+        </action>
+      </item>
+      <item label="Htop" >
+        <action name="Execute">
+          <command>termite -e 'htop'</command>
+        </action>
+      </item>
+      <item label="Nitrogen" >
+        <action name="Execute">
+          <command>nitrogen</command>
+        </action>
+      </item>
+      <item label="Plank" >
+        <action name="Execute">
+          <command>plank</command>
+        </action>
+      </item>
+      <item label="Redshift" >
+        <action name="Execute">
+          <command>redshift-gtk</command>
+        </action>
+      </item>
+      <item label="Task Manager" >
+        <action name="Execute">
+          <command>xfce4-taskmanager</command>
+        </action>
+      </item>
+      <item label="Temps" >
+        <action name="Execute">
+          <command>temps</command>
+        </action>
+      </item>
+      <item label="Terminator" >
+        <action name="Execute">
+          <command>terminator</command>
+        </action>
+      </item>
+      <item label="Termite" >
+        <action name="Execute">
+          <command>termite</command>
+        </action>
+      </item>
+      <item label="Urxvt" >
+        <action name="Execute">
+          <command>urxvt</command>
+        </action>
+      </item>
+      <item label="USB Image Writer" >
+        <action name="Execute">
+          <command>mintstick -m iso</command>
+        </action>
+      </item>
+      <item label="USB Stick Formatter" >
+        <action name="Execute">
+          <command>mintstick -m format</command>
+        </action>
+      </item>
+      <item label="UXTerm" >
+        <action name="Execute">
+          <command>uxterm</command>
+        </action>
+      </item>
+      <item label="Variety" >
+        <action name="Execute">
+          <command>variety</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Development"  label="Development">
+      <separator label="DEVELOPMENT"/>
+      <item label="CMake" >
+        <action name="Execute">
+          <command>cmake-gui</command>
+        </action>
+      </item>
+      <item label="Geany" >
+        <action name="Execute">
+          <command>geany</command>
+        </action>
+      </item>
+      <item label="Icon Browser" >
+        <action name="Execute">
+          <command>yad-icon-browser</command>
+        </action>
+      </item>
+      <item label="Meld" >
+        <action name="Execute">
+          <command>meld</command>
+        </action>
+      </item>
+      <item label="Qt Assistant" >
+        <action name="Execute">
+          <command>assistant</command>
+        </action>
+      </item>
+      <item label="Qt Designer" >
+        <action name="Execute">
+          <command>designer</command>
+        </action>
+      </item>
+      <item label="Qt Linguist" >
+        <action name="Execute">
+          <command>linguist</command>
+        </action>
+      </item>
+      <item label="Qt QDbusViewer" >
+        <action name="Execute">
+          <command>qdbusviewer</command>
+        </action>
+      </item>
+      <item label="Qt4 Assistant" >
+        <action name="Execute">
+          <command>assistant-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 Designer" >
+        <action name="Execute">
+          <command>designer-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 Linguist" >
+        <action name="Execute">
+          <command>linguist-qt4</command>
+        </action>
+      </item>
+      <item label="Qt4 QDbusViewer" >
+        <action name="Execute">
+          <command>qdbusviewer-qt4</command>
+        </action>
+      </item>
+      <item label="Sublime Text 3 Dev" >
+        <action name="Execute">
+          <command>subl3</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Graphics"  label="Graphics">
+      <separator label="GRAPHICS"/>
+      <item label="GIMP" >
+        <action name="Execute">
+          <command>gimp-2.8</command>
+        </action>
+      </item>
+      <item label="Gpick" >
+        <action name="Execute">
+          <command>gpick</command>
+        </action>
+      </item>
+      <item label="GPicView" >
+        <action name="Execute">
+          <command>gpicview</command>
+        </action>
+      </item>
+      <item label="Inkscape" >
+        <action name="Execute">
+          <command>inkscape</command>
+        </action>
+      </item>
+      <item label="Peek" >
+        <action name="Execute">
+          <command>peek</command>
+        </action>
+      </item>
+      <item label="Viewnior" >
+        <action name="Execute">
+          <command>viewnior</command>
+        </action>
+      </item>
+      <separator label="SCREENSHOT"/>
+      <menu id="screenshot" label="Screenshot in.." >
+        <separator label="SCREENSHOT IN.."/>
+        <item label="Screenshot Now" >
+          <action name="Execute">
+            <command>scrot -d 0 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="5 Seconds" >
+          <action name="Execute">
+            <command>scrot -d 5 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="10 Seconds" >
+          <action name="Execute">
+            <command>scrot -d 10 'ARCHLabs.png' -e  'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</command>
+          </action>
+        </item>
+        <item label="Shot With Selection" >
+          <action name="Execute">
+            <execute>scrot -s 'ARCHLabs-Selection.png' -e 'mv $f ~/Pictures/ ; gpicview ~/Pictures/$f'</execute>
+          </action>
+        </item>
+      </menu>
+      <item label="Xf Screnshoter" >
+        <action name="Execute">
+          <command>xfce4-screenshooter</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Multimedia"  label="Multimedia">
+      <separator label="MULTIMEDIA"/>
+      <item label="Audacity" >
+        <action name="Execute">
+          <command>env UBUNTU_MENUPROXY=0 audacity</command>
+        </action>
+      </item>
+      <item label="DeaDBeeF" >
+        <action name="Execute">
+          <command>deadbeef</command>
+        </action>
+      </item>
+      <item label="EasyTAG" >
+        <action name="Execute">
+          <command>easytag</command>
+        </action>
+      </item>
+      <item label="HandBrake" >
+        <action name="Execute">
+          <command>ghb</command>
+        </action>
+      </item>
+      <item label="MPV Media Player" >
+        <action name="Execute">
+          <command>mpv --player-operation-mode=pseudo-gui --</command>
+        </action>
+      </item>
+      <item label="PAVU Control" >
+        <action name="Execute">
+          <command>pavucontrol</command>
+        </action>
+      </item>
+      <item label="Qt V4L2 Utility" >
+        <action name="Execute">
+          <command>qv4l2</command>
+        </action>
+      </item>
+      <item label="Simple Recorder" >
+        <action name="Execute">
+          <command>simplescreenrecorder --logfile</command>
+        </action>
+      </item>
+      <item label="SMPlayer" >
+        <action name="Execute">
+          <command>smplayer</command>
+        </action>
+      </item>
+      <item label="VLC media player" >
+        <action name="Execute">
+          <command>/usr/bin/vlc --started-from-file</command>
+        </action>
+      </item>
+      <item label="Xfburn" >
+        <action name="Execute">
+          <command>xfburn</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Network"  label="Network">
+      <separator label="NETWORK"/>
+      <item label="Avahi SSH Server" >
+        <action name="Execute">
+          <command>/usr/bin/bssh</command>
+        </action>
+      </item>
+      <item label="Avahi VNC Server" >
+        <action name="Execute">
+          <command>/usr/bin/bvnc</command>
+        </action>
+      </item>
+      <item label="Chromium" >
+        <action name="Execute">
+          <command>chromium</command>
+        </action>
+      </item>
+      <item label="ELinks" >
+        <action name="Execute">
+          <command>termite -e '/usr/bin/elinks'</command>
+        </action>
+      </item>
+      <item label="FileZilla" >
+        <action name="Execute">
+          <command>filezilla</command>
+        </action>
+      </item>
+      <item label="Firefox" >
+        <action name="Execute">
+          <command>/usr/lib/firefox/firefox</command>
+        </action>
+      </item>
+      <item label="HexChat" >
+        <action name="Execute">
+          <command>hexchat --existing</command>
+        </action>
+      </item>
+      <item label="Mail Reader" >
+        <action name="Execute">
+          <command>exo-open --launch MailReader</command>
+        </action>
+      </item>
+      <item label="Opera" >
+        <action name="Execute">
+          <command>opera</command>
+        </action>
+      </item>
+      <item label="Transmission" >
+        <action name="Execute">
+          <command>transmission-gtk</command>
+        </action>
+      </item>
+      <item label="Vivaldi" >
+        <action name="Execute">
+          <command>/usr/bin/vivaldi-snapshot</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Office"  label="Office">
+      <separator label="OFFICE"/>
+      <item label="Document Viewer" >
+        <action name="Execute">
+          <command>evince</command>
+        </action>
+      </item>
+      <item label="LibreOffice Base" >
+        <action name="Execute">
+          <command>libreoffice --base</command>
+        </action>
+      </item>
+      <item label="LibreOffice Calc" >
+        <action name="Execute">
+          <command>libreoffice --calc</command>
+        </action>
+      </item>
+      <item label="LibreOffice Draw" >
+        <action name="Execute">
+          <command>libreoffice --draw</command>
+        </action>
+      </item>
+      <item label="LibreOffice Impress" >
+        <action name="Execute">
+          <command>libreoffice --impress</command>
+        </action>
+      </item>
+      <item label="LibreOffice Math" >
+        <action name="Execute">
+          <command>libreoffice --math</command>
+        </action>
+      </item>
+      <item label="LibreOffice Writer" >
+        <action name="Execute">
+          <command>libreoffice --writer</command>
+        </action>
+      </item>
+      <item label="LibreOffice" >
+        <action name="Execute">
+          <command>libreoffice</command>
+        </action>
+      </item>
+      <item label="WPS Presentation" >
+        <action name="Execute">
+          <command>/usr/bin/wpp</command>
+        </action>
+      </item>
+      <item label="WPS Spreadsheets" >
+        <action name="Execute">
+          <command>/usr/bin/et</command>
+        </action>
+      </item>
+      <item label="WPS Writer" >
+        <action name="Execute">
+          <command>/usr/bin/wps</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="Settings"  label="Settings">
+      <separator label="SETTINGS"/>
+      <item label="Accessibility" >
+        <action name="Execute">
+          <command>xfce4-accessibility-settings</command>
+        </action>
+      </item>
+      <item label="Adobe Flash Player" >
+        <action name="Execute">
+          <command>flash-player-properties</command>
+        </action>
+      </item>
+      <item label="Appearance" >
+        <action name="Execute">
+          <command>xfce4-appearance-settings</command>
+        </action>
+      </item>
+      <item label="ARandR" >
+        <action name="Execute">
+          <command>arandr</command>
+        </action>
+      </item>
+      <item label="Bluetooth" >
+        <action name="Execute">
+          <command>blueberry</command>
+        </action>
+      </item>
+      <item label="Display" >
+        <action name="Execute">
+          <command>xfce4-display-settings</command>
+        </action>
+      </item>
+      <item label="Keyboard" >
+        <action name="Execute">
+          <command>xfce4-keyboard-settings</command>
+        </action>
+      </item>
+      <item label="LXrandr" >
+        <action name="Execute">
+          <command>lxrandr</command>
+        </action>
+      </item>
+      <item label="MIME Type Editor" >
+        <action name="Execute">
+          <command>xfce4-mime-settings</command>
+        </action>
+      </item>
+      <item label="Mouse and Touchpad" >
+        <action name="Execute">
+          <command>xfce4-mouse-settings</command>
+        </action>
+      </item>
+      <item label="Network Connections" >
+        <action name="Execute">
+          <command>nm-connection-editor</command>
+        </action>
+      </item>
+      <item label="Notifications" >
+        <action name="Execute">
+          <command>xfce4-notifyd-config</command>
+        </action>
+      </item>
+      <item label="Panel" >
+        <action name="Execute">
+          <command>xfce4-panel --preferences</command>
+        </action>
+      </item>
+      <item label="Power Manager" >
+        <action name="Execute">
+          <command>xfce4-power-manager-settings</command>
+        </action>
+      </item>
+      <item label="Preferred Applications" >
+        <action name="Execute">
+          <command>exo-preferred-applications</command>
+        </action>
+      </item>
+      <item label="Print Settings" >
+        <action name="Execute">
+          <command>system-config-printer</command>
+        </action>
+      </item>
+      <item label="Privilege granting" >
+        <action name="Execute">
+          <command>gksu-properties</command>
+        </action>
+      </item>
+      <item label="Qt5 Settings" >
+        <action name="Execute">
+          <command>qt5ct</command>
+        </action>
+      </item>
+      <item label="Removable Drives" >
+        <action name="Execute">
+          <command>thunar-volman-settings</command>
+        </action>
+      </item>
+      <item label="Settings Editor" >
+        <action name="Execute">
+          <command>xfce4-settings-editor</command>
+        </action>
+      </item>
+      <item label="Settings Manager" >
+        <action name="Execute">
+          <command>xfce4-settings-manager</command>
+        </action>
+      </item>
+      <item label="Thunar Settings" >
+        <action name="Execute">
+          <command>thunar-settings</command>
+        </action>
+      </item>
+    </menu>
+    <separator/>
+    <menu id="Preferences"  label="Preferences">
+      <separator label="PREFERENCES"/>
+      <menu id="Openbox"  label="Openbox">
+        <item label="Edit menu.xml" >
+          <action name="Execute">
+            <command>geany ~/.config/openbox/menu.xml</command>
+          </action>
+        </item>
+        <item label="Edit rc.xml" >
+          <action name="Execute">
+            <command>geany ~/.config/openbox/rc.xml</command>
+          </action>
+        </item>
+        <item label="Edit autostart" >
+          <action name="Execute">
+            <command>geany ~/.config/openbox/autostart</command>
+          </action>
+        </item>
+        <separator/>
+        <item label="GUI Menu Editor" >
+          <action name="Execute">
+            <command>obmenu3</command>
+          </action>
+        </item>
+        <item label="GUI Config Tool" >
+          <action name="Execute">
+            <command>obconf</command>
+          </action>
+        </item>
+        <item label="GUI Keybinds" >
+          <action name="Execute">
+            <command>obkey</command>
+          </action>
+        </item>
+        <separator/>
+        <item label="Restart Openbox" >
+          <action name="Execute">
+            <command>openbox --restart</command>
+          </action>
+        </item>
+        <item label="Reconfigure Openbox" >
+          <action name="Execute">
+            <command>openbox --reconfigure</command>
+          </action>
+        </item>
+      </menu>
+      <menu id="Compositor" label="Compositor" execute="al-compositor" />
+      <menu id="Conky" label="Conky" execute="al-conky-pipemenu" />
+      <menu id="Tint2" label="Tint2" execute="al-tint2-pipemenu" />
+      <item label="Tint2 GUI" >
+        <action name="Execute">
+          <command>tint2conf</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="Choose wallpaper" >
+        <action name="Execute">
+          <command>nitrogen</command>
+        </action>
+      </item>
+      <item label="Lxappearance" >
+        <action name="Execute">
+          <command>lxappearance</command>
+        </action>
+      </item>
+      <item label="Xfce4 Appearance" >
+        <action name="Execute">
+          <command>xfce4-appearance-settings</command>
+        </action>
+      </item>
+      <item label="Rofi Appearance" >
+        <action name="Execute">
+          <command>rofi-theme-selector</command>
+        </action>
+      </item>
+      <item label="Termite Appearance" >
+        <action name="Execute">
+          <command>geany ~/.config/termite/config</command>
+        </action>
+      </item>
+      <item label="LightDM Appearance" >
+        <action name="Execute">
+          <command>gksudo lightdm-gtk-greeter-settings</command>
+        </action>
+      </item>
+      <item label="Slim Appearance" >
+        <action name="Execute">
+          <command>gksudo geany /etc/slim.conf</command>
+        </action>
+      </item>
+      <item label="Exit Appearance" >
+        <action name="Execute">
+          <command>gksudo geany /etc/oblogout.conf</command>
+        </action>
+      </item>
+      <item label="Dmenu" >
+        <action name="Execute">
+          <command>dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'</command>
+        </action>
+      </item>
+      <item label="Oomox" >
+        <action name="Execute">
+          <command>oomox-gui</command>
+        </action>
+      </item>
+    </menu>
+    <menu id="System Settings"  label="System Settings">
+      <separator label="SYSTEM SETTINGS"/>
+      <item label="Pamac Manager" >
+        <action name="Execute">
+          <command>pamac-manager</command>
+        </action>
+      </item>
+      <item label="Pamac Updater" >
+        <action name="Execute">
+          <command>pamac-updater</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="File Manager As Root" >
+        <action name="Execute">
+          <command>gksudo thunar</command>
+        </action>
+      </item>
+      <item label="Text Editor As Root" >
+        <action name="Execute">
+          <command>gksudo geany</command>
+        </action>
+      </item>
+      <separator/>
+      <item label="Disks" >
+        <action name="Execute">
+          <command>gnome-disks</command>
+        </action>
+      </item>
+      <item label="Login Config" >
+        <action name="Execute">
+          <command>gksudo geany /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm.conf</command>
+        </action>
+      </item>
+      <item label="GParted" >
+        <action name="Execute">
+          <command>gksudo gparted</command>
+        </action>
+      </item>
+      <item label="Grub Customizer" >
+        <action name="Execute">
+          <command>grub-customizer</command>
+        </action>
+      </item>
+      <item label="System Profiler" >
+        <action name="Execute">
+          <command>hardinfo</command>
+        </action>
+      </item>
+    </menu>
+    <separator/>
+    <menu id="Places" label="Places" execute="al-places-pipemenu" />
+    <menu id="Recent Files" label="Recent Files" execute="al-recent-files-pipemenu" />
+    <separator/>
+    <menu id="Help &amp; Resources" label="Help &amp; Resources" execute="al-help-pipemenu" />
+    <menu id="Display Keybinds" label="Display Keybinds" execute="al-kb-pipemenu" />
+    <separator/>
+    <item label="Exit Openbox" >
+      <action name="Execute">
+        <command>oblogout</command>
+      </action>
+    </item>
+  </menu>
+</openbox_menu>

@@ -1,0 +1,157 @@
+! ------------------------------------------------------------------------------
+! Espresso color scheme by Addy
+! Based On Mocha
+! ------------------------------------------------------------------------------
+
+
+! special
+*.foreground:   #606060
+*.background:   #ffffff
+*.cursorColor:  #dc8cc3
+
+! black
+*.color0  : #5b4848
+*.color8  : #736060
+
+! red
+*.color1  : #cb6077
+*.color9  : #e3788f
+
+! green
+*.color2  : #bec55b
+*.color10 : #d6ed73
+
+! yellow
+*.color3  : #e4bc87
+*.color11 : #fcd49f
+
+! blue
+*.color4  : #8ab3d5
+*.color12 : #a2cbed
+
+! magenta
+*.color5  : #a89bb9
+*.color13 : #c0b3d1
+
+! cyan
+*.color6  : #7bcdb4
+*.color14 : #93e5cc
+
+! white
+*.color7  : #e0d8d6
+*.color15 : #f8f0ee
+
+
+! ------------------------------------------------------------------------------
+! xterm configs
+! ------------------------------------------------------------------------------
+
+
+xterm*font: 7x13
+xterm*faceName: Inconsolata:size=8:antialias=false
+xterm*loginShell: true
+xterm*vt100*geometry: 74x20
+xterm*saveLines: 2000
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+xterm*termName: xterm-color
+xterm*eightBitInput: false
+!xterm*foreground: rgb:d9/d4/d4
+!xterm*background: rgb:32/32/32
+xterm*boldMode: false
+
+
+! ------------------------------------------------------------------------------
+! URxvt configs
+! ------------------------------------------------------------------------------
+
+
+! general settings
+URxvt*saveline:         15000
+URxvt*termName:         rxvt-256color
+URxvt*iso14755:         false
+! for this icon to load in panels and plank you need to follow the steps described here
+! http://archlabs.prophpbb.com/post1220.html
+URxvt*iconFile:  		/usr/share/icons/Sardi-Mono/scalable/apps/terminal.svg
+
+! appearance
+URxvt*depth:            32
+!URxvt*background:      rgba:0000/0000/0000/AAAA
+!URxvt*background:      [80]#404552
+URxvt*background:       [100]#ffffff
+URxvt*foreground:       #606060
+URxvt.underlineColor:   #4682B4
+URxvt.highlightColor:   #4682B4
+URxvt.throughColor:     Blue
+URxvt*cursorColor:      #dc8cc3
+URxvt*cursorColor2:     Black
+URxvt*scrollBar:        false
+URxvt*scrollBar_right:  false
+URxvt*internalBorder:   0
+URxvt*externalBorder:   0
+URxvt.colorIT:      	#87af5f
+URxvt.colorBD:      	#c5c8c6
+URxvt.colorUL:      	#87afd7
+URxvt.geometry: 		74x20
+URxvt.internalBorder:	12
+
+! fonts
+URxvt*letterSpace: 	    		-2
+!Xft.size:						8
+URxvt*font:                 	xft:Inconsolata:regular:size=8
+URxvt*imFont:               	xft:Inconsolata:regular:size=8
+URxvt*boldFont:             	xft:Inconsolata:bold:size=8
+URxvt*italicFont:           	xft:Inconsolata:italic:size=8
+URxvt*boldItalicFont:     		xft:Inconsolata:regular:size=8
+! run :.!fc-list | grep <font-name>
+
+! perl extensions
+URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select
+!URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select,tabbed
+
+! macros for clipboard and selection
+
+URxvt.copyCommand:      xclip -i -selection clipboard
+URxvt.pasteCommand:     xclip -o -selection clipboard
+URxvt.keysym.M-c:       perl:clipboard:copy
+URxvt.keysym.M-v:       perl:clipboard:paste
+URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.M-s:       perl:keyboard-select:search
+URxvt.keysym.M-u:       perl:url-select:select_next
+URxvt.urlLauncher:      firefox
+URxvt.underlineURLs:    true
+URxvt.urlButton:        1
+
+! tabbed
+URxvt.tabbed.tabbar-fg: 4
+URxvt.tabbed.tabbar-bg: 16
+URxvt.tabbed.tab-fg:    15
+URxvt.tabbed.tab-bg:    4
+URxvt*buffered:         false
+
+
+! ------------------------------------------------------------------------------
+! UXTerm configs
+! ------------------------------------------------------------------------------
+
+
+! termtype
+UXTerm*termName: xterm-256color
+UXTerm*VT100.geometry:     74x20
+UXTerm*font:               Inconsolata
+UXTerm*faceSize:		   12
+UXTerm*dynamicColors:      true
+UXTerm*utf8:               2
+UXTerm*eightBitInput:      true
+UXTerm*saveLines:          10000
+UXTerm*scrollKey:          true
+UXTerm*scrollTtyOutput:    false
+UXTerm*scrollBar:          false
+UXTerm*rightScrollBar:     false
+UXTerm*jumpScroll:         true
+UXTerm*multiScroll:        true
+UXTerm*toolBar:            false
+UXTerm*boldMode: false
+UXTerm*colorBDMode: true
+UXTerm*colorBD: rgb:3f/3f/3f                                         
+                                                           

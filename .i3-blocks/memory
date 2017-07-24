@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# First argument is source (mem/swap), second is output value
+# Check /proc/meminfo for possible instances
+INSTANCE="${BLOCK_INSTANCE:-mem;free}"
+
+SOURCE=$(echo "${INSTANCE}" | awk -F ';' '{print $1}')
+DISPLAY=$(echo "${INSTANCE}" | awk -F ';' '{print $2}')
+
+if [[ "${SOURCE}" = "mem" ]]; then
+  URGENT_VALUE=90
+elif [[ "${SOURCE}" = "swap" ]]; then
+  URGENT_VALUE=50
+fi
+
+if [[ "${DISPLAY}" = "" ]]; then
+  DISPLAY="free"
+fi
+
+ONE_KB=1024
+ONE_MB=$(echo "${ONE_KB}*1024" | bc -l)
+ONE_GB=$(echo "${ONE_MB}*1024" | bc -l)
+ONE_TB=$(echo "${ONE_GB}*1024" | bc -l)
+
+# Grep the value and remove KB so we can calculate with it later
+#MEMINFO=$(cat /proc/meminfo | grep "${INSTANCE}" | awk -F ':' '{print $2}' | tr -d ' kB')
+MEMORY_INFOS=$(cat /proc/meminfo)
+SOURCE_TOTAL=$(echo "${MEMORY_INFOS}" | grep -i "${SOURCE}total" | awk -F ':' '{print $2}' | tr -d ' kB')
+
+if [[ "${SOURCE_TOTAL}" -le 0 ]]; then
+  exit
+fi
+
+if [[ "${SOURCE}" = "mem" ]]; then
+    SOURCE_FREE_KEY="available"
+elif [[ "${SOURCE}" = "swap" ]]; then
+    SOURCE_FREE_KEY="free"
+fi
+
+SOURCE_FREE=$(echo "${MEMORY_INFOS}" | grep -i "${SOURCE}${SOURCE_FREE_KEY}" | awk -F ':' '{print $2}' | tr -d ' kB')
+SOURCE_USED=$(echo "scale=0; ${SOURCE_TOTAL}-${SOURCE_FREE}" | bc -l)
+SOURCE_PERC=$(echo "scale=0; (${SOURCE_USED}*100)/${SOURCE_TOTAL}" | bc -l)
+
+if [[ "${DISPLAY}" = "free" ]]; then
+  MEMINFO="${SOURCE_FREE}"
+elif [[ "${DISPLAY}" = "used" ]]; then
+  MEMINFO="${SOURCE_USED}"
+elif [[ "${DISPLAY}" = "total" ]]; then
+  MEMINFO="${SOURCE_TOTAL}"
+elif [[ "${DISPLAY}" = "perc" ]]; then
+  MEMINFO="${SOURCE_PERC}%"
+fi
+
+if [[ "${DISPLAY}" != "perc" ]]; then
+  # Convert KB meminfo to bytes
+  MEMINFO=$(echo "${MEMINFO}*${ONE_KB}" | bc -l)
+
+  if [[ "${MEMINFO}" -ge "${ONE_TB}" ]]; then
+    MEMINFO=$(echo "scale=3;${MEMINFO}/${ONE_TB}" | bc -l)"tb"
+  elif [[ "${MEMINFO}" -ge "${ONE_GB}" ]]; then
+    MEMINFO=$(echo "scale=2;${MEMINFO}/${ONE_GB}" | bc -l)"gb"
+  elif [[ "${MEMINFO}" -ge "${ONE_MB}" ]]; then
+    MEMINFO=$(echo "scale=1;${MEMINFO}/${ONE_MB}" | bc -l)"mb"
+  else
+    MEMINFO=$(echo "scale=0;${MEMINFO}/${ONE_KB}" | bc -l)"kb"
+  fi
+fi
+
+echo "${MEMINFO}"
+echo "${MEMINFO}"
+echo ""
+
+if [[ "${SOURCE_PERC}" -gt "${URGENT_VALUE}" ]]; then
+  exit 33
+fi

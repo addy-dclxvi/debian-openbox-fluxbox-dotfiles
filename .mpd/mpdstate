@@ -1,0 +1,23 @@
+sw_volume: 100
+audio_device_state:1:pulse audio
+audio_device_state:1:my_fifo
+state: pause
+current: 7
+time: 440.320000
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -1- Pull me under.mp3
+1:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -2- Another day.mp3
+2:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -3- Take the time.mp3
+3:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -4- Surrounded.mp3
+4:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -5- Metropolis_Part I.mp3
+5:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -6- Under a glass moon.mp3
+6:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -7- Wait for sleep.mp3
+7:Dream Theater/05 DREAM THEATRE - Images and words/Dream Theater - Images and words -8- Learning to live.mp3
+playlist_end
