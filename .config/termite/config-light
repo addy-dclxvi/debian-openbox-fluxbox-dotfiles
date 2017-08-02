@@ -8,7 +8,7 @@ cursor_blink = system
 cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
-font = Inconsolata 8
+font = M+ 1mn 8
 geometry = 480x280
 highlight = #2f2f2f
 icon_name = terminal
@@ -20,6 +20,7 @@ scrollback_lines = 15000
 size_hints = false
 search_wrap = true
 urgent_on_bell = true
+padding = 2
 
 [hints]
 #font = Monospace 12
