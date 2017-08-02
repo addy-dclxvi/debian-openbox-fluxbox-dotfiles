@@ -1,0 +1,68 @@
+//! -------------------------------------------------------
+//! ROFI Color theme
+//! User: Addy
+//! Copyright: Dave Davenport
+//! -------------------------------------------------------
+//! Use extended color scheme
+* {
+    spacing: 5px;
+    padding: 4px;
+    foreground: #787878;
+    background: #ffffff;
+    froly:     	#fd7980;
+}
+#window box {
+	padding: 180px 320px 180px 320px;
+	/* padding: top, right, bottom, left*/
+    border:  0px;
+    border-radius: 0px;
+    background: argb:aa000000;
+}
+#window mainbox inputbar {
+    background: #ffffff;
+    text: @foreground;
+    padding: 4px;
+}
+#window mainbox inputbar box {
+    border: 0px 0px 1px 0px;
+}
+#window mainbox box {
+    spacing: 5px;
+    padding: 24px;
+}
+#window mainbox listview element selected  normal {
+    background: @froly;
+    foreground: @background;
+}
+#window mainbox listview element selected active {
+    background: @froly;
+    foreground: @foreground;
+}
+#window mainbox listview element selected urgent {
+    background: @froly;
+    foreground: @foreground;
+}
+#window mainbox listview element normal  {
+    background: @background;
+    foreground: @foreground;
+}
+#window mainbox listview element normal active {
+     background: @background;
+     foreground: @foreground;
+}
+#window mainbox listview element normal urgent {
+    background: @background;
+    foreground: @foreground;
+}
+#window mainbox listview element alternate normal {
+    foreground: @foreground;
+    background: @background;
+}
+#window mainbox listview element alternate active {
+    background: @background;
+    foreground: @foreground;
+}
+#window mainbox listview element alternate urgent {
+    background: @background;
+    foreground: @foreground;
+}

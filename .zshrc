@@ -26,8 +26,10 @@ POWERLEVEL9K_CONTEXT_TEMPLATE=$user_symbol
 ##  My Power Level 9K config
 ##
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir context rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator dir_writable time)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator dir_writable time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY=truncate_from_right
@@ -214,40 +216,27 @@ alias pkglist="pacman -Qqe >"
 ## install all package in the generated package list
 alias install-pkglist="sudo pacman -S - <"
 
-
-## Alias for even-better-ls
-##
-LS_COLORS=$(ls_colors_generator)
-run_ls() {
-	ls-i --color=auto -w $(tput cols) "$@"
-}
-
-run_dir() {
-	dir-i --color=auto -w $(tput cols) "$@"
-}
-
-run_vdir() {
-	vdir-i --color=auto -w $(tput cols) "$@"
-}
-alias lsc="run_ls"
-alias dirc="run_dir"
-alias vdirc="run_vdir"
-alias ls="ls"
-alias dir="dir"
-alias vdir="vdir"
-alias lsi="lsc --group-directories-first"
-alias ls-icon-folderfirst="lsc --group-directories-first"
-alias ls-home-withicon-folderfirst="echo ' ' && lsc ~ --group-directories-first && echo ' '"
-
+## ls group directory first
+alias lsf="ls --group-directories-first"
 
 ## A funny meme :D
 ##
-alias love="echo '\e[31mShell: \e[34mLove not found \uF08A \uF00D' && echo ' '"
-alias happines="echo '\e[31mShell: \e[33mHappines not found \uF119' && echo ' '"
-alias peace="echo '\e[31mShell: \e[35mPeace not found \uF0E3' && echo ' '"
-alias kill="echo '\e[32mShell: \e[31mYou need to specify whom to kill \uF05B' && echo ' '"
-alias kill-everyone="echo '\e[32mShell: \e[31mBut! Genocide is illegal Sir!! \uF05C' && echo ' '"
 
+alias love="echo '\e[31mShell: \e[34mLove not found'"
+alias happines="echo '\e[31mShell: \e[33mHappines not found'"
+alias peace="echo '\e[31mShell: \e[35mPeace not found'"
+alias kill="echo '\e[32mShell: \e[31mYou need to specify whom to kill'"
+alias kill-everyone="echo '\e[32mShell: \e[31mBut! Genocide is illegal Sir!!'"
+#alias love="echo '\e[31mShell: \e[34mLove not found \uF08A \uF00D'"
+#alias happines="echo '\e[31mShell: \e[33mHappines not found \uF119'"
+#alias peace="echo '\e[31mShell: \e[35mPeace not found \uF0E3'"
+#alias kill="echo '\e[32mShell: \e[31mYou need to specify whom to kill \uF05B'"
+#alias kill-everyone="echo '\e[32mShell: \e[31mBut! Genocide is illegal Sir!! \uF05C'"
+#alias love="echo '\e[31mShell: \e[34mLove not found \uF08A \uF00D' && echo ' '"
+#alias happines="echo '\e[31mShell: \e[33mHappines not found \uF119' && echo ' '"
+#alias peace="echo '\e[31mShell: \e[35mPeace not found \uF0E3' && echo ' '"
+#alias kill="echo '\e[32mShell: \e[31mYou need to specify whom to kill \uF05B' && echo ' '"
+#alias kill-everyone="echo '\e[32mShell: \e[31mBut! Genocide is illegal Sir!! \uF05C' && echo ' '"
 
 ## Start CAVA Visualizer with color config
 ##
@@ -272,7 +261,8 @@ alias neofetch-violet="neofetch --source .neofetch/al-violet.png --colors 5 5 5 
 
 ## View and set wallpaper with feh
 alias feh-view="feh --scale-down --auto-zoom"
-alias feh-set="echo 'Wallpaper has been set for You, very nice choice :)' && feh --bg-fill"
+alias feh-set="feh --bg-fill"
+#alias feh-set="echo 'Wallpaper has been set for You, very nice choice :)' && feh --bg-fill"
 
 ## Refresh font cache
 alias font-refresh="fc-cache -fv"

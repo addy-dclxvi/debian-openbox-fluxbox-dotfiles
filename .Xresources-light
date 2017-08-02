@@ -48,9 +48,9 @@
 
 
 xterm*font: 7x13
-xterm*faceName: Inconsolata:size=8:antialias=false
+xterm*faceName: M+ 1mn:size=8:antialias=false
 xterm*loginShell: true
-xterm*vt100*geometry: 74x20
+xterm*vt100*geometry: 92x16
 xterm*saveLines: 2000
 xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*termName: xterm-color
@@ -77,8 +77,8 @@ URxvt*iconFile:  		/usr/share/icons/Sardi-Mono/scalable/apps/terminal.svg
 URxvt*depth:            32
 !URxvt*background:      rgba:0000/0000/0000/AAAA
 !URxvt*background:      [80]#404552
-URxvt*background:       [100]#ffffff
-URxvt*foreground:       #606060
+URxvt*background:       [100]#2f343f
+URxvt*foreground:       #F8F8FF
 URxvt.underlineColor:   #4682B4
 URxvt.highlightColor:   #4682B4
 URxvt.throughColor:     Blue
@@ -91,17 +91,18 @@ URxvt*externalBorder:   0
 URxvt.colorIT:      	#87af5f
 URxvt.colorBD:      	#c5c8c6
 URxvt.colorUL:      	#87afd7
-URxvt.geometry: 		74x20
-URxvt.internalBorder:	12
+URxvt.geometry: 		92x16
+URxvt.internalBorder:	24
 
 ! fonts
 URxvt*letterSpace: 	    		-2
+URxvt.lineSpace: 				-1
 !Xft.size:						8
-URxvt*font:                 	xft:Inconsolata:regular:size=8
-URxvt*imFont:               	xft:Inconsolata:regular:size=8
-URxvt*boldFont:             	xft:Inconsolata:bold:size=8
-URxvt*italicFont:           	xft:Inconsolata:italic:size=8
-URxvt*boldItalicFont:     		xft:Inconsolata:regular:size=8
+URxvt*font:                 	xft:M+ 1mn:regular:size=8
+URxvt*imFont:               	xft:M+ 1mn:regular:size=8
+URxvt*boldFont:             	xft:M+ 1mn:bold:size=8
+URxvt*italicFont:           	xft:M+ 1mn:italic:size=8
+URxvt*boldItalicFont:     		xft:M+ 1mn:regular:size=8
 ! run :.!fc-list | grep <font-name>
 
 ! perl extensions
@@ -137,8 +138,8 @@ URxvt*buffered:         false
 
 ! termtype
 UXTerm*termName: xterm-256color
-UXTerm*VT100.geometry:     74x20
-UXTerm*font:               Inconsolata
+UXTerm*VT100.geometry:     92x16
+UXTerm*font:               M+ 1mn
 UXTerm*faceSize:		   12
 UXTerm*dynamicColors:      true
 UXTerm*utf8:               2
