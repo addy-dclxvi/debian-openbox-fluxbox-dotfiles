@@ -3,26 +3,26 @@
 </p>
 A collection of configs to be placed in the users home directory usually prefixed with a period, hence the name dotfiles.
 
-#i3
+## i3
 Pretty stock simple config
   
-#polybar
+## polybar
 Multi head 2 bar setup for i3 or openbox.
   
-#openbox
+## openbox
 Fairly complete rc.xml, bit of a different menu structure. For my openbox themes collections please check my another repo.
   
-#zsh
+## zsh
 Modified powerlevel9k, decent zshrc.
   
-#compton
+## compton
 Blur heavy glx or more basic xrender configs.
 
-#conky
+## conky
 Just a single conkyrc, for my another conky collections please check my other repos.
 
-#tint2
+## tint2
 Just a single tint2rc, for my another tint2 collections please check my another repo.
 
-#package list
+## package list
 I don't remember one by one what packages need to be installed to make everything works. But I have generated my-package-list.txt file. Maybe it can help You to decide what packages need to be installed if You want to use these dotfiles.
