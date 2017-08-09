@@ -1,6 +1,7 @@
 <p align="center">
 <a name="top" href="https://github.com/addy-dclxvi/Ultimate-Dotfiles/"><img src="https://raw.githubusercontent.com/addy-dclxvi/Ultimate-Dotfiles/master/logo.png"></a>
 </p>
+
 ## Introduction
 A collection of configs to be placed in the users home directory usually prefixed with a period, hence the name dotfiles.
 
