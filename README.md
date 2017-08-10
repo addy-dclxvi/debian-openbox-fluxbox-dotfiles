@@ -8,7 +8,7 @@ This repo is actually intended for my personal backup, but everyone are welcome 
 
 ## Preview
 ![alt text](https://raw.githubusercontent.com/addy-dclxvi/Ultimate-Dotfiles/master/preview.jpg)
-I can't give You every preview for every part, but You can view My Deviant Art [Gallery](http://addy-dclxvi.deviantart.com/gallery/) if you want to see more preview of these dotfiles.
+I can't give You preview for every part, but You can view My Deviant Art [Gallery](http://addy-dclxvi.deviantart.com/gallery/) if you want to see more preview of these dotfiles.
 
 ## Containing
 
