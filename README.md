@@ -4,19 +4,20 @@
 
 ## Introduction
 A collection of configs to be placed in the users home directory usually prefixed with a period, hence the name dotfiles.
+This repo is actually intended for my personal backup, but everyone are welcome to use these resources.
 
 ## Preview
 ![alt text](https://raw.githubusercontent.com/addy-dclxvi/Ultimate-Dotfiles/master/preview.jpg)
 I can't give You every preview for every part, but You can view My Deviant Art [Gallery](http://addy-dclxvi.deviantart.com/gallery/) if you want to see more preview of these dotfiles.
 
-## i3
-Pretty stock simple config
-  
-## openbox
-Fairly complete rc.xml, bit of a different menu structure. For my openbox themes collections please check my another repo.
+## Containing
 
-## i3blocks
-A simple i3 block config for i3 bar.
+- **Openbox** <br /> Fairly complete rc.xml, organized menu, and option to use menu.xml with icons ([Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons is needed).
+For my openbox themes collections please check my [Openbox-Theme-Collections](https://github.com/addy-dclxvi/Openbox-Theme-Collections).
+
+- **i3** <br /> i3 Pretty stock simple config. My default config is using i3blocks as statusbar. To replace it with Polybar simply edit the config, uncomment the Polybar execution and remove the i3bar.
+
+- **i3blocks** A simple i3 block config for i3 bar.
   
 ## zsh
 Modified powerlevel9k, decent zshrc. And contains some useful alias.

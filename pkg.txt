@@ -30,6 +30,7 @@ b43-firmware
 b43-fwcutter
 bash
 bash-completion
+bdf-unifont
 bind-tools
 binutils
 bison
@@ -38,11 +39,13 @@ bluez
 bluez-firmware
 bluez-libs
 bluez-utils
+breeze-icons
 breeze-snow-cursor-theme
 broadcom-wl
 btrfs-progs
 bzip2
 cantarell-fonts
+capitaine-cursors
 catfish
 cava
 chromium
@@ -51,6 +54,7 @@ clonezilla
 compton
 conky-lua
 coreutils
+covergloobus
 cower
 crda
 cryptsetup
@@ -81,6 +85,7 @@ f2fs-tools
 fakeroot
 feh
 ffmpegthumbnailer
+figlet
 file
 file-roller
 filesystem
@@ -158,6 +163,7 @@ irssi
 iw
 jfsutils
 jq
+kickshaw
 laptop-detect
 less
 lftp
@@ -173,6 +179,7 @@ linux
 linux-atm
 lm_sensors
 logrotate
+lolcat
 lsb-release
 lsscsi
 lvm2
@@ -196,6 +203,7 @@ mpc
 mpd
 mpdviz
 mtools
+musicbrainz
 nano
 nbd
 ncdu
@@ -225,7 +233,7 @@ oblogout
 obmenu-generator
 obmenu3
 oh-my-zsh-git
-oomox
+oomox-git
 openbox
 openbox-arc-git
 openconnect
@@ -233,6 +241,7 @@ openssh
 openvpn
 opera
 os-prober
+otf-fira-sans
 p7zip
 pacaur
 packer
@@ -270,6 +279,7 @@ python-pip
 python-pyalsaaudio
 python-pygit2
 python2-dbus
+python2-mpd
 python2-pyalsaaudio
 python2-xdg
 qt4
@@ -319,13 +329,17 @@ texinfo
 thunar
 thunar-archive-plugin
 thunar-volman
+tilda
 tint2
 tmux
 transmission-gtk
 ttf-dejavu
 ttf-droid-font
 ttf-font-awesome
+ttf-iosevka
+ttf-material-icons
 ttf-monaco
+ttf-mplus
 ttf-roboto
 tty-clock
 tumbler
@@ -425,8 +439,10 @@ xorg-xwininfo
 xorg-xwud
 xsel
 xterm
+xtitle
 yad
 yaourt
+youtube-dl
 zd1211-firmware
 zenity
 zsh

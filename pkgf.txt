@@ -46,6 +46,7 @@ bamf
 bash
 bash-completion
 bc
+bdf-unifont
 bind-tools
 binutils
 bison
@@ -57,6 +58,7 @@ bluez-libs
 bluez-tools
 bluez-utils
 boost-libs
+breeze-icons
 breeze-snow-cursor-theme
 broadcom-wl
 btrfs-progs
@@ -68,6 +70,7 @@ ca-certificates-utils
 cairo
 cairomm
 cantarell-fonts
+capitaine-cursors
 catfish
 cava
 cblas
@@ -87,6 +90,7 @@ compton
 confuse
 conky-lua
 coreutils
+covergloobus
 cower
 cracklib
 crda
@@ -151,6 +155,7 @@ ffmpeg
 ffmpeg2.8
 ffmpegthumbnailer
 fftw
+figlet
 file
 file-roller
 filesystem
@@ -314,6 +319,7 @@ jsoncpp
 kbd
 kbproto
 keyutils
+kickshaw
 kmod
 krb5
 ladspa
@@ -558,6 +564,7 @@ libxv
 libxvmc
 libxxf86dga
 libxxf86vm
+libyaml
 libzmf
 licenses
 lightdm
@@ -571,6 +578,7 @@ linux-firmware
 llvm-libs
 lm_sensors
 logrotate
+lolcat
 lpsolve
 lrzip
 lsb-release
@@ -615,6 +623,7 @@ mpg123
 mpv
 mtdev
 mtools
+musicbrainz
 nano
 nbd
 ncdu
@@ -656,7 +665,7 @@ obmenu3
 ocl-icd
 oh-my-zsh-git
 oniguruma
-oomox
+oomox-git
 openal
 openbox
 openbox-arc-git
@@ -677,6 +686,7 @@ opus
 opusfile
 orc
 os-prober
+otf-fira-sans
 p11-kit
 p7zip
 pacaur
@@ -796,6 +806,7 @@ python2-imagesize
 python2-jinja
 python2-lxml
 python2-markupsafe
+python2-mpd
 python2-numpy
 python2-olefile
 python2-packaging
@@ -856,6 +867,18 @@ rsync
 rtkit
 rtmpdump
 rubberband
+ruby
+ruby-diff-lcs
+ruby-paint
+ruby-rainbow
+ruby-rspec
+ruby-rspec-core
+ruby-rspec-expectations
+ruby-rspec-mocks
+ruby-rspec-support
+ruby-term-ansicolor
+ruby-tins
+ruby-trollop
 run-parts
 rxvt-unicode
 rxvt-unicode-terminfo
@@ -926,6 +949,7 @@ thin-provisioning-tools
 thunar
 thunar-archive-plugin
 thunar-volman
+tilda
 tint2
 tmux
 tolua++
@@ -935,7 +959,11 @@ tslib
 ttf-dejavu
 ttf-droid-font
 ttf-font-awesome
+ttf-iosevka
+ttf-liberation
+ttf-material-icons
 ttf-monaco
+ttf-mplus
 ttf-roboto
 tty-clock
 tumbler
@@ -1085,11 +1113,13 @@ xplc
 xproto
 xsel
 xterm
+xtitle
 xvidcore
 xz
 yad
 yajl
 yaourt
+youtube-dl
 zd1211-firmware
 zenity
 zeromq

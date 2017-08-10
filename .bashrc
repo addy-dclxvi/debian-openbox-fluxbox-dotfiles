@@ -8,6 +8,7 @@
 export HISTCONTROL=ignoreboth:erasedups
 
 #PS1='[\u@\h \W]\$ '
+#PS1='\e[31m\u\e[39m@\h [\e[35m\W\e[39m]\n\e[34m» \e[39m'
 PS1='\n\e[31m\u\e[39m@\h [\e[35m\W\e[39m]\n\e[34m» \e[39m'
 
 #list
@@ -93,6 +94,21 @@ alias font-refresh="fc-cache -fv"
 
 ## ncmpcpp with album-art
 alias ncmpcpp-art="ncmpcpp -c .ncmpcpp/config-art"
+
+## self-destruct
+rm()
+{
+  if [ "$1" = "-rf/" ]
+  then
+    shift
+    echo '' && echo 'Do a self destruct in 5.. 4.. 3.. 2.. 1..' && echo 'Just kidding :p' && echo '' && echo "Let's taking a screenshot instead" && scrot -cd 5 "$@"
+  else
+    command rm "$@"
+  fi
+}
+
+## termite light
+alias termite-light="termite -c ~/.config/termite/config-light &"
 
 
 shopt -s autocd # change to named directory

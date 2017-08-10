@@ -18,7 +18,7 @@ print_info() {
     #info "OS" distro
     #info "Model" model
     info "Kernel" kernel
-    info "Packages" packages
+    #info "Packages" packages
     info "Memory" memory
     #info "Disk" disk
     #info "Uptime" uptime
@@ -44,7 +44,7 @@ print_info() {
 
     info line_break
     info cols
-    info line_break
+    #info line_break
 }
 
 
@@ -545,7 +545,7 @@ image_backend="w3m"
 # NOTE: 'auto' will pick the best image source for whatever image backend is used.
 #       In ascii mode, distro ascii art will be used and in an image mode, your
 #       wallpaper will be used.
-image_source=~/.config/neofetch/ad-cyan.png
+image_source=~/.config/neofetch/al-cyan.png
 #image_source=/home/addy/Pictures/flower-low.jpg
 
 

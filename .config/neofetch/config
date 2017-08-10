@@ -18,8 +18,8 @@ print_info() {
     #info "OS" distro
     #info "Model" model
     info "Kernel" kernel
-    info "Packages" packages
-    info "Memory" memory
+    #info "Packages" packages
+    #info "Memory" memory
     #info "Disk" disk
     #info "Uptime" uptime
     info "Terminal" term
@@ -44,7 +44,7 @@ print_info() {
 
     info line_break
     info cols
-    info line_break
+    #info line_break
 }
 
 
@@ -450,7 +450,7 @@ color_blocks="on"
 # Default:  '3'
 # Values:   'num'
 # Flag:     --block_width
-block_width=3
+block_width=4
 
 # Color block height in lines
 #
@@ -621,14 +621,14 @@ crop_offset="center"
 # Values:  'auto', '00px', '00%', 'none'
 # Flags:   --image_size
 #          --size
-image_size="180"
+image_size="190"
 
 # Ggap between image and text
 #
 # Default: '3'
 # Values:  'num', '-num'
 # Flag:    --gap
-gap=5
+gap=0
 
 # Image offsets
 # Only works with the w3m backend.
@@ -637,7 +637,7 @@ gap=5
 # Values:  'px'
 # Flags:   --xoffset
 #          --yoffset
-yoffset=20
+yoffset=15
 xoffset=20
 
 # Image background color

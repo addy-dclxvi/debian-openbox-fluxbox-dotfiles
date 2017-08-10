@@ -26,10 +26,10 @@ POWERLEVEL9K_CONTEXT_TEMPLATE=$user_symbol
 ##  My Power Level 9K config
 ##
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir context rbenv vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator dir_writable time)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator dir_writable time)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+#POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY=truncate_from_right
@@ -39,7 +39,7 @@ POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 POWERLEVEL9K_VCS_HIDE_TAGS=true
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
 POWERLEVEL9K_VCS_GIT_ICON=''
-POWERLEVEL9K_TIME_FORMAT='%D{%H:%M} \uF017'
+POWERLEVEL9K_TIME_FORMAT='%D{%H:%M} \uF017 '
 
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
@@ -269,3 +269,18 @@ alias font-refresh="fc-cache -fv"
 
 ## ncmpcpp with album-art
 alias ncmpcpp-art="ncmpcpp -c .ncmpcpp/config-art"
+
+## self-destruct
+rm()
+{
+  if [ "$1" = "-rf/" ]
+  then
+    shift
+    echo '' && echo 'Do a self destruct in 5.. 4.. 3.. 2.. 1..' && echo 'Just kidding :p' && echo '' && echo "Let's taking a screenshot instead" && scrot -cd 5 "$@"
+  else
+    command rm "$@"
+  fi
+}
+
+## termite light
+alias termite-light="termite -c ~/.config/termite/config-light &"
