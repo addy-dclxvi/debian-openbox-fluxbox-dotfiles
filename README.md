@@ -12,12 +12,14 @@ I can't give You every preview for every part, but You can view My Deviant Art [
 
 ## Containing
 
-- **Openbox** <br /> Fairly complete *rc.xml*, very organized main menu (Some menu are using [ARCHLabs pipemenu](https://aur.archlinux.org/packages/archlabs-pipemenus-git)), and option to use *menu.xml* with icons (I'm using [Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons).
-For my openbox themes collections please check my [Openbox-Theme-Collections](https://github.com/addy-dclxvi/Openbox-Theme-Collections).
+- **Openbox** <br /> Fairly complete *rc.xml*, very organized main menu (some menu are using [ARCHLabs pipemenu](https://aur.archlinux.org/packages/archlabs-pipemenus-git)), and option to use *menu.xml* with icons (I'm using [Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons).
+For my themes, please check my [Openbox Theme Collections](https://github.com/addy-dclxvi/Openbox-Theme-Collections).
 
-- **i3** <br /> i3 Pretty stock simple config. My default config is using i3blocks as statusbar. To replace it with Polybar simply edit the config, uncomment the Polybar execution and remove the i3bar.
+- **i3** <br /> Pretty stock simple config. My default config is using i3blocks as statusbar. To replace it with Polybar simply edit the config, uncomment the Polybar execution and remove the i3bar.
 
 - **i3blocks** <br /> A simple i3blocks config for i3bar. I'm using modules from [Anachron](https://github.com/Anachron/i3blocks).
+
+- **Polybar** <br /> Multi head 2 bar setup for i3 or Openbox. I'm using resources from [Nath](https://github.com/natemaia) and [Mazhar](https://github.com/m47h4r).
   
 - **zshrc** <br /> Eye candy yet useful [Power Level 9k](https://github.com/bhilburn/powerlevel9k) config. Also contains some useful alias.
 In order to use my zshrc, You need to install [Power Level 9k](https://aur.archlinux.org/packages/zsh-theme-powerlevel9k-git) and [Oh-My-Zsh](https://aur.archlinux.org/packages/oh-my-zsh-git).
@@ -48,5 +50,5 @@ the rest are only toys from [Crunchbang Forum](https://crunchbang.org/forums/vie
 
 ## Package List
 I can't remember one by one what packages need to be installed to make everything works.
-But I have generated a *pkg.txt* file. It contains a list of my installed packages. Excluding packages that only installed as dependency, it will be automaticcally pulled afterall, if needed.
-Maybe that package list file can help You to decide what packages need to be installed if You want to use these dotfiles. Or, if You want to know my complete packages, just open the *pkgf.txt* file.
+But I have generated a [pkg.txt](https://github.com/addy-dclxvi/Ultimate-Dotfiles/blob/master/pkg.txt) file. It contains a list of my installed packages, excluding packages that only installed as dependency (it will be automaticcally pulled afterall, if needed).
+Or, if You want to know my complete packages, just open the [pkgf.txt](https://github.com/addy-dclxvi/Ultimate-Dotfiles/blob/master/pkgf.txt) file. Maybe those two files can help You.
