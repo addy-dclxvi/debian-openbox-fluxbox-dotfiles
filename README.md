@@ -12,7 +12,7 @@ I can't give You every preview for every part, but You can view My Deviant Art [
 
 ## Containing
 
-- **Openbox** <br /> Fairly complete rc.xml, organized menu, and option to use menu.xml with icons ([Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons is needed).
+- **Openbox** <br /> Fairly complete ```rc.xml```, organized menu, and option to ```use menu.xml``` with icons (I'm using [Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons).
 For my openbox themes collections please check my [Openbox-Theme-Collections](https://github.com/addy-dclxvi/Openbox-Theme-Collections).
 
 - **i3** <br /> i3 Pretty stock simple config. My default config is using i3blocks as statusbar. To replace it with Polybar simply edit the config, uncomment the Polybar execution and remove the i3bar.
