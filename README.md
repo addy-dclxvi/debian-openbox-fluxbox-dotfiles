@@ -52,3 +52,7 @@ the rest are only toys from [Crunchbang Forum](https://crunchbang.org/forums/vie
 I can't remember one by one what packages need to be installed to make everything works.
 But I have generated a [pkg.txt](https://github.com/addy-dclxvi/Ultimate-Dotfiles/blob/master/pkg.txt) file. It contains a list of my installed packages, excluding packages that only installed as dependency (it will be automaticcally pulled afterall, if needed).
 Or, if You want to know my complete packages, just open the [pkgf.txt](https://github.com/addy-dclxvi/Ultimate-Dotfiles/blob/master/pkgf.txt) file. Maybe those two files can help You.
+
+## My Links
+[Google+](https://plus.google.com/+AdhiPambudi)
+[Deviant Art](http://addy-dclxvi.deviantart.com/)
