@@ -12,52 +12,41 @@ I can't give You every preview for every part, but You can view My Deviant Art [
 
 ## Containing
 
-- **Openbox** <br /> Fairly complete ```rc.xml```, organized menu, and option to ```use menu.xml``` with icons (I'm using [Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons).
+- **Openbox** <br /> Fairly complete *rc.xml*, very organized main menu (Some menu are using [ARCHLabs pipemenu](https://aur.archlinux.org/packages/archlabs-pipemenus-git)), and option to use *menu.xml* with icons (I'm using [Sardi Ghost Flexible](https://aur.archlinux.org/packages/sardi-icons) icons).
 For my openbox themes collections please check my [Openbox-Theme-Collections](https://github.com/addy-dclxvi/Openbox-Theme-Collections).
 
 - **i3** <br /> i3 Pretty stock simple config. My default config is using i3blocks as statusbar. To replace it with Polybar simply edit the config, uncomment the Polybar execution and remove the i3bar.
 
-- **i3blocks** A simple i3 block config for i3 bar.
+- **i3blocks** <br /> A simple i3blocks config for i3bar. I'm using modules from [Anachron](https://github.com/Anachron/i3blocks).
   
-## zsh
-Modified powerlevel9k, decent zshrc. And contains some useful alias.
+- **zshrc** <br /> Eye candy yet useful [Power Level 9k](https://github.com/bhilburn/powerlevel9k) config. Also contains some useful alias.
+In order to use my zshrc, You need to install [Power Level 9k](https://aur.archlinux.org/packages/zsh-theme-powerlevel9k-git) and [Oh-My-Zsh](https://aur.archlinux.org/packages/oh-my-zsh-git).
+Their combinations is decent. Autocorrect, autocomplete with TAB button, and many useful features.
   
-## compton
-Blur heavy glx or more basic xrender configs.
+- **Compton** <br /> Eye candy shadow. Also some useful "exclude" to avoid broken compositing.
 
-## conky
-Just a single conkyrc, for my another conky collections please check my other repos.
+- **Conky** <br /> Just a single conkyrc. For my another Conky collections please check my other [repos](https://github.com/addy-dclxvi?tab=repositories).
 
-## tint2
-Just a single tint2rc, for my another tint2 collections please check my another repo.
+- **Tint2** <br /> Just a single tint2rc. For my another Tint2 collections please check my [Tint2 Themes Collections](https://github.com/addy-dclxvi/Tint2-Theme-Collections).
 
-## termite
-My custom color schemes for termite.
+- **termite** <br /> My custom color schemes for termite.
 
-## Xresources
-My custom color schemes & config for Urxvt, including copy paste support.
+- **Xresources** <br /> My custom color schemes & config for Urxvt, including copy paste support by [Muennich](https://github.com/muennich/urxvt-perls). Hit Alt+C to copy, and Alt+V to paste.
 
-## ncmpcpp
-A simple ncmpcpp config, with album art support.
+- **ncmpcpp** <br /> A simple ncmpcpp config, with album art support. The album art script is taken from [Marco](https://marcocheung.wordpress.com/).
 
-## CAVA
-Some cava configs, with different color. Integrated with zshrc & bashrc alias.
+- **CAVA** <br /> Some [CAVA Visualizer](https://aur.archlinux.org/packages/cava) configs, with different color. Integrated with zshrc & bashrc alias for easy launch. 
 
-## Rofi
-A simple program launcher, only one color scheme for now.
+- **Rofi** <br /> A simple program launcher, only include one color scheme for now.
 
-## gtk.css
-Add paddings for vte-based terminal, including termite.
+- **gtk.css** <br /> Add paddings for vte-based terminal, including termite.
 
-## Neofetch
-Some color configs for neofetch, integrated with zshrc & bashrc alias.
+- **Neofetch** <br /> Some color configs for neofetch, integrated with zshrc & bashrc alias for easy launch.
 
-## bin
-The only useful command here is gitsetup & gitpush, the rest are only toys.
+- **bin** <br /> The only useful command here is gitsetup & gitpush by [Erik Dubois](http://erikdubois.be/quick-easy-way-set-personal-github-repository),
+the rest are only toys from [Crunchbang Forum](https://crunchbang.org/forums/viewtopic.php?id=13645).
 
 ## Package List
-I don't remember one by one what packages need to be installed to make everything works.
-But I have generated my-package-list.txt file. Maybe it can help You to decide what packages need to be installed if You want to use these dotfiles.
-
-## Credits
-These dotfiles are not my only work. I will update this part later. Promise!
+I can't remember one by one what packages need to be installed to make everything works.
+But I have generated a *pkg.txt* file. It contains a list of my installed packages. Excluding packages that only installed as dependency, it will be automaticcally pulled afterall, if needed.
+Maybe that package list file can help You to decide what packages need to be installed if You want to use these dotfiles. Or, if You want to know my complete packages, just open the *pkgf.txt* file.
