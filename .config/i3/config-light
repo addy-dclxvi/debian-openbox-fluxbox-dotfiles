@@ -193,6 +193,11 @@ bar {
     }
 }
 
+# In case You prefer Lemonbar
+#    bar {
+#        i3bar_command ~/.config/i3/lemonbar/i3_lemonbar.sh
+#		}
+
 #removes window titles
 for_window [class=".*"] border pixel 4
 gaps inner 12

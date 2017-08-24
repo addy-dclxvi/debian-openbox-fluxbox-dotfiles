@@ -3,6 +3,7 @@ alsa-firmware
 alsa-lib
 alsa-plugins
 alsa-utils
+android-tools
 arandr
 arc-gtk-theme
 arc-icon-theme
@@ -51,6 +52,8 @@ cava
 chromium
 clipit-gtk3
 clonezilla
+compiz
+compiz-standalone
 compton
 conky-lua
 coreutils
@@ -74,10 +77,12 @@ dmraid
 dnsmasq
 dosfstools
 downgrade
+dzen2
 e2fsprogs
 easytag
 efitools
 elinks
+emerald
 ethtool
 evince
 exfat-utils
@@ -96,6 +101,7 @@ flashplugin
 flex
 font-manager-git
 fsarchiver
+fvwm
 galculator
 gawk
 gcc
@@ -142,6 +148,7 @@ handbrake
 hardinfo
 haveged
 hdparm
+herbstluftwm
 hexchat
 hplip
 htop
@@ -165,6 +172,7 @@ jfsutils
 jq
 kickshaw
 laptop-detect
+lemonbar-xft-git
 less
 lftp
 libcups
@@ -258,6 +266,7 @@ pcmciautils
 peek
 pepper-flash
 perl
+perl-anyevent-i3
 phallus-fonts-git
 pkg-config
 plank
@@ -299,6 +308,7 @@ rsync
 rxvt-unicode
 s-nail
 sardi-icons
+screenfetch
 scrot
 sdparm
 sed
@@ -311,6 +321,7 @@ smplayer
 speedtest-cli
 speedtouch
 squashfs-tools
+stlarch_font
 sublime-text-dev
 sudo
 surfn-icons-git
@@ -370,6 +381,7 @@ wps-office
 wttr
 wvdial
 xdg-user-dirs
+xdotool
 xf86-input-evdev
 xf86-input-keyboard
 xf86-input-libinput
@@ -396,7 +408,10 @@ xfce4-power-manager
 xfce4-screenshooter
 xfce4-settings
 xfce4-taskmanager
+xfdesktop
 xfsprogs
+xfwm4
+xfwm4-standalone
 xl2tpd
 xorg-bdftopcf
 xorg-iceauth
@@ -415,6 +430,7 @@ xorg-xcursorgen
 xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
+xorg-xfd
 xorg-xgamma
 xorg-xhost
 xorg-xinit

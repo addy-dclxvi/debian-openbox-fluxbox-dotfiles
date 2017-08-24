@@ -1,0 +1,531 @@
+w;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                       ;;;;;;;
+;;;;;;      ♟ ♞ ♝ ♜ ♛ ♚                   ;;;;;;;
+;;;;;;        ─ │                      ;;;;;;;
+;;;;;;                             ;;;;;;;
+;;;;;;                             ;;;;;;;
+;;;;;;                      ↵      ;;;;;;;
+;;;;;;         ⚡ ✓ ✘  🌞                ;;;;;;;
+;;;;;;             ➤ ─              ;;;;;;;
+;;;;;;       🔥 👌 ( ͡° ͜ʖ ͡°)                 ;;;;;;;
+;;;;;;              ○ ●              ;;;;;;;
+;;;;;;                           ;;;;;;;
+;;;;;;                  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;         Fonts you will need                      ;;;;;;;;
+;;;;;;;;      --- ttf-font-awesome                        ;;;;;;;;
+;;;;;;;;      --- ttf-material-icons                      ;;;;;;;;
+;;;;;;;;      --- ttf-fira-code                           ;;;;;;;;
+;;;;;;;;      --- nerd-fonts-complete                     ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;             Colours
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[colors]
+background = #00E1E1E0
+foreground = #D1D1D1
+white      = #D1D1D1
+yellow     = #ffcb6b
+urgent     = #B33232
+blue       = #4E88CF
+lightblue  = #5DD5FF
+darkblue   = #4D66C3
+f-alt      = #365260
+b-alt      = #365260
+arc        = #484852
+dupe       = #00E1E1E0
+dark       = #000000
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;            i3 Bars
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+compositing-background = over
+compositing-foreground = source
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+
+[bar/bar1]
+monitor = LVDS1
+width = 100%
+height = 18
+offset-x = 0
+offset-y = 0
+fixed-center = true
+border-bottom-size = 0
+border-bottom-color = ${colors.background}
+border-top-size = 4
+border-top-color = ${colors.background}
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "mplus Nerd Font:pixelsize=9:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+
+modules-left = right workspace-icon right2 right3 title right4 right5 rofi menu right1
+modules-center =
+;modules-right = left volume left2 left3 pkg left2 left3 time left2
+modules-right = left volume left2 left3 time left2
+
+module-margin = 0
+padding-right = 2
+padding-left = 2
+bottom = false
+underline-size = 0
+tray-position = right
+tray-padding = 10
+tray-background = ${colors.background}
+
+
+
+[bar/bar2]
+monitor = LVDS1
+width = 100%
+height = 18
+offset-x = 0
+offset-y = 0
+fixed-center = true
+border-bottom-size = 4
+border-bottom-color = ${colors.background}
+border-top-size = 0
+border-top-color = ${colors.background}
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "mplus Nerd Font:pixelsize=9:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=10:antialias=false;2"
+font-2 = MaterialIcons:size=10:antialias=false;2
+font-3 = Fira Sans:size=10:weight=regular;2
+
+modules-left = right music right1
+modules-center =
+modules-right = left memory left2 left3 coreuse temp left2
+module-margin = 0
+
+padding-right = 2
+;tray-position = right
+padding-left = 2
+bottom = true
+underline-size = 0
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;              Modules
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/rofi]
+type = custom/script
+exec = echo "  "
+click-left = "rofi -show run -font "Roboto 9" -fullscreen True"
+label-foreground = ${colors.foreground}
+label-background = ${colors.b-alt}
+
+
+
+[module/temp]
+type = internal/temperature
+thermal-zone = 0
+warn-temp = 70
+format = <label>
+format-padding = 0
+label-foreground = ${colors.foreground}
+label-background = ${colors.b-alt}
+label-warn-foreground = ${colors.urgent}
+label = "  %temperature% "
+label-warn = "  %temperature% "
+
+
+
+[module/eth]
+type = internal/network
+interface = eno1
+interval = 1
+label-connected = "  "
+label-connected-foreground = ${colors.foreground}
+label-connected-background = ${colors.b-alt}
+label-disconnected = "  "
+label-disconnected-foreground = ${colors.foreground}
+label-disconnected-background = ${colors.b-alt}
+
+
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+format-padding = 1
+format-background = ${colors.b-alt}
+format-foreground = ${colors.foreground}
+label =  %percentage_used%%
+bar-used-width = 12
+bar-used-indicator = 
+bar-used-indicator-foreground = ${colors.foreground}
+bar-used-fill = 
+bar-used-fill-foreground = ${colors.foreground}
+bar-used-empty = 
+bar-used-empty-foreground = ${colors.dark}
+
+
+
+[module/coreuse]
+type = internal/cpu
+interval = 1
+;format = <label> <ramp-coreload>
+format = <label>
+format-background = ${colors.b-alt}
+format-prefix = ""
+format-prefix-padding = 1
+format-prefix-foreground = ${colors.foreground}
+label = %percentage%%
+ramp-coreload-0 = %{F#81817F}▂%{F-}
+ramp-coreload-1 = %{F#81817F}▃%{F-}
+ramp-coreload-2 = %{F#D1D1D0}▄%{F-}
+ramp-coreload-3 = %{F#D1D1D0}▅%{F-}
+ramp-coreload-4 = %{F#D1D1D0}▆%{F-}
+ramp-coreload-5 = %{F#FFFFFF}▇%{F-}
+ramp-coreload-6 = %{F#FFFFFF}█%{F-}
+
+
+
+[module/time]
+type = internal/date
+interval = 5
+label-foreground = ${colors.foreground}
+date-alt = " %a, %d-%m-%y"
+time = "%a %d, %H:%M%%{F-}"
+time-alt = "%H:%M:%S "
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+format-background = ${colors.b-alt}
+label = %date% %time%
+
+
+
+
+[module/music]
+type                  = internal/mpd
+label-song            = %artist% - %title%
+label-song-maxlen     = 65
+format-online = " <icon-prev><icon-stop><toggle><icon-next><icon-random><label-song><bar-progress>"
+label-song-foreground = ${colors.foreground}
+format-background = ${colors.b-alt}
+label-song-background = ${colors.b-alt}
+icon-pause-background = ${colors.b-alt}
+icon-play-background  = ${colors.b-alt}
+icon-stop-background = ${colors.b-alt}
+icon-prev-background = ${colors.b-alt}
+icon-next-background = ${colors.b-alt}
+icon-random-background = ${colors.b-alt}
+icon-pause-foreground = ${self.label-song-foreground}
+icon-stop-foreground = ${self.label-song-foreground}
+icon-play-foreground  = ${self.label-song-foreground}
+label-song-padding = 2
+format-padding = 2
+icon-prev  = " "
+icon-stop  = " "
+icon-pause = " "
+icon-play  = " "
+icon-next  = " "
+icon-random = "  "
+toggle-off-foreground = ${colors.foreground}
+toggle-on-foreground  = ${colors.dark}
+bar-progress-width = 20
+bar-progress-indicator = 
+bar-progress-fill = 
+bar-progress-empty = 
+bar-progress-empty-foreground = ${colors.dark}
+bar-progress-empty-background = ${colors.b-alt}
+bar-progress-fill-foreground = ${colors.foreground}
+bar-progress-fill-background = ${colors.b-alt}
+bar-progress-indicator-foreground = ${colors.foreground}
+bar-progress-indicator-background = ${colors.b-alt}
+
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+label-mounted =  %mountpoint%:%percentage_used%%
+label-mounted-foreground = ${colors.blue}
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.blue}
+
+
+
+[module/pkg]
+type = custom/script
+label-foreground = ${colors.foreground}
+label-background = ${colors.b-alt}
+exec = ~/.config/polybar/pkg.sh
+;click-left = ~/.config/polybar/update.sh
+;click-right = ~/.config/polybar/aur-update.sh
+label-padding = 0
+interval = 60
+
+
+
+[module/compton]
+type = custom/script
+label-background = ${colors.b-alt}
+exec = ~/.config/polybar/compton.sh
+click-left = ~/.config/polybar/compton-toggle.sh
+click-right = ~/.config/polybar/compton-toggle.sh
+interval = 2
+label-padding = 1
+
+
+[module/trash]
+interval = 1
+type = custom/script
+exec = ~/.config/polybar/trash
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-background = ${colors.b-alt}
+click-right = rm -rf ~/.local/share/Trash/files/*
+click-left = exo-open --launch FileManager ~/.local/share/Trash/files
+
+
+
+[module/menu]
+type = custom/menu
+format-spacing = 1
+format-background = ${colors.b-alt}
+label-open = " ⚡ "
+label-open-foreground = ${colors.foreground}
+label-open-background = ${colors.b-alt}
+label-close = " ⚡ "
+label-close-foreground = ${colors.urgent}
+label-separator = "│"
+label-separator-foreground = ${colors.background}
+# Top level
+menu-0-0 = "  "
+menu-0-0-exec = menu-open-1
+menu-0-1 = "  "
+menu-0-1-exec = menu-open-2
+menu-0-2 = "   "
+menu-0-2-exec = menu-open-3
+# 1
+menu-1-0 = "  "
+menu-1-0-exec = exo-open --launch WebBrowser
+menu-1-1 = "  "
+menu-1-1-exec = exo-open --launch TerminalEmulator
+menu-1-2 = "  "
+menu-1-2-exec = exo-open --launch FileManager
+menu-1-3 = "   "
+menu-1-3-exec = atom
+# 2
+menu-2-0 = "  "
+menu-2-0-exec = gimp-2.8 &
+menu-2-1 = "  "
+menu-2-1-exec = audacious &
+menu-2-2 = "  "
+menu-2-2-exec = pamac-manager &
+menu-2-3 = "  "
+menu-2-3-exec = steam-runtime
+menu-2-4 = "  "
+menu-2-4-exec = xfce4-appearance-settings &
+menu-2-5 = "   "
+menu-2-5-exec = scrot %F-%S_$wx$h_scrot.png -e 'mv $f ~/images'
+# 3
+menu-3-0 = "  "
+menu-3-0-exec = i3lock-fancy
+menu-3-1 = "  "
+menu-3-1-exec = i3-msg exit
+menu-3-2 = "  "
+menu-3-2-exec = systemctl reboot
+menu-3-3 = "   "
+menu-3-3-exec = systemctl poweroff
+
+
+
+[module/title]
+type = custom/script
+interval = 1
+label = %output%
+label-maxlen = 65
+exec = echo "$(xtitle)"
+format = <label>
+format-background = ${colors.b-alt}
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-padding = 3
+
+
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+format-volume = <label-volume><bar-volume>
+label-volume = "  "
+label-volume-foreground = ${colors.foreground}
+label-volume-background = ${colors.b-alt}
+format-muted-prefix = "  "
+format-muted-foreground = ${colors.dark}
+format-muted-background = ${colors.b-alt}
+label-muted = sound muted
+bar-volume-width = 15
+bar-volume-foreground-0 = ${colors.foreground}
+bar-volume-gradient = false
+bar-volume-indicator =
+bar-volume-indicator-foreground = ${colors.foreground}
+bar-volume-indicator-backround = ${colors.b-alt}
+bar-volume-fill-background = ${colors.b-alt}
+bar-volume-fill = ""
+bar-volume-empty = ""
+bar-volume-empty-foreground = ${colors.dark}
+bar-volume-empty-background = ${colors.b-alt}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;              i3
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/workspace-icon]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
+format = <label-state>
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-background = ${colors.f-alt}
+label-focused = %icon% %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.f-alt}
+label-focused-underline = ${colors.lightblue}
+label-focused-padding = 1
+label-unfocused = %icon% %name%
+label-unfocused-background = ${colors.f-alt}
+label-unfocused-padding = 1
+label-visible = %icon% %name%
+label-visible-underline = ${colors.lightblue}
+label-visible-background = ${colors.f-alt}
+label-visible-padding = 1
+label-urgent = %icon% %name%
+label-urgent-foreground = ${colors.b-alt}
+label-urgent-background = ${colors.f-alt}
+label-urgent-padding = 1
+
+[module/workspace-box]
+type = internal/i3
+format = <label-state><label-mode>
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+label-mode-padding = 1
+label-mode = %mode%
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.b-alt}
+label-focused = ""
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.b-alt}
+label-focused-padding = 1
+label-unfocused = ""
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-background = ${colors.b-alt}
+label-unfocused-padding = 1
+label-urgent = ""
+label-urgent-foreground = ${colors.urgent}
+label-urgent-background = ${colors.b-alt}
+label-urgent-padding = 1
+label-visible = ""
+label-visible-foreground = ${colors.foreground}
+label-visible-background = ${colors.b-alt}
+label-visible-padding = 1
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;           powerline style
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/left]
+type = custom/text
+content = 
+content-background = ${colors.background}
+content-foreground = ${colors.b-alt}
+
+[module/left2]
+type = custom/text
+content = " "
+content-background = ${colors.b-alt}
+content-foreground = ${colors.dupe}
+
+[module/left3]
+type = custom/text
+content = 
+content-background = ${colors.background}
+content-foreground = ${colors.b-alt}
+
+[module/left4]
+type = custom/text
+content = 
+content-background = ${colors.background}
+content-foreground = ${colors.b-alt}
+
+[module/right]
+type = custom/text
+content = 
+content-background = ${colors.b-alt}
+content-foreground = ${colors.dupe}
+
+[module/right1]
+type = custom/text
+content = 
+font = 1
+content-background = ${colors.background}
+content-foreground = ${colors.f-alt}
+
+[module/right2]
+type = custom/text
+content = 
+content-background = ${colors.background}
+content-foreground = ${colors.f-alt}
+
+[module/right3]
+type = custom/text
+content = 
+content-background = ${colors.b-alt}
+content-foreground = ${colors.dupe}
+
+[module/right4]
+type = custom/text
+content = 
+content-background = ${colors.background}
+content-foreground = ${colors.f-alt}
+
+[module/right5]
+type = custom/text
+content = 
+content-background = ${colors.b-alt}
+content-foreground = ${colors.dupe}

@@ -7,6 +7,7 @@ alsa-firmware
 alsa-lib
 alsa-plugins
 alsa-utils
+android-tools
 arandr
 arc-gtk-theme
 arc-icon-theme
@@ -57,6 +58,7 @@ bluez-firmware
 bluez-libs
 bluez-tools
 bluez-utils
+boost
 boost-libs
 breeze-icons
 breeze-snow-cursor-theme
@@ -85,6 +87,8 @@ clipit-gtk3
 clonezilla
 clucene
 cmake
+compiz
+compiz-standalone
 compositeproto
 compton
 confuse
@@ -129,6 +133,7 @@ dosfstools
 double-conversion
 downgrade
 drbl
+dzen2
 e2fsprogs
 easytag
 ecryptfs-utils
@@ -136,6 +141,7 @@ efibootmgr
 efitools
 efivar
 elinks
+emerald
 enchant
 ethtool
 evince
@@ -175,6 +181,7 @@ fribidi
 fsarchiver
 fuse-common
 fuse2
+fvwm
 galculator
 garcon
 gawk
@@ -269,6 +276,7 @@ harfbuzz
 harfbuzz-icu
 haveged
 hdparm
+herbstluftwm
 hexchat
 hicolor-icon-theme
 hplip
@@ -288,6 +296,7 @@ idnkit
 ijs
 ilmbase
 imagemagick
+imlib
 imlib2
 inetutils
 iniparser
@@ -331,6 +340,7 @@ lcms
 lcms2
 ldb
 ldns
+lemonbar-xft-git
 less
 lftp
 libabw
@@ -489,6 +499,7 @@ libspiro
 libsrtp
 libssh
 libssh2
+libstroke
 libsystemd
 libtar
 libtasn1
@@ -604,6 +615,7 @@ mdadm
 meld
 memtest86+
 mesa
+metacity
 mime-types
 minizip
 mintstick-git
@@ -714,14 +726,20 @@ pcsclite
 peek
 pepper-flash
 perl
+perl-anyevent
+perl-anyevent-i3
+perl-canary-stability
 perl-clone
+perl-common-sense
 perl-curses
 perl-data-dump
 perl-dbi
 perl-error
+perl-json-xs
 perl-linux-desktopfiles
 perl-sgmls
 perl-term-animation
+perl-types-serialiser
 perl-uri
 perl-xml-libxml
 perl-xml-namespacesupport
@@ -753,6 +771,7 @@ ppp
 pptpclient
 procps-ng
 progsreiserfs
+protobuf
 psmisc
 pulseaudio
 pulseaudio-alsa
@@ -760,6 +779,7 @@ pulseaudio-bluetooth
 pygobject-devel
 pygobject2-devel
 pygtk
+pyrex
 python
 python-appdirs
 python-cairo
@@ -888,6 +908,7 @@ sassc
 sbc
 sbsms
 schroedinger
+screenfetch
 scrnsaverproto
 scrot
 sdl
@@ -922,6 +943,7 @@ squashfs-tools
 sratom
 sshfs
 startup-notification
+stlarch_font
 sublime-text-dev
 sudo
 surfn-icons-git
@@ -1029,6 +1051,7 @@ xcb-util-wm
 xcb-util-xrm
 xdg-user-dirs
 xdg-utils
+xdotool
 xextproto
 xf86-input-evdev
 xf86-input-keyboard
@@ -1060,7 +1083,10 @@ xfce4-screenshooter
 xfce4-settings
 xfce4-taskmanager
 xfconf
+xfdesktop
 xfsprogs
+xfwm4
+xfwm4-standalone
 xineramaproto
 xkeyboard-config
 xl2tpd
@@ -1087,6 +1113,7 @@ xorg-xcursorgen
 xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
+xorg-xfd
 xorg-xgamma
 xorg-xhost
 xorg-xinit

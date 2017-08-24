@@ -1,0 +1,564 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                  Icon Collection                    ;;;;;;;
+;;;;;;     ♟ ♞ ♝ ♜ ♛ ♚                 ;;;;;;;
+;;;;;;       ─ │                     ;;;;;;;
+;;;;;;                           ;;;;;;;
+;;;;;;                            ;;;;;;;
+;;;;;;                  ↵      ;;;;;;;
+;;;;;;        ⚡✓ ✘  🌞              ;;;;;;;
+;;;;;;            ➤ ─              ;;;;;;;
+;;;;;;      🔥 👌 ( ͡° ͜ʖ ͡°)                ;;;;;;;
+;;;;;;             ○ ●              ;;;;;;;
+;;;;;;     
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;         Fonts you will need                      ;;;;;;;;
+;;;;;;;;      --- ttf-font-awesome                        ;;;;;;;;
+;;;;;;;;      --- ttf-material-icons                      ;;;;;;;;
+;;;;;;;;      --- ttf-fira-code                           ;;;;;;;;
+;;;;;;;;      --- nerd-fonts-complete                     ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;             Colours
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[colors]
+background = #ed232729
+foreground = #D1D1D0
+yellow     = #ffcb6b
+red        = #922929
+blue       = #fd7980
+lightblue  = #e3788f
+darkblue   = #4D66C3
+f-alt      = #ffffff
+b-alt      = #ed232729
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;              Bars
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/bottom]
+monitor = LVDS1
+width = 100%
+height = 24
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "mplus Nerd Font:pixelsize=9:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+tray-position = right
+tray-padding = 2
+modules-left = workspaces title
+modules-center =
+modules-right = mpd
+padding-right = 2
+padding-left = 1
+module-margin = 0
+bottom = true
+overline line-size = 1
+underline-size = 2
+
+[bar/topleftbar]
+monitor = LVDS1
+width = 323px
+height = 24
+offset-x = 0
+offset-y =
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "SauceCodePro Nerd Font:pixelsize=10:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+modules-left = ram coreuse
+modules-center =
+modules-right =
+module-margin = 0
+padding-right = 1
+padding-left = 1
+bottom = false
+underline-size = 2
+
+[bar/toprightbar]
+monitor = LVDS1
+width = 1039px
+height = 24
+offset-x = 881
+offset-y =
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "SauceCodePro Nerd Font:pixelsize=10:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+modules-left = xwindow
+modules-center =
+modules-right = compton pkg eth time
+module-margin = 0
+padding-right = 1
+padding-left = 5
+bottom = false
+underline-size = 2
+
+[bar/traybar]
+monitor = LVDS1
+width = 100%
+height = 24
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "SauceCodePro Nerd Font:pixelsize=10:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+tray-position = left
+tray-padding = 2
+modules-left = mpd
+modules-center =
+modules-right = workspaces volume trash
+padding-right = 2
+padding-left = 1
+module-margin = 0
+bottom = true
+overline line-size = 1
+underline-size = 2
+
+[bar/bottomrightbar]
+monitor = LVDS1
+width = 53%
+height = 24
+offset-x = 0
+offset-y = 24
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "SauceCodePro Nerd Font:pixelsize=10:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+modules-left = title
+modules-center =
+modules-right = compton eth time
+module-margin = 0
+padding-right = 2
+padding-left = 2
+bottom = true
+underline-size = 2
+
+[bar/bottomleftbar]
+monitor = LVDS1
+width = 323px
+height = 24
+offset-x = 0
+offset-y =
+separator = " "
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = "SauceCodePro Nerd Font:pixelsize=10:antialias=false;3"
+font-1 = "FontAwesome:pixelsize=12:antialias=false;2"
+font-2 = MaterialIcons:size=12:antialias=false;2
+font-3 = Fira Sans:size=12:weight=regular;2
+modules-left = filesystem temp
+modules-center =
+modules-right =
+padding-right = 1
+padding-left = 1
+module-margin = 0
+bottom = true
+overline line-size = 1
+underline-size = 2
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;              Modules
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/temp]
+type = internal/temperature
+thermal-zone = 0
+warn-temp = 70
+format = <ramp> <label>
+format-padding = 1
+label-foreground = ${colors.foreground}
+;ramp-foreground = ${colors.blue}
+label-warn-foreground = ${colors.red}
+label = %temperature%
+label-warn = " %temperature%"
+ramp-0 = %{F#5DD5FF}▁%{F-}
+ramp-1 = %{F#5DD5FF}▂%{F-}
+ramp-2 = %{F#5DD5FF}▃%{F-}
+ramp-3 = %{F#4E88CF}▄%{F-}
+ramp-4 = %{F#4E88CF}▅%{F-}
+ramp-5 = %{F#2378DF}▆%{F-}
+ramp-6 = %{F#2378DF}▇%{F-}
+ramp-7 = %{F#2378DF}█%{F-}
+
+
+
+[module/eth]
+type = internal/network
+interface = enp1s0
+interval = 0.5
+;format-connected-underline = ${colors.blue}
+label-connected = ""
+label-connected-foreground = ${colors.blue}
+label-disconnected = ""
+label-disconnected-foreground = ${colors.blue}
+
+
+
+[module/ram]
+type = internal/memory
+interval = 3
+;label-foreground = ${colors.blue}
+label-padding = 1
+format-prefix = ""
+format-prefix-foreground = ${colors.blue}
+format-padding = 1
+
+
+
+[module/coreuse]
+type = internal/cpu
+interval = 1
+format = <label> <ramp-coreload>
+format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+;format-underline = ${colors.blue}
+label = %percentage%%
+ramp-coreload-0 = %{F#5DD5FF}▁%{F-}
+ramp-coreload-1 = %{F#5DD5FF}▂%{F-}
+ramp-coreload-2 = %{F#5DD5FF}▃%{F-}
+ramp-coreload-3 = %{F#4E88CF}▄%{F-}
+ramp-coreload-4 = %{F#4E88CF}▅%{F-}
+ramp-coreload-5 = %{F#2378DF}▆%{F-}
+ramp-coreload-6 = %{F#2378DF}▇%{F-}
+ramp-coreload-7 = %{F#2378DF}█%{F-}
+
+
+
+[module/time]
+type = internal/date
+interval = 5
+;label-foreground = ${colors.blue}
+date =
+date-alt = " %Y-%m-%d"
+time = "%H:%M "
+time-alt = "%H:%M:%S "
+format-prefix = ""
+format-prefix-foreground = ${colors.blue}
+;format-underline = ${colors.blue}
+label = %date% %time%
+
+
+
+
+[module/mpd]
+type                  = internal/mpd
+label-song            = %artist% - %title%
+label-song-maxlen     = 65
+label-song-ellipsis   = true
+format-online = <label-song>   <icon-prev> <icon-stop> <toggle> <icon-next>
+label-song-foreground = ${colors.foreground}
+label-padding = 1
+label-song-background = ${colors.background}
+icon-pause-background = ${self.label-song-background}
+icon-play-background  = ${self.label-song-background}
+icon-pause-foreground = ${colors.blue}
+icon-stop-foreground = ${self.label-song-foreground}
+icon-play-foreground  = ${self.label-song-foreground}
+label-song-padding = 1
+icon-prev  = ""
+icon-stop  = ""
+icon-pause = ""
+icon-play  = ""
+icon-next  = ""
+icon-random = ""
+toggle-off-foreground = ${colors.blue}
+toggle-on-foreground  = ${colors.red}
+bar-progress-width = 20
+bar-progress-indicator = ""
+bar-progress-fill = ""
+bar-progress-empty = "─"
+bar-progress-fill-foreground = ${colors.blue}
+bar-progress-indicator-foreground = ${colors.blue}
+
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+mount-1 = /media/addy/Media
+label-mounted = " :%percentage_used%%"
+label-mounted-foreground = ${colors.blue}
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.blue}
+
+
+
+[module/pkg]
+type = custom/script
+label-foreground = ${colors.blue}
+exec = ~/.config/polybar/pkg.sh
+click-left = ~/.config/polybar/update.sh
+click-right = ~/.config/polybar/aur-update.sh
+
+
+
+[module/compton]
+type = custom/script
+exec = ~/.config/polybar/compton.sh
+click-left = ~/.config/polybar/compton-toggle.sh
+click-right = ~/.config/polybar/compton-toggle.sh
+interval = 2
+
+
+
+[module/trash]
+interval = 1
+type = custom/script
+exec = ~/.config/polybar/trash
+format-prefix = "  "
+format-prefix-foreground = ${colors.blue}
+click-right = rm -rf ~/.local/share/Trash/files/*
+click-left = exo-open --launch FileManager ~/.local/share/Trash/files
+
+
+
+[module/menu]
+type = custom/menu
+format-spacing = 1
+label-open = "  "
+label-open-foreground = ${colors.blue}
+label-close = "  "
+label-close-foreground = ${colors.red}
+label-separator = "│"
+label-separator-foreground = ${colors.blue}
+# Top level
+menu-0-0 = "  "
+menu-0-0-exec = menu-open-1
+menu-0-1 = "  "
+menu-0-1-exec = menu-open-2
+menu-0-2 = "  "
+menu-0-2-exec = menu-open-3
+# 1
+menu-1-0 = "  "
+menu-1-0-exec = exo-open --launch WebBrowser
+menu-1-1 = "  "
+menu-1-1-exec = exo-open --launch TerminalEmulator
+menu-1-2 = "  "
+menu-1-2-exec = exo-open --launch FileManager
+menu-1-3 = "  "
+menu-1-3-exec = atom
+# 2
+menu-2-0 = "  "
+menu-2-0-exec = gimp-2.8 &
+menu-2-1 = "  "
+menu-2-1-exec = audacious &
+menu-2-2 = "  "
+menu-2-2-exec = pamac-manager &
+menu-2-3 = "  "
+menu-2-3-exec = steam-runtime
+menu-2-4 = "  "
+menu-2-4-exec = scrot %F-%S_$wx$h_scrot.png -e 'mv $f ~/images'
+# 3
+menu-3-0 = "  "
+menu-3-0-exec = logout
+menu-3-1 = "  "
+menu-3-1-exec = systemctl reboot
+menu-3-2 = "  "
+menu-3-2-exec = systemctl poweroff
+
+
+[module/title]
+type = custom/script
+interval = 1
+label = %output%
+label-maxlen = 65
+exec = echo "$(xtitle)"
+format = <label>
+format-background = ${colors.b-alt}
+#format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+format-padding = 1
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:20:...%
+
+format-background = ${colors.b-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+format-padding = 1
+
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+format-volume = <label-volume> <bar-volume>
+label-volume =
+label-volume-foreground = ${colors.foreground}
+format-muted-prefix =
+format-muted-foreground = ${colors.f-alt}
+label-muted = sound muted
+bar-volume-width = 15
+bar-volume-foreground-0 = ${colors.lightblue}
+bar-volume-foreground-1 = ${colors.lightblue}
+bar-volume-foreground-2 = ${colors.lightblue}
+bar-volume-foreground-3 = ${colors.lightblue}
+bar-volume-foreground-4 = ${colors.lightblue}
+bar-volume-foreground-5 = ${colors.blue}
+bar-volume-foreground-6 = ${colors.blue}
+bar-volume-foreground-7 = ${colors.blue}
+bar-volume-foreground-8 = ${colors.blue}
+bar-volume-foreground-9 = ${colors.darkblue}
+bar-volume-foreground-10 = ${colors.darkblue}
+bar-volume-foreground-11 = ${colors.darkblue}
+bar-volume-foreground-12 = ${colors.darkblue}
+bar-volume-foreground-13 = ${colors.darkblue}
+bar-volume-gradient = true
+bar-volume-indicator =
+bar-volume-indicator-font = 1
+bar-volume-indicator-foreground = ${colors.foreground}
+bar-volume-fill = ""
+bar-volume-fill-font = 1
+bar-volume-empty = ""
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.f-alt}
+
+
+
+[module/workspaces]
+type = internal/xworkspaces
+enable-click = true
+enable-scroll = true
+Additional formatting
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-9 = 10;
+;icon-default = 
+
+format = <label-state>
+label-monitor = %name%
+
+label-active = " %icon% %name% "
+label-active-foreground = ${colors.blue}
+label-active-background = ${colors.background}
+label-active-underline = ${colors.blue}
+
+label-occupied = " %icon% %name% "
+label-occupied-underline = ${colors.blue}
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.blue}
+
+label-urgent = " %icon% %name% "
+label-urgent-foreground = ${colors.red}
+label-urgent-background = ${colors.background}
+label-urgent-underline = ${colors.red}
+
+label-empty = " %icon% %name% "
+label-empty-foreground = #ffffff
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;            style modules
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/pipe]
+type = custom/text
+content = "|"
+content-background = ${colors.background}
+content-foreground = ${colors.darkgrey}
+content-padding = 1
+
+[module/darkarrow]
+type = custom/text
+content = ""
+content-background = ${colors.background}
+content-foreground = ${colors.blue}
+content-padding = 0
+
+[module/darkarrow55]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/lightarrow]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/mediumarrow]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.blue}
+content-padding = 0
+
+[module/mediumarrow2]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.blue}
+
+[module/rightarrow]
+type = custom/text
+content = ""
+content-background = ${colors.background}
+content-foreground = ${colors.blue}
+content-padding = 0
+
+[module/lightarrow2]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/lightarrow5]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/arrow1]
+type=custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/arrow2]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0
+
+[module/arrow3]
+type = custom/text
+content = ""
+content-background = ${colors.blue}
+content-foreground = ${colors.background}
+content-padding = 0

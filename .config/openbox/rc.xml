@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Triste-Froly</name>
+    <name>Clair-Orange</name>
     <titleLayout>IMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -52,6 +52,9 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
   -->
+    <!--
+  <cornerRadius>4</cornerRadius>
+-->
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
@@ -126,6 +129,9 @@
       <name>3</name>
       <name>4</name>
       <name>5</name>
+      <name>6</name>
+      <name>7</name>
+      <name>8</name>
     </names>
     <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching

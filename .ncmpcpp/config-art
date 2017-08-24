@@ -176,7 +176,7 @@ visualizer_color = cyan, green, yellow, magenta, red
 ## Note: colors can be nested.
 ##
 #
-song_list_format = "                    {{%a - %t}|{%f}}{$R%l}"
+song_list_format = "                             {{%a - %t}|{%f}}{$R%l}"
 #
 #song_status_format = {%a - %t}|{%f}
 song_status_format = "{{%a{ "%b"{ (%y)}} - }{%t$/b}}|{$b%f$/b} ♫"
@@ -189,7 +189,7 @@ song_library_format = {{%a - %t} (%b)}|{%f}
 #
 #alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
-now_playing_prefix = "$b$2"
+now_playing_prefix = "$b$5"
 #
 now_playing_suffix = "$/b$9"
 #
@@ -484,7 +484,7 @@ state_line_color = red
 #
 state_flags_color = yellow
 #
-main_window_color = magenta
+main_window_color = default
 #
 color1 = red
 #
@@ -494,7 +494,7 @@ main_window_highlight_color = white
 #
 progressbar_color = black
 #
-progressbar_elapsed_color = red
+progressbar_elapsed_color = yellow
 #
 statusbar_color = red
 #

@@ -52,8 +52,8 @@ POWERLEVEL9K_DIR_HOME_BACKGROUND=red
 POWERLEVEL9K_DIR_HOME_FOREGROUND=white
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=red
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND=white
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=red
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=white
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=yellow
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=black
 POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=red
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=white
 
@@ -252,7 +252,7 @@ alias neopad="neofetch --config /home/addy/.config/neofetch/config-padding"
 ##
 alias neofetch-blue="neofetch --source .neofetch/al-blue.png --colors 4 4 4 4 4"
 alias neofetch-crimson="neofetch --source .neofetch/al-crimson.png --colors 1 1 1 1 1"
-alias neofetch-froly="neofetch --source .neofetch/al-crimson.png --colors 9 9 9 9 9"
+alias neofetch-froly="neofetch --source .neofetch/al-froly.png --colors 9 9 9 9 9"
 alias neofetch-lavender="neofetch --source .neofetch/al-lavender.png --colors 13 13 13 13 13"
 alias neofetch-lime="neofetch --source .neofetch/al-lime.png --colors 2 2 2 2 2"
 alias neofetch-orange="neofetch --source .neofetch/al-orange.png --colors 3 3 3 3 3"
@@ -284,3 +284,9 @@ rm()
 
 ## termite light
 alias termite-light="termite -c ~/.config/termite/config-light &"
+
+## download mp3 from youtube
+alias ytmp3="youtube-dl --extract-audio --audio-format mp3"
+
+## git clone depth 1
+alias clone="git clone --depth 1"
