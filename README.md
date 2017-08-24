@@ -24,7 +24,7 @@ For my themes, please check my [Openbox Theme Collections](https://github.com/ad
   
 - **zshrc** <br /> Eye candy yet useful [Power Level 9k](https://github.com/bhilburn/powerlevel9k) config. Also contains some useful alias.
 In order to use my zshrc, You need to install [Nerd Font Complete](https://aur.archlinux.org/packages/nerd-fonts-complete), [Power Level 9k](https://aur.archlinux.org/packages/zsh-theme-powerlevel9k-git) and [Oh-My-Zsh](https://aur.archlinux.org/packages/oh-my-zsh-git).
-Their combinations is decent. Autocorrect, autocomplete with TAB button, and many useful features.
+Their combinations is decent. Autocorrect, autocomplete with TAB button, and many useful features. <br />
 ![alt text](https://raw.githubusercontent.com/addy-dclxvi/Ultimate-Dotfiles/master/powerlevel9k.gif)
   
 - **Compton** <br /> Eye candy shadow. Also some useful "exclude" to avoid broken compositing.
@@ -37,7 +37,7 @@ Their combinations is decent. Autocorrect, autocomplete with TAB button, and man
 
 - **Xresources** <br /> My custom color schemes & config for Urxvt, including copy paste support by [Muennich](https://github.com/muennich/urxvt-perls). Hit Alt+C to copy, and Alt+V to paste.
 
-- **ncmpcpp** <br /> A simple ncmpcpp config, with album art support. The album art script is taken from [Marco](https://marcocheung.wordpress.com/). Slightly modified to get rid the transparency bug.
+- **ncmpcpp** <br /> A simple ncmpcpp config, with album art support. The album art script is taken from [Marco](https://marcocheung.wordpress.com/). Slightly modified to get rid the transparency bug. <br />
 ![alt text](https://raw.githubusercontent.com/addy-dclxvi/Ultimate-Dotfiles/master/ncmpcpp.gif)
 
 - **CAVA** <br /> Some [CAVA Visualizer](https://aur.archlinux.org/packages/cava) configs, with different color. Integrated with zshrc & bashrc alias for easy launch. 
