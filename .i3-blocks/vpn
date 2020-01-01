@@ -1,9 +1,0 @@
-#!/bin/bash
-
-VPNC_FILE='/var/run/vpnc.pid'
-
-if [[ -e "${VPNC_FILE}" ]]; then
-  echo "on"
-  echo "on"
-  echo ""
-fi

@@ -1,0 +1,7 @@
+[Default Applications]
+image/gif=viewnior.desktop
+image/jpeg=viewnior.desktop
+image/png=viewnior.desktop
+image/svg+xml=viewnior.desktop
+text/plain=geany.desktop
+text/html=geany.desktop

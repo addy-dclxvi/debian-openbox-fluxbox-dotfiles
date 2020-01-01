@@ -1,0 +1,13 @@
+# GIMP gimprc
+# 
+# This is your personal gimprc file.  Any variable defined in this file takes
+# precedence over the value defined in the system-wide gimprc:
+# /etc/gimp/2.0/gimprc
+# Most values can be set within GIMP by changing some options in the
+# Preferences dialog.
+
+(plug-in-path "/usr/lib/gimp/2.0/plug-ins:/home/addy/.gimp-2.8/plug-ins")
+(theme "Photoshop")
+
+
+# end of gimprc

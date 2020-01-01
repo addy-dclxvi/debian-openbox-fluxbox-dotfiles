@@ -1,158 +1,78 @@
-! ------------------------------------------------------------------------------
-! Espresso color scheme by Addy
-! Based On Mocha
-! ------------------------------------------------------------------------------
-
+!! Colorscheme
 
 ! special
-*.foreground:   #f5f8f6
-*.background:   #2f343f
-*.cursorColor:  #dc8cc3
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
 
 ! black
-*.color0  : #5b4848
-*.color8  : #736060
+*.color0: #263640
+*.color8: #4a697d
 
 ! red
-*.color1  : #cb6077
-*.color9  : #e3788f
+*.color1: #d12f2c
+*.color9: #fa3935
 
 ! green
-*.color2  : #bec55b
-*.color10 : #d6ed73
+*.color2: #819400
+*.color10: #a4bd00
 
 ! yellow
-*.color3  : #e4bc87
-*.color11 : #fcd49f
+*.color3: #b08500
+*.color11: #d9a400
 
 ! blue
-*.color4  : #8ab3d5
-*.color12 : #a2cbed
+*.color4: #2587cc
+*.color12: #2ca2f5
 
 ! magenta
-*.color5  : #a89bb9
-*.color13 : #c0b3d1
+*.color5: #696ebf
+*.color13: #8086e8
 
 ! cyan
-*.color6  : #7bcdb4
-*.color14 : #93e5cc
+*.color6: #289c93
+*.color14: #33c5ba
 
 ! white
-*.color7  : #e0d8d6
-*.color15 : #f8f0ee
+*.color7: #bfbaac
+*.color15: #fdf6e3
 
+!! URxvt Appearance
+URxvt.font: -*-rissole-*
+URxvt.boldFont: -*-rissole-*
+URxvt.italicFont: -*-rissole-*
+URxvt.boldItalicfont: -*-rissole-*
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
 
-! ------------------------------------------------------------------------------
-! xterm configs
-! ------------------------------------------------------------------------------
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
 
-
-xterm*font: 7x13
-xterm*faceName: M+ 1mn:size=8:antialias=false
-xterm*loginShell: true
-xterm*vt100*geometry: 92x16
-xterm*saveLines: 2000
-xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
-xterm*termName: xterm-color
-xterm*eightBitInput: false
-!xterm*foreground: rgb:d9/d4/d4
-!xterm*background: rgb:32/32/32
-xterm*boldMode: false
-
-
-! ------------------------------------------------------------------------------
-! URxvt configs
-! ------------------------------------------------------------------------------
-
-
-! general settings
-URxvt*saveline:         15000
-URxvt*termName:         rxvt-256color
-URxvt*iso14755:         false
-! for this icon to load in panels and plank you need to follow the steps described here
-! http://archlabs.prophpbb.com/post1220.html
-URxvt*iconFile:  		/usr/share/icons/Sardi-Mono/scalable/apps/terminal.svg
-
-! appearance
-URxvt*depth:            32
-!URxvt*background:      rgba:0000/0000/0000/AAAA
-!URxvt*background:      [80]#404552
-URxvt*background:       [100]#2f343f
-URxvt*foreground:       #F8F8FF
-URxvt.underlineColor:   #4682B4
-URxvt.highlightColor:   #4682B4
-URxvt.throughColor:     Blue
-URxvt*cursorColor:      #dc8cc3
-URxvt*cursorColor2:     Black
-URxvt*scrollBar:        false
-URxvt*scrollBar_right:  false
-URxvt*internalBorder:   0
-URxvt*externalBorder:   0
-URxvt.colorIT:      	#87af5f
-URxvt.colorBD:      	#c5c8c6
-URxvt.colorUL:      	#87afd7
-URxvt.geometry: 		92x16
-URxvt.internalBorder:	24
-
-! fonts
-URxvt*letterSpace: 	    		-2
-URxvt.lineSpace: 				-1
-!Xft.size:						8
-URxvt*font:                 	xft:M+ 1mn:regular:size=8
-URxvt*imFont:               	xft:M+ 1mn:regular:size=8
-URxvt*boldFont:             	xft:M+ 1mn:bold:size=8
-URxvt*italicFont:           	xft:M+ 1mn:italic:size=8
-URxvt*boldItalicFont:     		xft:M+ 1mn:regular:size=8
-! run :.!fc-list | grep <font-name>
-
-! perl extensions
-URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select
-!URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select,tabbed
-
-! macros for clipboard and selection
-
-URxvt.copyCommand:      xclip -i -selection clipboard
-URxvt.pasteCommand:     xclip -o -selection clipboard
-URxvt.keysym.M-c:       perl:clipboard:copy
-URxvt.keysym.M-v:       perl:clipboard:paste
-URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape:  perl:keyboard-select:activate
-URxvt.keysym.M-s:       perl:keyboard-select:search
-URxvt.keysym.M-u:       perl:url-select:select_next
-URxvt.urlLauncher:      firefox
-URxvt.underlineURLs:    true
-URxvt.urlButton:        1
-
-! tabbed
-URxvt.tabbed.tabbar-fg: 4
-URxvt.tabbed.tabbar-bg: 16
-URxvt.tabbed.tab-fg:    15
-URxvt.tabbed.tab-bg:    4
-URxvt*buffered:         false
-
-
-! ------------------------------------------------------------------------------
-! UXTerm configs
-! ------------------------------------------------------------------------------
-
-
-! termtype
-UXTerm*termName: xterm-256color
-UXTerm*VT100.geometry:     92x16
-UXTerm*font:               M+ 1mn
-UXTerm*faceSize:		   12
-UXTerm*dynamicColors:      true
-UXTerm*utf8:               2
-UXTerm*eightBitInput:      true
-UXTerm*saveLines:          10000
-UXTerm*scrollKey:          true
-UXTerm*scrollTtyOutput:    false
-UXTerm*scrollBar:          false
-UXTerm*rightScrollBar:     false
-UXTerm*jumpScroll:         true
-UXTerm*multiScroll:        true
-UXTerm*toolBar:            false
-UXTerm*boldMode: false
-UXTerm*colorBDMode: true
-UXTerm*colorBD: rgb:3f/3f/3f                                         
-                                                           
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1

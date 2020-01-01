@@ -1,0 +1,26 @@
+
+[alsa]
+mixer-element=Master
+
+[audacious]
+generic_title_format=${?artist:${artist} - }${title}
+record=FALSE
+
+[audgui]
+filebrowser_win=183,104,1000,494
+info_win=729,274,548,391
+
+[gtkui]
+column_expand=1,1,1,0,0
+column_widths=10,275,175,10,175,175,10,100,32,10,275,275,275,10
+infoarea_show_vis=FALSE
+infoarea_visible=FALSE
+menu_visible=FALSE
+player_height=494
+player_width=1000
+player_x=183
+player_y=138
+statusbar_visible=FALSE
+
+[gtkui-layout]
+item_count=0

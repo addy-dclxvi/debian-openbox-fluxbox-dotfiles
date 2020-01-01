@@ -1,53 +1,55 @@
-#
-# These things are run when an Openbox X Session is started.
-# You may place a similar script in $HOME/.config/openbox/autostart
-# to run user-specific things.
-#
+#!/bin/dash
 
-compton -b --config ~/.config/compton.conf &
+# Environtment
+export PATH="${PATH}:$HOME/.scripts"
+export RANGER_LOAD_DEFAULT_RC=FALSE
+export EDITOR=vim
 
-tint2 &
-
-#thunar starting in daemon mode
-thunar --daemon &
-
-#bluetooth#
-#(sleep 3; blueberry-tray) &
-
-# Set background image
-(sleep 1; nitrogen --restore) &
-
-#on laptops without seperate numeric keyboard put hashtag in front
-#numlockx &
-
-## GNOME PolicyKit authentication
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
-## Volume control for systray
-(sleep 2; volumeicon) &
-#(sleep 2; pasystray) &
-
-## Turn off/on System Beep
+# Autostart Apps
+xset +fp ~/.fonts/misc/
 xset b off
+xset r rate 250 25
+xbacklight -set 5
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+pcmanfm -d &
+compton -b
+hsetroot -center ~/.wallpaper.jpg
+xsettingsd &
+dunst &
 
-## Enable power management
-xfce4-power-manager &
+# Touchpad settings
+synclient \
+VertEdgeScroll=0 HorizEdgeScroll=0 \
+VertTwoFingerScroll=1 HorizTwoFingerScroll=1 \
+VertScrollDelta=320 HorizScrollDelta=320 \
+MinSpeed=0.05 MaxSpeed=1.2 \
+AccelFactor=0.04 CoastingSpeed=10 \
+TapButton1=0 TapButton2=0 TapButton3=0
 
-##Clipboard Manager
-(sleep 3; clipit) &
+# System Tray
+trayer \
+--align right --widthtype request --heighttype pixel --height 28 \
+--transparent true --alpha 255 &
 
-## XFCE4 Settings
-xfsettingsd &
-
-(sleep 5; nm-applet) &
-
-(sleep 2s && al-conky-session --autostart) &
-
-#plank &
-#(sleep 2; temps) &
-#redshift-gtk &
-
-## Restore LXrandr Configuration
-xrandr --output HDMI1 --mode 1360x768 --same-as LVDS1 --output LVDS1 --mode 1366x768 --rate 60.00
-
-
+# Panel
+[ -e "/tmp/panel-fifo" ] && rm "/tmp/panel-fifo"
+mkfifo "/tmp/panel-fifo"
+i3status > "/tmp/panel-fifo" &
+statusline() {
+while read -r line ; do
+    case $line in
+        A*) wifi="%{B#d12f2c}%{F#263640} %{A:wicd-gtk --no-tray &:}${line#?}%{A} %{B-}%{F-}";;
+        B*) battery="%{B#819400}%{F#263640} ${line#?} %{B-}%{F-}";;
+        C*) volume="%{B#b08500}%{F#263640} %{A4:pulsevol --up:}%{A5:pulsevol --down:}\
+%{A:pavucontrol &:}${line#?}%{A}%{A}%{A} %{B-}%{F-}";;
+        D*) temp="%{B#2587cc}%{F#263640} ${line#?} %{B-}%{F-}";;
+        E*) load="%{B#696ebf}%{F#263640} %{A:x-terminal-emulator \
+-hold -e htop &:}${line#?}%{A} %{B-}%{F-}";;
+        F*) disk="%{B#289c93}%{F#263640} %{A:pcmanfm &:}${line#?}%{A} %{B-}%{F-}";;
+        G*) clock="%{B#263640}%{F#93a1a1} ${line#?} %{B-}%{F-}";;
+    esac
+    printf "%s\n" "%{l}${wifi}${battery}${volume}${temp}${load}${disk}%{r}${clock}"
+done
+}
+statusline < "/tmp/panel-fifo" | lemonbar -g x28 \
+-f -*-rissole-* -f -*-waffle-* -B "#141c21" -F "#93a1a1" | dash &

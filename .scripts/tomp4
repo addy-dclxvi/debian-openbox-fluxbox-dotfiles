@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Convert video to mp4 using ffmpeg
+# My recording script stores to mkv by default
+# Mkv is not approved on Reddit inbuilt host
+# Cheers! Addy
+
+if [ -z "$1" ]; then
+	echo -e "\e[31mNeed a file after \e[0mtomp4 \e[31mcommand\e[0m"
+	else
+
+	if [ -e "$1" ]; then
+		FILENAME=$(echo $1 | sed 's/[.].*$//')
+		ffmpeg -i $1 \
+		-f mp4 \
+		-vcodec libx264 \
+		-preset fast \
+		-profile:v main \
+		-acodec aac \
+		$FILENAME.mp4 -hide_banner
+		echo -e "\e[32mDone \e[0m"
+		echo -e "\e[32mThe result stored as \e[0m$1.mp4"
+		else
+		echo -e "\e[33mFile not found \e[0m"
+	fi
+fi

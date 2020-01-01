@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Just a wrapper script to launch rofi
+
+rofi -show run -sidebar-mode \
+-modi drun,run,window \
+-hide-scrollbar true \
+-bw 2 \
+-lines 12 \
+-padding 24 \
+-width 60 \
+-location 0 \
+-columns 3 \
+-font "rissole 8" \
+-color-enabled true \
+-color-window "#141c21,#141c21,#141c21" \
+-color-normal "#141c21,#93a1a1,#141c21,#141c21,#d12f2c" \
+-color-active "#141c21,#696ebf,#141c21,#141c21,#d12f2c" \
+-color-urgent "#141c21,#b08500,#141c21,#141c21,#d12f2c"
