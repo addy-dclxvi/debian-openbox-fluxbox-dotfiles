@@ -5,7 +5,7 @@
 # I usually launch this script using rofi
 # Cheers! Addy
 
-[ ! -d "~/Videos" ] && mkdir ~/Videos
+mkdir -p ~/Videos
 time=$(date +"%y.%m.%d_%H:%M:%S")
 
 ffmpeg \

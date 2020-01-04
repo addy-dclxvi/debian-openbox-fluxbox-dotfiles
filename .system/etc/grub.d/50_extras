@@ -1,0 +1,9 @@
+# Set to classic colors of black and white
+set menu_color_normal=light-gray/black
+set menu_color_highlight=black/white
+
+# Set timeout
+set timeout=4
+
+# Set default entry to Windows
+set default="2"

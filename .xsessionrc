@@ -1,0 +1,5 @@
+#!/bin/dash
+
+export PATH="${PATH}:$HOME/.scripts"
+export RANGER_LOAD_DEFAULT_RC=FALSE
+export EDITOR=vim

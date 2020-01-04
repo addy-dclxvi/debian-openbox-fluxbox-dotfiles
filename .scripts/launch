@@ -2,8 +2,8 @@
 
 # Just a wrapper script to launch rofi
 
-rofi -show run -sidebar-mode \
--modi drun,run,window \
+rofi -show drun -sidebar-mode \
+-modi run,drun,window \
 -hide-scrollbar true \
 -bw 2 \
 -lines 12 \

@@ -5,7 +5,7 @@ general {
         separator = ""
 }
 
-order += "wireless wlan0"
+order += "wireless wlp3s0"
 order += "battery 0"
 order += "volume master"
 order += "cpu_temperature 0"
@@ -13,7 +13,7 @@ order += "load"
 order += "disk /"
 order += "tztime local"
 
-wireless wlan0 {
+wireless wlp3s0 {
         format_up = "A %essid\n"
         format_down = "A Disconnected\n"
 }

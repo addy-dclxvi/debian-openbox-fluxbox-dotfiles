@@ -6,7 +6,7 @@
 # Need xdg-utils, mostly preinstalled
 # Cheers! Addy
 
-[ ! -d "~/Pictures" ] && mkdir ~/Pictures
+mkdir -p ~/Pictures
 
 # 'screeny -f' to take a screenshot for current focused window only
 if [[ $1 = "-f" ]]; then

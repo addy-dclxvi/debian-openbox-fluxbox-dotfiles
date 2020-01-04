@@ -13,3 +13,4 @@ application/pdf=evince.desktop;
 application/x-cd-image=org.gnome.FileRoller.desktop;
 text/x-matlab=geany.desktop;
 application/json=geany.desktop;
+image/webp=gimp.desktop;

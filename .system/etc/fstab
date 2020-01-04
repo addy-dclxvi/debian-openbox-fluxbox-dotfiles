@@ -1,2 +1,2 @@
-UUID=93a7667d-9c08-472d-b60f-d3d56bb91e86 / ext4 noatime,nodiratime,errors=remount-ro 0 1
-UUID="01D50F16628BE490" /media/addy/Media ntfs defaults 0 0
+UUID=a8107a83-bc85-46f2-b981-285524e80fab / ext4 noatime,nodiratime,errors=remount-ro 0 1
+UUID=D815-9F64 /boot/efi vfat umask=0077 0 1
