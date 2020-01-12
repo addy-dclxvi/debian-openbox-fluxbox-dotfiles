@@ -1,11 +1,19 @@
 ## Preview
-![vim](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/vim-ufetch.jpg)
-<br />
-![ranger](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/ranger-dunst-xresources-openboxmenu.jpg)
+![vim](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/vim.jpg)
 <br />
 ![pcmanfm](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/pcmanfm.jpg)
 <br />
-![gimpsplashscreen](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/gimpsplashscreen.jpg)
+![menu](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/menu.jpg)
+<br />
+![splash](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/splash.jpg)
+<br />
+![ranger](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/ranger.jpg)
+<br />
+![mpv](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/mpv.jpg)
+<br />
+![htop](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/htop.jpg)
+<br />
+![rofi](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/rofi.jpg)
 <br />
 ![gimp](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/gimp.jpg)
 <br />
@@ -25,7 +33,7 @@
 - **GTK Theme** Arc
 - **Icons** Faba
 - **Cursor** Breeze
-- **GTK Fonts** Opensans, Vollkorn, Fira Code
+- **GTK Fonts** Liberation
 - **File Manager** PCManFM, GVFS, LibMTP
 - **Web Browser** Chromium VA-API
 - **VA-API Driver** i965-va-driver
@@ -47,7 +55,10 @@
 - **GUI Text Editor** Geany
 - **CLI Text Editor** Vim
 - **Policy Kit Frontend** Gnome Polkit
-- **Media Player** MPV
+- **Video Player** MPV
+- **Music Player** Audacious
+- **Office Suite** LibreOffice
+- **Printer Driver** GutenPrint
 - **Screenshooter** scrot
 - **Network Manager** WICD
 - **Brightness Manager** xbacklight
@@ -92,9 +103,10 @@
 - **Scroll Up Titlebar** roll up window
 - **Scroll Down Titlebar** restore rolled up window
 - **Double Click Desktop** list opened programs, so I could survive without a taskbar
-- **Click on SSID (Panel)** Open WICD
-- **Click on Volume (Panel)** Open Pavucontrol
-- **Scrol Up/Down on Volume (Panel)** Turn up/down the volume
+- **Click on SSID (Panel)** open WICD
+- **Click on Volume (Panel)** open Pavucontrol
+- **Scrol Up/Down on Volume (Panel)** turn up/down the volume
+- **Click on Disk (Panel)** launch PCManFM
 - ..More keybinds just read the *~/.config/openbox/rc.xml* file
 
 ## Notes
