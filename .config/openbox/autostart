@@ -8,7 +8,7 @@ xbacklight -set 5
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 pcmanfm -d &
 compton -b
-hsetroot -center ~/.wallpaper.jpg
+hsetroot -fill ~/.wallpaper.jpg
 xsettingsd &
 dunst &
 
