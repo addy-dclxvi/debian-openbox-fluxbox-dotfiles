@@ -3,8 +3,8 @@
 
 	[nop]
 	[exec] (Run..) {launch --green}
-	[exec] (Terminal) {x-terminal-emulator}
-	[exec] (Browser) {x-www-browser}
+	[exec] (Terminal Emulator) {x-terminal-emulator}
+	[exec] (Web Browser) {x-www-browser}
 	
 	[separator]
 
