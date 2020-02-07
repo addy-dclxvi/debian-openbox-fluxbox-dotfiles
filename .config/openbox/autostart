@@ -47,4 +47,4 @@ while read -r line ; do
 done
 }
 statusline < "/tmp/panel-fifo" | lemonbar -g x28 \
--f -*-rissole-* -f -*-waffle-* -B "#141c21" -F "#93a1a1" | dash &
+-f -*-crepes-* -f -*-waffle-* -B "#141c21" -F "#93a1a1" | dash &
