@@ -1,0 +1,70 @@
+## Shortcuts
+Mod4 Return :Exec x-terminal-emulator
+Mod4 D :Exec launch --green
+Mod4 Shift W :Exec x-www-browser
+Mod4 Shift F :Exec thunar
+Mod4 Shift G :Exec geany
+Print :Exec screeny
+Mod1 Print :Exec screeny -f
+Control Print :Exec sleep 0.5; screeny -s
+XF86AudioPlay :Exec mpc toggle
+XF86AudioStop :Exec mpc stop
+XF86AudioNext :Exec mpc next
+XF86AudioPrev :Exec mpc prev
+XF86AudioRaiseVolume :Exec pulsevol --up
+XF86AudioLowerVolume :Exec pulsevol --down
+XF86AudioMute :Exec pulsevol --mute
+
+## Fluxbox Mousebinds
+OnDesktop Mouse1 :HideMenus
+OnDesktop Mouse3 :RootMenu
+OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnWindowBorder Move1 :StartMoving
+OnLeftGrip Move1 :StartResizing bottomleft
+OnRightGrip Move1 :StartResizing bottomright
+OnTitlebar Control Mouse1 :StartTabbing
+OnTitlebar Double Mouse1 :Maximize
+OnTitlebar Mouse1 :MacroCmd {Raise} {Focus} {ActivateTab}
+OnTitlebar Move1  :StartMoving
+OnTitlebar Mouse3 :WindowMenu
+
+## Fluxbox Keybinds
+Mod1 space :RootMenu
+Mod1 Tab :NextWindow {groups} (workspace=[current])
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
+Mod1 Control Left :PrevWorkspace
+Mod1 Control Right :NextWorkspace
+Mod1 Control Up :PrevWindow {groups} (workspace=[current])
+Mod1 Control Down :NextWindow {groups} (workspace=[current])
+Mod4 1 :Workspace 1
+Mod4 2 :Workspace 2
+Mod4 3 :Workspace 3
+Mod4 4 :Workspace 4
+Mod4 Shift 1 :TakeToWorkspace 1
+Mod4 Shift 2 :TakeToWorkspace 2
+Mod4 Shift 3 :TakeToWorkspace 3
+Mod4 Shift 4 :TakeToWorkspace 4
+Mod4 Shift Left :TakeToPrevWorkspace
+Mod4 Shift Right :TakeToNextWorkspace
+Mod4 Mod1 Left :FocusLeft
+Mod4 Mod1 Right :FocusRight
+Mod4 Mod1 Up :FocusUp
+Mod4 Mod1 Down :FocusDown
+Mod4 Control Left :MoveTo 0 * Left
+Mod4 Control Right :MoveTo 0 * Right
+Mod4 Control Up :MoveTo * 0 Upper
+Mod4 Control Down :MoveTo * 0 Lower
+Mod4 A :MoveTo 0 0 Center
+Mod4 C :Close
+Mod4 Z :Minimize
+Mod4 F :Maximize
+Mod4 T :ToggleDecor
+Mod4 U :Shade
+Mod4 F11 :Fullscreen
+Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 Left}
+Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 Right}
+Mod4 Up :MacroCmd {ResizeTo 75% 75%} {MoveTo 0 0 Center}
+Mod4 Down :MacroCmd {ResizeTo 50% 50%} {MoveTo 0 0 Center}
+Mod4 Control Escape :Exit
+Mod4 Shift BackSpace :Restart

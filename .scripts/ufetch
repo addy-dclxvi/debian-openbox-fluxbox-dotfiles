@@ -30,15 +30,36 @@ else
 fi
 
 ## Define Colours
+if [[ $1 = "--red" ]]; then
+    bgaccent="$(tput setab 1)"
+    accent="$(tput setaf 1)"
+elif [[ $1 = "--green" ]]; then
+    bgaccent="$(tput setab 2)"
+    accent="$(tput setaf 2)"
+elif [[ $1 = "--yellow" ]]; then
+    bgaccent="$(tput setab 3)"
+    accent="$(tput setaf 3)"
+elif [[ $1 = "--blue" ]]; then
+    bgaccent="$(tput setab 4)"
+    accent="$(tput setaf 4)"
+elif [[ $1 = "--magenta" ]]; then
+    bgaccent="$(tput setab 5)"
+    accent="$(tput setaf 5)"
+elif [[ $1 = "--cyan" ]]; then
+    bgaccent="$(tput setab 6)"
+    accent="$(tput setaf 6)"
+else
+    bgaccent="$(tput setab 1)"
+    accent="$(tput setaf 1)"
+fi
+
 bold="$(tput bold)"
-red="$(tput setaf 1)"
 white="$(tput setaf 7)"
-bgred="$(tput setab 1)"
 reset="$(tput sgr0)"
-cbg="${reset}${bgred}${white}"
+cbg="${reset}${bold}${bgaccent}${white}"
 cr="${reset}"
 c0="${reset}${bold}"
-c1="${reset}${red}"
+c1="${reset}${accent}"
 
 ## Output
 

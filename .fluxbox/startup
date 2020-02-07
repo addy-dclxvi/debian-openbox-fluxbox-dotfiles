@@ -1,0 +1,29 @@
+#!/bin/dash
+
+# Autostart Apps
+xset fp+ ~/.fonts/misc
+xset b off
+xset r rate 250 25
+xbacklight -set 5
+xsettingsd &
+compton -b
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+(sleep 1.4; xfce4-power-manager) &
+(sleep 1.2; nm-applet) &
+(sleep 1.0; pnmixer) &
+(sleep 0.8; clipit) &
+thunar --daemon &
+dunst &
+hsetroot -fill ~/.fluxbox/wallpaper.jpg
+
+# Touchpad Settings
+synclient \
+VertEdgeScroll=0 HorizEdgeScroll=0 \
+VertTwoFingerScroll=1 HorizTwoFingerScroll=1 \
+VertScrollDelta=40 HorizScrollDelta=40 \
+MinSpeed=0.2 MaxSpeed=1.4 \
+AccelFactor=0.2 CoastingSpeed=10 \
+TapButton1=1 TapButton2=0 TapButton3=0
+
+# Launch Fluxbox
+exec fluxbox -no-slit

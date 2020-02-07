@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-power-manager" version="1.0">
+  <property name="xfce4-power-manager" type="empty">
+    <property name="power-button-action" type="uint" value="0"/>
+    <property name="brightness-switch-restore-on-exit" type="int" value="0"/>
+    <property name="brightness-switch" type="int" value="0"/>
+    <property name="inactivity-sleep-mode-on-battery" type="uint" value="1"/>
+    <property name="critical-power-action" type="uint" value="3"/>
+    <property name="dpms-enabled" type="bool" value="true"/>
+    <property name="brightness-level-on-ac" type="uint" value="5"/>
+    <property name="brightness-level-on-battery" type="uint" value="5"/>
+    <property name="show-tray-icon" type="bool" value="true"/>
+    <property name="general-notification" type="bool" value="false"/>
+    <property name="sleep-button-action" type="uint" value="1"/>
+  </property>
+</channel>

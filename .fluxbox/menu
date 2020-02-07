@@ -1,0 +1,78 @@
+[begin] (MAIN MENU)
+[encoding] {UTF-8}
+
+	[nop]
+	[exec] (Run..) {launch --green}
+	[exec] (Terminal) {x-terminal-emulator}
+	[exec] (Browser) {x-www-browser}
+	
+	[separator]
+
+	[submenu] (Accesories) {ACCESSORIES}
+	[nop]
+		[exec] (Bulk Rename) {thunar -B}
+		[exec] (Compton) {pkill compton; compton -b}
+		[exec] (Evince) {evince}
+		[exec] (File Roller) {file-roller}
+		[exec] (Geany) {geany}
+		[exec] (Gucharmap) {gucharmap}
+		[exec] (Thunar) {thunar}
+		[exec] (Thunar as Root) {pkexec thunar}
+	[nop]
+	[end]
+
+	[submenu] (Multimedia) {MULTIMEDIA}
+	[nop]
+		[exec] (Audacious) {audacious}
+		[exec] (GIMP) {gimp}
+		[exec] (Inkscape) {inkscape}
+		[exec] (Parole) {parole}
+		[exec] (Pulse Audio) {pavucontrol}
+		[exec] (Screenshot) {sleep 1; screeny}
+		[exec] (Viewnior) {viewnior}
+	[nop]
+	[end]
+
+	[submenu] (Internet) {INTERNET}
+	[nop]
+		[exec] (Chromium) {chromium}
+		[exec] (Network Manager) {nm-connection-editor}
+		[exec] (Transmission) {transmission-gtk}
+	[nop]
+	[end]
+
+	[submenu] (Office) {OFFICE}
+	[nop]
+		[exec] (LibreOffice Calc) {libreoffice --calc}
+		[exec] (LibreOffice Writer) {libreoffice --writer}
+		[exec] (Printer Manager) {system-config-printer}
+	[nop]
+	[end]
+
+	[submenu] (System) {SYSTEM}
+	[nop]
+		[exec] (Appearance) {lxappearance}
+		[exec] (Gparted) {sudo gparted}
+		[exec] (Task Manager) {xfce4-taskmanager}
+		[exec] (Edit Autostart) {xdg-open ~/.fluxbox/startup}
+		[exec] (Edit Init) {xdg-open ~/.fluxbox/init}
+		[exec] (Edit Keybinds) {xdg-open ~/.fluxbox/keys}
+		[exec] (Edit Menu) {xdg-open ~/.fluxbox/menu}
+		[restart] (Reload Fluxbox)
+	[nop]
+	[end]
+
+	[separator]
+
+	[submenu] (Exit) {EXIT}
+	[nop]
+		[exit] (Logout)
+		[exec] (Sleep) {systemctl suspend}
+		[exec] (Reboot) {systemctl reboot}
+		[exec] (Poweroff) {systemctl poweroff}
+	[nop]
+	[end]
+
+[nop]
+[endencoding]
+[end]

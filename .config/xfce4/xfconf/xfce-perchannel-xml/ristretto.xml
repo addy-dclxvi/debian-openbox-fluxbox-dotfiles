@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="ristretto" version="1.0">
+  <property name="window" type="empty">
+    <property name="navigationbar" type="empty">
+      <property name="position" type="string" value="left"/>
+    </property>
+    <property name="maximize-on-startup" type="bool" value="false"/>
+    <property name="toolbar" type="empty">
+      <property name="show" type="bool" value="false"/>
+    </property>
+    <property name="statusbar" type="empty">
+      <property name="show" type="bool" value="false"/>
+    </property>
+    <property name="thumbnails" type="empty">
+      <property name="show" type="bool" value="false"/>
+    </property>
+    <property name="height" type="uint" value="532"/>
+    <property name="width" type="uint" value="1024"/>
+  </property>
+  <property name="desktop" type="empty">
+    <property name="type" type="string" value="none"/>
+  </property>
+</channel>
