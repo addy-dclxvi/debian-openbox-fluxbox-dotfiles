@@ -20,6 +20,14 @@
 		[exec] (Thunar as Root) {pkexec thunar}
 	[nop]
 	[end]
+	[submenu] (Internet) {INTERNET}
+
+	[nop]
+		[exec] (Chromium) {chromium}
+		[exec] (Network Manager) {nm-connection-editor}
+		[exec] (Transmission) {transmission-gtk}
+	[nop]
+	[end]
 
 	[submenu] (Multimedia) {MULTIMEDIA}
 	[nop]
@@ -30,14 +38,6 @@
 		[exec] (Pulse Audio) {pavucontrol}
 		[exec] (Screenshot) {sleep 1; screeny}
 		[exec] (Viewnior) {viewnior}
-	[nop]
-	[end]
-
-	[submenu] (Internet) {INTERNET}
-	[nop]
-		[exec] (Chromium) {chromium}
-		[exec] (Network Manager) {nm-connection-editor}
-		[exec] (Transmission) {transmission-gtk}
 	[nop]
 	[end]
 
