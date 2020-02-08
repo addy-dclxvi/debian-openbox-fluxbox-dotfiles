@@ -28,7 +28,7 @@ rofi -show drun -sidebar-mode \
 -width 60 \
 -location 0 \
 -columns 3 \
--font "crepes 10" \
+-font "cinnamonroll 10" \
 -color-enabled true \
 -color-window "#141c21,#141c21,#141c21" \
 -color-normal "#141c21,#93a1a1,#141c21,#141c21,$ACCENT" \
