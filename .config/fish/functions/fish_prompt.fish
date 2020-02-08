@@ -5,7 +5,11 @@ function fish_prompt
     set -l last_status $status
     # Show the current working directory
     set_color black
-    set_color --background=red
+    if test (id -u) -eq 0
+		set_color --background=yellow
+	else
+		set_color --background=red
+	end
     if test (id -u) -eq 0
         echo -n ' # '
     else
@@ -28,7 +32,9 @@ function fish_right_prompt
     echo -n ' '
     set_color black
     set_color --background=blue
-    echo -n ' dir '
+    echo -n ' '
+    echo -n (hostname -s)
+	echo -n ' '
     set_color normal
 end
 
