@@ -26,8 +26,10 @@ OnRightGrip Move1 :StartResizing bottomright
 OnTitlebar Control Mouse1 :StartTabbing
 OnTitlebar Double Mouse1 :Maximize
 OnTitlebar Mouse1 :MacroCmd {Raise} {Focus} {ActivateTab}
-OnTitlebar Move1  :StartMoving
+OnTitlebar Move1 :StartMoving
 OnTitlebar Mouse3 :WindowMenu
+OnTitlebar Mouse4 :ShadeOn
+OnTitlebar Mouse5 :ShadeOff
 
 ## Fluxbox Keybinds
 Mod4 space :RootMenu
