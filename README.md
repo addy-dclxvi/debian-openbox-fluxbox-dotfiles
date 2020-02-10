@@ -34,7 +34,7 @@
 - **CLI Text Editor** Vim
 - **GUI Text Editor** Geany
 - **Graphic Editor** GIMP
-- **Vectrol Drawer** Inkscape
+- **Vector Drawer** Inkscape
 - **Screenshooter** scrot
 - **Wallpaper Handler** Hsetroot
 - **Brightness Manager** xbacklight
