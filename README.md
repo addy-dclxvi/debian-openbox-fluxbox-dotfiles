@@ -57,7 +57,7 @@
 - **Non-free Drivers** Realtek Audio & Atheros Wifi
 - **WM** Fluxbox
 - **Panel** Fluxbox Toolbar (Tray icon theme is
-[Diminished](https://github.com/addy-dclxvi/diminished-tray-icons)
+[Diminished](https://github.com/addy-dclxvi/diminished-tray-icons))
 - **Start Menu** Fluxbox Menu (*~/.fluxbox/menu* edited manually)
 - **File Manager** Thunar, Thunar Volman, Tumblr, GVFS, LibMTP
 - **Archiver** File Roller
