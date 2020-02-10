@@ -63,8 +63,7 @@
 - **Archiver** File Roller
 - **PDF Reader** Evince
 - **Video Player** Parole
-- **Network Manager** WICD
-- **Battery Tray** Xfce4 Power Manager
+- **Battery Applet** Xfce4 Power Manager
 - **Clipboard Manager** Clipit
 - **Sound Applet** PNMixer
 - **Network Applet** nm-applet
