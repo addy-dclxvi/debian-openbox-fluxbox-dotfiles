@@ -30,7 +30,7 @@ OnTitlebar Move1  :StartMoving
 OnTitlebar Mouse3 :WindowMenu
 
 ## Fluxbox Keybinds
-Mod1 space :RootMenu
+Mod4 space :RootMenu
 Mod1 Tab :NextWindow {groups} (workspace=[current])
 Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
 Mod1 Control Left :PrevWorkspace

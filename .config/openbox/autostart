@@ -10,7 +10,7 @@ pcmanfm -d &
 compton -b
 hsetroot -fill ~/.wallpaper.jpg
 xsettingsd &
-dunst &
+dunst -geometry "300x60-28+56" &
 
 # Touchpad settings
 synclient \

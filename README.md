@@ -1,77 +1,85 @@
 ## Preview
-![vim](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/vim.jpg)
+### ThinkPad X230 Debian Openbox
+![openbox](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/openbox.jpg)
 <br />
-![pcmanfm](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/pcmanfm.jpg)
+### Aspire A514 Debian Fluxbox
+![fluxbox](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/fluxbox.jpg)
 <br />
-![menu](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/menu.jpg)
-<br />
-![splash](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/splash.jpg)
-<br />
-![ranger](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/ranger.jpg)
-<br />
-![mpv](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/mpv.jpg)
-<br />
-![htop](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/htop.jpg)
-<br />
-![rofi](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/rofi.jpg)
-<br />
-![gimp](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/gimp.jpg)
-<br />
-
 ## Details
-- **Devices** ThinkPad X230
+### Both ThinkPad X230 & Aspire A514
 - **Distro** Debian Buster
 - **Display Server** X11
 - **Display Manager** LightDM
 - **Greeter** LightDM GTK Greeter
 - **Desktop Environment** None
-- **WM** Openbox
-- **Start Menu** LXMenu-Data piped to Openbox-Menu
 - **Launcher** Rofi
-- **Panel** i3status piped to Lemonbar
+- **Terminal** URxvt
 - **Compositor** Compton
 - **GTK Theme** Arc
 - **Icons** Faba
 - **Cursor** Breeze
-- **GTK Fonts** Liberation
-- **File Manager** PCManFM, GVFS, LibMTP
 - **Web Browser** Chromium VA-API
 - **VA-API Driver** i965-va-driver
 - **Encoder/Decoder** ffmpeg
 - **Task Manager** HTOP
-- **System Tray** Trayer
 - **Power Manager** TLP
 - **Image Viewer** Viewnior
 - **Sound Mixer** PulseAudio
-- **Terminal** URxvt
+- **Policy Kit Frontend** Gnome Polkit
+- **Notification Daemon** Dunst
 - **Pager** Less
 - **CLI Shell** Fish
-- **Archiver** XArchiver
-- **Notification Daemon** Dunst
 - **CLI File Manager** Ranger
 - **CLI Image Viewer** Caca
-- **Graphic Editor** GIMP
-- **Non-free Drivers** Broadcom Bluetooth & Intel Wifi
-- **GUI Text Editor** Geany
 - **CLI Text Editor** Vim
-- **Policy Kit Frontend** Gnome Polkit
-- **Video Player** MPV
+- **GUI Text Editor** Geany
+- **Graphic Editor** GIMP
+- **Vectrol Drawer** Inkscape
+- **Screenshooter** scrot
+- **Wallpaper Handler** Hsetroot
+- **Brightness Manager** xbacklight
 - **Music Player** Audacious
 - **Office Suite** LibreOffice
 - **Printer Driver** GutenPrint
-- **Screenshooter** scrot
+
+### ThinkPad X230
+- **Non-free Drivers** Broadcom Bluetooth & Intel Wifi
+- **WM** Openbox
+- **Panel** i3status piped to Lemonbar
+- **Start Menu** LXMenu-Data piped to Openbox-Menu
+- **File Manager** PCManFM, GVFS, LibMTP
+- **System Tray** Trayer
+- **Archiver** XArchiver
+- **Video Player** MPV
 - **Network Manager** WICD
-- **Brightness Manager** xbacklight
-- **Wallpaper Handler** Hsetroot
+
+### Aspire A514
+- **Non-free Drivers** Realtek Audio & Atheros Wifi
+- **WM** Fluxbox
+- **Panel** Fluxbox Toolbar (Tray icon theme is
+[Diminished](https://github.com/addy-dclxvi/diminished-tray-icons)
+- **Start Menu** Fluxbox Menu (*~/.fluxbox/menu* edited manually)
+- **File Manager** Thunar, Thunar Volman, Tumblr, GVFS, LibMTP
+- **Archiver** File Roller
+- **PDF Reader** Evince
+- **Video Player** Parole
+- **Network Manager** WICD
+- **Battery Tray** Xfce4 Power Manager
+- **Clipboard Manager** Clipit
+- **Sound Applet** PNMixer
+- **Network Applet** nm-applet
 
 ## How I Restore My Setup
 - Install Debian Buster minimal, without any DE
-- Enable `contrib` and `non-free` repository (/etc/apt/sources.list)
+- Enable `contrib` and `non-free` repository (*/etc/apt/sources.list*)
 - Connect to the internet
 - Install git
 - Clone this repo `git clone --depth=1 https://github.com/addy-dclxvi/dotfiles ~/.dotfiles`
 - Deploy the dotfiles `cp -a ~/.dotfiles/. ~`
-- Restore the packages `sh ~/.scripts/packages`
+- Restore the packages `sh ~/.scripts/openboxpack` or `sh ~/.scripts/fluxboxpack`
+- Add user to sudoers using `visudo`
+- Change the systemclock to localtime `timedatectl set-local-rtc 1` then set the time in BIOS
+(because I set my BIOS clock to localtime insted of UTC)
 - Change the default CLI Shell `chsh $(whoami) -s /usr/bin/fish`
 - Edit some system configuration, example in ~/.dotfiles/.system
 - Reboot
@@ -79,9 +87,10 @@
 - Start working
 
 ## Keybinds & Mousebinds
+### Both Openbox & Fluxbox Are Same
 - **Super + Enter** launch URxvt
 - **Super + D** launch Rofi with wrapper script
-- **Super + Space** launch Openbox Menu, just like right click on the desktop
+- **Super + Space** launch root menu (like right click on the desktop)
 - **Alt + Tab** switch to next window
 - **Alt + Shift + Tab** switch to previous window
 - **Control + Alt + Left/Right** switch to previous/next workspace
@@ -98,19 +107,26 @@
 - **Super + F** maximize
 - **Super + T** toggle the window decoration
 - **Super + U** roll up the window
-- **Super + Shift + Backspace** reload Openbox, do this after modify the configuration files
+- **Super + Shift + Backspace** reload, do this after modify the configuration files
 - **Double Click Titlebar** maximize
 - **Scroll Up Titlebar** roll up window
 - **Scroll Down Titlebar** restore rolled up window
-- **Double Click Desktop** list opened programs, so I could survive without a taskbar
-- **Click on SSID (Panel)** open WICD
-- **Click on Volume (Panel)** open Pavucontrol
+- **Double Click Desktop** list opened programs,
+so I could survive without a taskbar (Openbox only)
 - **Scrol Up/Down on Volume (Panel)** turn up/down the volume
-- **Click on Disk (Panel)** launch PCManFM
-- ..More keybinds just read the *~/.config/openbox/rc.xml* file
+- ..More keybinds just read the *~/.config/openbox/rc.xml* 
+or *~/.fluxbox/keys* file
+
+### Mouse Action on Lemonbar (Openbox only)
+- **Click on Disk (Panel)** launch PCManFM 
+- **Click on Volume (Panel)** open Pavucontrol 
+- **Click on SSID (Panel)** open WICD 
+
 
 ## Notes
 - If you want to use this configuration, inspect the code before use.
 - If you find "addy" in the configuration file, replace it with your own username.
-- My Wifi interface is wlp3s0 & my ethernet interface is enp0s25, if you find them in the
-configuration file, replace with your own. Use `ip a` to find yours.
+- My Wifi interface is wlp3s0 & my ethernet interface is enp0s25 (ThinkPad X230),
+if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
+- My Wifi interface is wlp2s0 & my ethernet interface is enp1s0 (Aspire A514),
+if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
