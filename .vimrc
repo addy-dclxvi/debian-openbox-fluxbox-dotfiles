@@ -1,6 +1,7 @@
 noh
 syntax on
 set t_Co=16
+set background=dark
 set nocompatible
 set showmode
 set showcmd
