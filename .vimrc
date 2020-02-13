@@ -70,8 +70,8 @@ hi pmenu ctermbg=0 ctermfg=NONE
 hi pmenusel ctermbg=4 ctermfg=0
 hi pmenusbar ctermbg=0
 hi pmenuthumb ctermbg=7
-hi matchparen ctermbg=black ctermfg=NONE
-hi search ctermbg=0
+hi matchparen ctermbg=0 ctermfg=NONE
+hi search ctermbg=0 ctermfg=NONE
 hi statusline ctermbg=0 ctermfg=NONE
 hi statuslinenc ctermbg=0 ctermfg=0
 hi user1 ctermbg=1 ctermfg=0
