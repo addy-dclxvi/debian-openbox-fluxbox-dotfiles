@@ -15,7 +15,6 @@ visualizer_color = "default"
 [header]
 header_visibility = "no"
 header_window_color = "default"
-playlist_shorten_total_times = yes"
 volume_color = "default"
 state_line_color = "black"
 
