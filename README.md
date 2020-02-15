@@ -121,7 +121,7 @@ or *~/.fluxbox/keys* file
 - **Click on Disk (Panel)** launch PCManFM 
 - **Click on Volume (Panel)** open Pavucontrol 
 - **Click on SSID (Panel)** open WICD
-- **Click on CPU Load (Panel)** open htop
+- **Click on CPU Load (Panel)** open HTOP
 
 
 ## Notes
