@@ -112,6 +112,7 @@
 - **Scroll Down Titlebar** restore rolled up window
 - **Double Click Desktop** list opened programs,
 so I could survive without a taskbar (Openbox only)
+- **Hold Control While Dragging Window** tabbing mode (Fluxbox only)
 - **Scrol Up/Down on Volume (Panel)** turn up/down the volume
 - ..More keybinds just read the *~/.config/openbox/rc.xml* 
 or *~/.fluxbox/keys* file
@@ -119,7 +120,8 @@ or *~/.fluxbox/keys* file
 ### Mouse Action on Lemonbar (Openbox only)
 - **Click on Disk (Panel)** launch PCManFM 
 - **Click on Volume (Panel)** open Pavucontrol 
-- **Click on SSID (Panel)** open WICD 
+- **Click on SSID (Panel)** open WICD
+- **Click on CPU Load (Panel)** open htop
 
 
 ## Notes
