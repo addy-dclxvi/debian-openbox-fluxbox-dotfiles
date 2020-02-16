@@ -14,44 +14,44 @@ order += "disk /"
 order += "tztime local"
 
 wireless wlp3s0 {
-        format_up = "A %essid\n"
-        format_down = "A Disconnected\n"
+        format_up = "A  %essid \n"
+        format_down = "A  Disconnected \n"
 }
 
 battery 0 {
         last_full_capacity = true
-        format = "B%status %percentage\n"
-        format_down = "B% No battery"
+        format = "B %status %percentage \n"
+        format_down = "B % No battery \n"
         integer_battery_capacity = true
         path = "/sys/class/power_supply/BAT%d/uevent"
-        status_chr = ""
+        status_chr = ""
         status_bat = ""
         status_unk = ""
         status_full = ""
 }
 
 volume master {
-        format = "C %volume\n"
-        format_muted = "C Muted\n"
+        format = "C  %volume \n"
+        format_muted = "C  Muted \n"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
 }
 
 cpu_temperature 0 {
-        format = "D %degrees°C\n"
+        format = "D  %degrees°C \n"
         path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 load {
-        format = "E %5min Load\n"
+        format = "E  %5min Load \n"
 }
 
 disk "/" {
-        format = "F %free Free\n"
+        format = "F  %free Free \n"
 }
 
 tztime local {
-        format = "G %time\n"
+        format = "G  %time \n"
         format_time = "%A %-d %B at %H:%M"
 }

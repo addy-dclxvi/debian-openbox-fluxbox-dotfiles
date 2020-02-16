@@ -33,15 +33,15 @@ i3status > "/tmp/panel-fifo" &
 statusline() {
 while read -r line ; do
     case $line in
-        A*) wifi="%{B#d12f2c}%{F#263640} %{A:wicd-gtk --no-tray &:}${line#?} %{A}%{B-}%{F-}";;
-        B*) battery="%{B#819400}%{F#263640} ${line#?} %{B-}%{F-}";;
+        A*) wifi="%{B#d12f2c}%{F#263640} %{A:wicd-gtk --no-tray &:}${line#?}  %{A}%{B-}%{F-}";;
+        B*) battery="%{B#819400}%{F#263640} ${line#?}  %{B-}%{F-}";;
         C*) volume="%{B#b08500}%{F#263640} %{A4:pulsevol --up:}%{A5:pulsevol --down:}\
-%{A:pavucontrol &:}${line#?} %{A}%{A}%{A}%{B-}%{F-}";;
-        D*) temp="%{B#2587cc}%{F#263640} ${line#?} %{B-}%{F-}";;
+%{A:pavucontrol &:}${line#?}  %{A}%{A}%{A}%{B-}%{F-}";;
+        D*) temp="%{B#2587cc}%{F#263640} ${line#?}  %{B-}%{F-}";;
         E*) load="%{B#696ebf}%{F#263640} %{A:x-terminal-emulator \
--hold -e htop &:}${line#?} %{A}%{B-}%{F-}";;
-        F*) disk="%{B#289c93}%{F#263640} %{A:pcmanfm &:}${line#?} %{A}%{B-}%{F-}";;
-        G*) clock="%{B#263640}%{F#93a1a1} ${line#?} %{B-}%{F-}";;
+-hold -e htop &:}${line#?}  %{A}%{B-}%{F-}";;
+        F*) disk="%{B#289c93}%{F#263640} %{A:pcmanfm &:}${line#?}  %{A}%{B-}%{F-}";;
+        G*) clock="%{B#263640}%{F#93a1a1} ${line#?}  %{B-}%{F-}";;
     esac
     printf "%s\n" "%{l}${wifi}${battery}${volume}${temp}${load}${disk}%{r}${clock}"
 done
