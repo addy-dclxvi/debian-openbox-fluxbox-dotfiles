@@ -1,9 +1,10 @@
 ## Shortcuts
 Mod4 Return :Exec x-terminal-emulator
 Mod4 D :Exec launch --green
-Mod4 Shift W :Exec x-www-browser
-Mod4 Shift F :Exec thunar
-Mod4 Shift G :Exec geany
+Mod4 W :Exec x-www-browser
+Mod4 E :Exec thunar
+Mod4 G :Exec geany
+Mod4 V :Exec pavucontrol
 Print :Exec screeny
 Mod1 Print :Exec screeny -f
 Control Print :Exec sleep 0.5; screeny -s
