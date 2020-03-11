@@ -439,22 +439,22 @@
 				<command>x-terminal-emulator</command>
 			</action>
 		</keybind>
-		<keybind key="W-S-w">
+		<keybind key="W-w">
 			<action name="Execute">
 				<command>x-www-browser</command>
 			</action>
 		</keybind>
-		<keybind key="W-S-f">
+		<keybind key="W-e">
 			<action name="Execute">
 				<command>pcmanfm</command>
 			</action>
 		</keybind>
-		<keybind key="W-S-g">
+		<keybind key="W-g">
 			<action name="Execute">
 				<command>geany</command>
 			</action>
 		</keybind>
-		<keybind key="W-S-v">
+		<keybind key="W-v">
 			<action name="Execute">
 				<command>pavucontrol</command>
 			</action>
