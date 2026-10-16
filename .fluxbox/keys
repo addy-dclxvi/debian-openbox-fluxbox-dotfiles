@@ -1,20 +1,9 @@
 ## Shortcuts
-Mod4 Return :Exec x-terminal-emulator
-Mod4 D :Exec launch --green
-Mod4 W :Exec x-www-browser
-Mod4 E :Exec thunar
-Mod4 G :Exec geany
-Mod4 V :Exec pavucontrol
-Print :Exec screeny
-Mod1 Print :Exec screeny -f
-Control Print :Exec sleep 0.5; screeny -s
-XF86AudioPlay :Exec mpc toggle
-XF86AudioStop :Exec mpc stop
-XF86AudioNext :Exec mpc next
-XF86AudioPrev :Exec mpc prev
-XF86AudioRaiseVolume :Exec pulsevol --up
-XF86AudioLowerVolume :Exec pulsevol --down
-XF86AudioMute :Exec pulsevol --mute
+# Mod4 Return :Exec x-terminal-emulator
+Mod4 Return :Exec alacritty
+Mod4 W :Exec xdg-open about:home
+Mod4 E :Exec xdg-open ~
+Print :Exec mate-screenshot
 
 ## Fluxbox Mousebinds
 OnDesktop Mouse1 :HideMenus
@@ -69,5 +58,5 @@ Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 Left}
 Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 Right}
 Mod4 Up :MacroCmd {ResizeTo 75% 75%} {MoveTo 0 0 Center}
 Mod4 Down :MacroCmd {ResizeTo 50% 50%} {MoveTo 0 0 Center}
-Mod4 Control Escape :Exit
-Mod4 Shift BackSpace :Restart
+Mod4 Q :Exit
+Mod4 BackSpace :Restart

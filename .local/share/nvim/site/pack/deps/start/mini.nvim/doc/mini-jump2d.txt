@@ -1,0 +1,525 @@
+*mini.jump2d* Jump within visible lines
+
+MIT License Copyright (c) 2022 Evgeni Chasnovski
+
+------------------------------------------------------------------------------
+                                                                    *MiniJump2d*
+Jump within visible lines via iterative label filtering.
+
+Features:
+- Make jump by iterative filtering of possible, equally considered jump
+  spots until there is only one. Filtering is done by typing a label
+  character that is visualized at jump spot.
+
+- Customizable (see |MiniJump2d.config|):
+    - Way of computing possible jump spots with opinionated default.
+    - Characters used to label jump spots during iterative filtering.
+    - Visual effects: how many steps ahead to show; dim lines with spots.
+    - Action hooks to be executed at certain events during jump.
+    - Allowed windows: current and/or not current.
+    - Allowed lines: whether to process blank or folded lines, lines
+      before/at/after cursor line, etc. Example: user can configure to look
+      for spots only inside current window at or after cursor line.
+    Example: user can configure to look for word starts only inside current
+    window at or after cursor line with `j` and `k` labels performing some
+    action after jump.
+
+- Works in Visual and Operator-pending (with dot-repeat) modes.
+
+- Preconfigured ways of computing jump spots (see |MiniJump2d.builtin_opts|):
+    - Starts of lines.
+    - Starts of words.
+    - Single character from user input.
+    - Variable length query from user input.
+
+- Works with multibyte characters.
+
+General overview of how jump is intended to be performed:
+- Lock eyes on desired location ("spot") recognizable by future jump.
+  Should be within visible lines at place where cursor can be placed.
+
+- Initiate jump. Either by custom keybinding or with a call to
+  |MiniJump2d.start()| (allows customization options). This will highlight
+  all possible jump spots with their labels (letters from "a" to "z" by
+  default). For more details, read |MiniJump2d.start()| and |MiniJump2d.config|.
+
+- Type character that appeared over desired location. If its label was
+  unique, jump is performed. If it wasn't unique, possible jump spots are
+  filtered to those having the same label character.
+
+- Repeat previous step until there is only one possible jump spot or type <CR>
+  to jump to first available jump spot. Typing anything else stops jumping
+   without moving cursor.
+
+# Setup ~
+
+This module needs a setup with `require('mini.jump2d').setup({})` (replace
+`{}` with your `config` table). It will create global Lua table
+`MiniJump2d` which you can use for scripting or manually (with
+`:lua MiniJump2d.*`).
+
+See |MiniJump2d.config| for available config settings.
+
+You can override runtime config settings locally to buffer inside
+`vim.b.minijump2d_config` which should have same structure as
+`MiniJump2d.config`. See |mini.nvim-buffer-local-config| for more details.
+
+To stop module from showing non-error feedback, set `config.silent = true`.
+
+# Example usage ~
+
+- Modify default jumping to use only current window at or after cursor line: >lua
+
+  require('mini.jump2d').setup({
+    allowed_lines = { cursor_before = false },
+    allowed_windows = { not_current = false },
+  })
+<
+- Jump to line start using combination of options supplied in
+  |MiniJump2d.config| and |MiniJump2d.builtin_opts.line_start|: >vim
+
+  :lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)
+<
+- Jump to a single character typed after executing this command: >vim
+
+  :lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
+<
+- See more examples in |MiniJump2d.start()| and |MiniJump2d.builtin_opts|.
+
+# Comparisons ~
+
+- [phaazon/hop.nvim](https://github.com/phaazon/hop.nvim):
+    - Both are fast, customizable, and extensible (user can write their own
+      ways to define jump spots).
+    - `hop.nvim` visualizes all steps at once. While this module can show
+      configurable number of steps ahead.
+    - Both have several builtin ways to specify type of jump (word start,
+      line start, one character or query based on user input). `hop.nvim`
+      does that by exporting many targeted Neovim commands, while this
+      module has preconfigured basic options leaving others to
+      customization with Lua code (see |MiniJump2d.builtin_opts|).
+    - `hop.nvim` computes labels (called "hints") differently. Contrary to
+      this module deliberately not having preference of one jump spot over
+      another, `hop.nvim` uses specialized algorithm that produces sequence
+      of keys in a slightly biased manner: some sequences are intentionally
+      shorter than the others (leading to fewer average keystrokes). They
+      are put near cursor (by default) and highlighted differently. Final
+      order of sequences is based on distance to the cursor.
+    - |mini.jump2d| has opinionated default algorithm of computing jump
+      spots. See |MiniJump2d.default_spotter()|.
+
+# Highlight groups ~
+*MiniJump2d-hl-groups*
+
+- `MiniJump2dSpot` - highlighting of jump spot's next step. By default it
+  uses label with highest contrast while not being too visually demanding:
+  white on black for dark |'background'|, black on white for light. If it
+  doesn't suit your liking, try couple of these alternatives (or choose
+  your own, of course): >lua
+
+    -- Reverse underlying colors (mostly *very* visible in any colorscheme)
+    vim.api.nvim_set_hl(0, 'MiniJump2dSpot', { reverse = true })
+
+    -- Bold italic
+    vim.api.nvim_set_hl(0, 'MiniJump2dSpot', { bold = true, italic = true })
+
+    -- Red undercurl
+    vim.api.nvim_set_hl(0, 'MiniJump2dSpot', { sp = 'Red', undercurl = true })
+<
+- `MiniJump2dSpotUnique` - highlighting of jump spot's next step if it has
+  unique label. By default links to `MiniJump2dSpot`.
+
+- `MiniJump2dSpotAhead` - highlighting of jump spot's future steps. By default
+  similar to `MiniJump2dSpot` but with less contrast and visibility.
+
+- `MiniJump2dDim` - highlighting of lines with at least one jump spot.
+  Make it non-bright in order for jump spot labels to be more visible.
+  By default linked to `Comment` highlight group.
+
+To change any highlight group, set it directly with |nvim_set_hl()|.
+
+# Disabling ~
+
+To disable, set `vim.g.minijump2d_disable` (globally) or
+`vim.b.minijump2d_disable` (for a buffer) to `true`. Considering high
+number of different scenarios and customization intentions, writing exact
+rules for disabling module's functionality is left to user. See
+|mini.nvim-disabling-recipes| for common recipes.
+
+------------------------------------------------------------------------------
+                                                            *MiniJump2d.setup()*
+                          `MiniJump2d.setup`({config})
+Module setup
+
+Parameters ~
+{config} `(table|nil)` Module config table. See |MiniJump2d.config|.
+
+Usage ~
+>lua
+  require('mini.jump2d').setup() -- use default config
+  -- OR
+  require('mini.jump2d').setup({}) -- replace {} with your config table
+<
+------------------------------------------------------------------------------
+                                                             *MiniJump2d.config*
+                              `MiniJump2d.config`
+Defaults ~
+>lua
+  MiniJump2d.config = {
+    -- Function producing jump spots (byte indexed) for a particular line.
+    -- For more information see |MiniJump2d.start()|.
+    -- If `nil` (default) - use |MiniJump2d.default_spotter()|
+    spotter = nil,
+
+    -- Characters used for labels of jump spots (in supplied order)
+    labels = 'abcdefghijklmnopqrstuvwxyz',
+
+    -- Options for visual effects
+    view = {
+      -- Whether to dim lines with at least one jump spot
+      dim = false,
+
+      -- How many steps ahead to show. Set to big number to show all steps.
+      n_steps_ahead = 0,
+    },
+
+    -- Which lines are used for computing spots
+    allowed_lines = {
+      blank = true, -- Blank line (not sent to spotter even if `true`)
+      cursor_before = true, -- Lines before cursor line
+      cursor_at = true, -- Cursor line
+      cursor_after = true, -- Lines after cursor line
+      fold = true, -- Start of fold (not sent to spotter even if `true`)
+    },
+
+    -- Which windows from current tabpage are used for visible lines
+    allowed_windows = {
+      current = true,
+      not_current = true,
+    },
+
+    -- Functions to be executed at certain events
+    hooks = {
+      before_start = nil, -- Before jump start
+      after_jump = nil, -- After jump was actually done
+    },
+
+    -- Module mappings. Use `''` (empty string) to disable one.
+    mappings = {
+      start_jumping = '<CR>',
+    },
+
+    -- Whether to disable showing non-error feedback
+    -- This also affects (purely informational) helper messages shown after
+    -- idle time if user input is required.
+    silent = false,
+  }
+<
+# Spotter function ~
+
+Actual computation of possible jump spots is done through spotter function.
+It should have the following arguments:
+- `line_num` is a line number inside buffer.
+- `args` - table with additional arguments:
+    - {win_id} - identifier of a window where input line number is from.
+    - {win_id_init} - identifier of a window which was current when
+      `MiniJump2d.start()` was called.
+
+Its output is a list of byte-indexed positions that should be considered as
+possible jump spots for this particular line in this particular window.
+Note: for a more aligned visualization this list should be (but not
+strictly necessary) sorted increasingly.
+
+Note: spotter function is always called with `win_id` window being
+"temporary current" (see |nvim_win_call()|). This allows using builtin
+Vimscript functions that operate only inside current window.
+
+# View ~
+
+Option `view.n_steps_ahead` controls how many steps ahead to show along
+with the currently required label. Those future steps are shown with
+different (less visible) highlight group ("MiniJump2dSpotAhead"). Usually
+it is a good idea to use this with a spotter which doesn't result into many
+jump spots (like, for example, |MiniJump2d.builtin_opts.word_start|).
+Default is 0 to not show anything ahead as it reduces visual noise.
+
+Option `view.dim` controls whether to dim lines with at least one jump spot.
+Dimming is done by applying "MiniJump2dDim" highlight group to the whole line.
+
+# Allowed lines ~
+
+Option `allowed_lines` controls which lines will be used for computing
+possible jump spots:
+- If `blank` or `fold` is `true`, it is possible to jump to first column of blank
+  line (determined by |prevnonblank()|) or first folded one (determined by
+  |foldclosed()|) respectively. Otherwise they are skipped. These lines are
+  not processed by spotter function even if the option is `true`.
+- If `cursor_before`, (`cursor_at`, `cursor_after`) is `true`, lines before
+  (at, after) cursor line of all processed windows are forwarded to spotter
+  function. Otherwise, they don't. This allows control of jump "direction".
+
+# Hooks ~
+
+Following hook functions can be used to further tweak jumping experience:
+- `before_start` - called without arguments first thing when jump starts.
+  One of the possible use cases is to ask for user input and update spotter
+  function with it.
+- `after_jump` - called after jump was actually done. Useful to make
+  post-adjustments (like move cursor to first non-whitespace character).
+
+------------------------------------------------------------------------------
+                                                            *MiniJump2d.start()*
+                           `MiniJump2d.start`({opts})
+Start jumping
+
+Compute possible jump spots, visualize them and wait for iterative filtering.
+
+# First computation of possible jump spots ~
+
+- Process allowed windows (current and/or not current; controlled by
+  `allowed_windows` option) by visible lines from top to bottom. For each
+  one see if it is allowed (controlled by `allowed_lines` option). If not
+  allowed, then do nothing. If allowed and should be processed by
+  `spotter`, process it.
+- Apply spotter function from `spotter` option for each appropriate line
+  and concatenate outputs. This means that eventual order of jump spots
+  aligns with lexicographical order within "window id" - "line number" -
+  "position in `spotter` output" tuples.
+- For each possible jump compute its label: a single character from
+  `labels` option used to filter jump spots. Each possible label character
+  might be used more than once to label several "consecutive" jump spots.
+  It is done in an optimal way under assumption of no preference of one
+  spot over another. Basically, it means "use all labels at each step of
+  iterative filtering as equally as possible".
+
+# Visualization ~
+
+Current label for each possible jump spot is shown at that position
+overriding everything underneath it.
+
+# Iterative filtering ~
+
+Labels of possible jump spots are computed in order to use them as equally
+as possible.
+
+Example:
+- With `abc` as `labels` option, initial labels for 10 possible jumps
+  are "aaaabbbccc". As there are 10 spots which should be "coded" with 3
+  symbols, at least 2 symbols need 3 steps to filter them out. With current
+  implementation those are always the "first ones".
+- After typing `a`, it filters first four jump spots and recomputes its
+  labels to be "aabc".
+- After typing `a` again, it filters first two spots and recomputes its
+  labels to be "ab".
+- After typing either `a` or `b` it filters single spot and makes jump.
+
+With default 26 labels for most real-world cases 2 steps is enough for
+default spotter function. Rarely 3 steps are needed with several windows.
+
+Parameters ~
+{opts} `(table|nil)` Configuration of jumping, overriding global and buffer
+  local values. Has the same structure as |MiniJump2d.config|
+  without <mappings> field. Extra allowed fields:
+  - <hl_group> - highlight group for first step.
+    Default: `"MiniJump2dSpot"`.
+  - <hl_group_ahead> - highlight group for second and later steps.
+    Default: `"MiniJump2dSpotAhead"`.
+  - <hl_group_dim> - highlight group for dimming used lines.
+    Default: `"MiniJump2dDim"`.
+  - <hl_group_unique> - highlight group for unique next step.
+    Default: `"MiniJump2dSpotUnique"`.
+
+Usage ~
+>lua
+  -- Start default jumping
+  MiniJump2d.start()
+
+  -- Jump to word start
+  MiniJump2d.start(MiniJump2d.builtin_opts.word_start)
+
+  -- Jump to single character from user input (follow by typing one character)
+  MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
+
+  -- Jump to first character of punctuation group only inside current window
+  -- which is placed at cursor line; visualize with `Search`
+  MiniJump2d.start({
+    spotter = MiniJump2d.gen_spotter.pattern('%p+'),
+    allowed_lines = { cursor_before = false, cursor_after = false },
+    allowed_windows = { not_current = false },
+    hl_group = 'Search'
+  })
+<
+See also ~
+|MiniJump2d.config|
+
+------------------------------------------------------------------------------
+                                                             *MiniJump2d.stop()*
+                              `MiniJump2d.stop`()
+Stop jumping
+
+------------------------------------------------------------------------------
+                                                        *MiniJump2d.gen_spotter*
+                            `MiniJump2d.gen_spotter`
+Generate spotter
+
+This is a table with function elements. Call to actually get a spotter.
+
+------------------------------------------------------------------------------
+                                              *MiniJump2d.gen_spotter.pattern()*
+              `MiniJump2d.gen_spotter.pattern`({pattern}, {side})
+Generate spotter for Lua pattern
+
+Parameters ~
+{pattern} `(string|nil)` Lua pattern. Default: `'[^%s%p]+'` which matches group
+  of "non-whitespace non-punctuation characters" (basically a way of saying
+  "group of alphanumeric characters" that works with multibyte characters).
+{side} `(string|nil)` Which side of pattern match should be considered as
+  jumping spot. Should be one of `'start'` (start of match, default), `'end'`
+  (inclusive end of match), or `'none'` (match for spot is done manually
+  inside pattern with plain `()` matching group).
+
+Return ~
+`(function)` Spotter function.
+
+Usage ~
+>lua
+  -- Match any punctuation
+  MiniJump2d.gen_spotter.pattern('%p')
+
+  -- Match first from line start non-whitespace character
+  MiniJump2d.gen_spotter.pattern('^%s*%S', 'end')
+
+  -- Match start of last word
+  MiniJump2d.gen_spotter.pattern('[^%s%p]+[%s%p]-$', 'start')
+
+  -- Match letter followed by another letter (example of manual matching
+  -- inside pattern)
+  MiniJump2d.gen_spotter.pattern('%a()%a', 'none')
+<
+------------------------------------------------------------------------------
+                                           *MiniJump2d.gen_spotter.vimpattern()*
+                 `MiniJump2d.gen_spotter.vimpattern`({pattern})
+Generate spotter for Vimscript pattern
+
+Parameters ~
+{pattern} `(string|nil)` Vimscript |pattern|. Default: `\k\+` to match group
+  of "keyword characters" (see |'iskeyword'|).
+
+Return ~
+`(function)` Spotter function.
+
+Usage ~
+>lua
+  -- Match start of a keyword
+  MiniJump2d.gen_spotter.vimpattern('\\k\\+')
+
+  -- Match end of a keyword
+  MiniJump2d.gen_spotter.vimpattern('\\k*\\zs\\k')
+<
+------------------------------------------------------------------------------
+                                                *MiniJump2d.gen_spotter.union()*
+                     `MiniJump2d.gen_spotter.union`({...})
+Generate union of spotters
+
+Parameters ~
+{...} `(any)` Each argument should be a valid spotter.
+  See |MiniJump2d.config| for more details.
+
+Return ~
+`(function)` Spotter producing union of spots.
+
+Usage ~
+>lua
+  -- Match start and end of non-blank character groups:
+  local nonblank_start = MiniJump2d.gen_spotter.pattern('%S+', 'start')
+  local nonblank_end = MiniJump2d.gen_spotter.pattern('%S+', 'end')
+  local spotter = MiniJump2d.gen_spotter.union(nonblank_start, nonblank_end)
+<
+------------------------------------------------------------------------------
+                                                  *MiniJump2d.default_spotter()*
+                          `MiniJump2d.default_spotter`
+Default spotter function
+
+Spot is possible for jump if it is one of the following:
+- Start or end of non-whitespace character group.
+- Alphanumeric character followed or preceded by punctuation (useful for
+  snake case names).
+- Start of uppercase character group (useful for camel case names). Usually
+  only Latin alphabet is recognized due to Lua patterns shortcomings.
+
+These rules are derived in an attempt to balance between two intentions:
+- Allow as much useful jumping spots as possible.
+- Make labeled jump spots easily distinguishable.
+
+Usually takes from 2 to 3 keystrokes to get to destination.
+
+------------------------------------------------------------------------------
+                                                       *MiniJump2d.builtin_opts*
+                           `MiniJump2d.builtin_opts`
+Table with builtin `opts` values for |MiniJump2d.start()|
+
+Each element of table is itself a table defining one or several options for
+`MiniJump2d.start()`. Read help description to see which options it defines
+(like in |MiniJump2d.builtin_opts.line_start|).
+
+Usage ~
+>lua
+  -- Using `MiniJump2d.builtin_opts.line_start` as example:
+  -- Command
+  :lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)
+
+  -- Custom mapping
+  vim.keymap.set(
+    'n', '<CR>',
+    '<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<CR>'
+  )
+
+  -- Inside `MiniJump2d.setup()` (make sure to use all defined options)
+  local jump2d = require('mini.jump2d')
+  local jump_line_start = jump2d.builtin_opts.line_start
+  jump2d.setup({
+    spotter = jump_line_start.spotter,
+    hooks = { after_jump = jump_line_start.hooks.after_jump }
+  })
+<
+------------------------------------------------------------------------------
+                                               *MiniJump2d.builtin_opts.default*
+                       `MiniJump2d.builtin_opts.default`
+Jump with |MiniJump2d.default_spotter()|
+
+Defines `spotter`.
+
+------------------------------------------------------------------------------
+                                            *MiniJump2d.builtin_opts.line_start*
+                      `MiniJump2d.builtin_opts.line_start`
+Jump to line start
+
+Defines `spotter` and `hooks.after_jump`.
+
+------------------------------------------------------------------------------
+                                            *MiniJump2d.builtin_opts.word_start*
+                      `MiniJump2d.builtin_opts.word_start`
+Jump to word start
+
+Respects |'iskeyword'| when computing word start.
+
+Defines `spotter`.
+
+------------------------------------------------------------------------------
+                                      *MiniJump2d.builtin_opts.single_character*
+                   `MiniJump2d.builtin_opts.single_character`
+Jump to single character taken from user input
+
+Defines `spotter`, `allowed_lines.blank`, `allowed_lines.fold`, and
+`hooks.before_start`.
+
+------------------------------------------------------------------------------
+                                                 *MiniJump2d.builtin_opts.query*
+                        `MiniJump2d.builtin_opts.query`
+Jump to query taken from user input
+
+Defines `spotter`, `allowed_lines.blank`, `allowed_lines.fold`, and
+`hooks.before_start`.
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:

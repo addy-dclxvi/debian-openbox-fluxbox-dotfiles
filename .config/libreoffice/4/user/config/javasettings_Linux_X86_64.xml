@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--This is a generated file. Do not alter this file!-->
-<java xmlns="http://openoffice.org/2004/java/framework/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<enabled xsi:nil="false">false</enabled>
-<userClassPath xsi:nil="true"/>
-<vmParameters xsi:nil="true"/>
-<jreLocations xsi:nil="true"/>
-<javaInfo xsi:nil="true"/>
-</java>

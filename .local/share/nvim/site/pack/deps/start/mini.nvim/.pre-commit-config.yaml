@@ -1,0 +1,20 @@
+repos:
+  - repo: local
+    hooks:
+      - id: stylua
+        name: StyLua
+        language: system
+        entry: stylua
+        args: [--respect-ignores]
+        types: [lua]
+      - id: gendocs
+        name: Gendocs
+        language: system
+        entry: make --silent documentation
+        types: [lua]
+      - id: lintcommit
+        name: LintCommit
+        language: system
+        entry: nvim
+        args: ['--headless', '--noplugin', '-u', 'scripts/lintcommit.lua', '--']
+        stages: ['commit-msg']

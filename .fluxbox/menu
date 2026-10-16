@@ -1,78 +1,87 @@
-[begin] (MAIN MENU)
-[encoding] {UTF-8}
+[begin] (Menu)
+	[exec] (Run) {fbrun}
+	[exec] (Terminal) {x-terminal-emulator}
+	[exec] (Web Browser) {xdg-open about:home}
+	[exec] (File Manager) {xdg-open ~}
 
-	[nop]
-	[exec] (Run..) {launch --green}
-	[exec] (Terminal Emulator) {x-terminal-emulator}
-	[exec] (Web Browser) {x-www-browser}
-	
 	[separator]
 
-	[submenu] (Accesories) {ACCESSORIES}
-	[nop]
-		[exec] (Bulk Rename) {thunar -B}
-		[exec] (Compton) {pkill compton; compton -b}
-		[exec] (Evince) {evince}
-		[exec] (File Roller) {file-roller}
-		[exec] (Geany) {geany}
-		[exec] (Gucharmap) {gucharmap}
-		[exec] (Thunar) {thunar}
-		[exec] (Thunar as Root) {pkexec thunar}
-	[nop]
-	[end]
-	[submenu] (Internet) {INTERNET}
-
-	[nop]
-		[exec] (Chromium) {chromium}
-		[exec] (Network Manager) {nm-connection-editor}
-		[exec] (Transmission) {transmission-gtk}
-	[nop]
+	[submenu] (Accessories)
+		[exec] (Pluma Text Editor) {pluma}
+		[exec] (MATE Calculator) {mate-calc}
+		[exec] (Engrampa Archive Manager) {engrampa}
+		[exec] (MATE Screenshot) {mate-screenshot}
+		[exec] (MATE Search Tool) {mate-search-tool}
+		[exec] (Vim) {mate-terminal -e vim}
 	[end]
 
-	[submenu] (Multimedia) {MULTIMEDIA}
-	[nop]
-		[exec] (Audacious) {audacious}
-		[exec] (GIMP) {gimp}
-		[exec] (Inkscape) {inkscape}
-		[exec] (Parole) {parole}
-		[exec] (Pulse Audio) {pavucontrol}
-		[exec] (Screenshot) {sleep 1; screeny}
-		[exec] (Viewnior) {viewnior}
-	[nop]
+	[submenu] (Internet)
+		[exec] (Network Connections) {nm-connection-editor}
+		[exec] (Firefox) {firefox}
 	[end]
 
-	[submenu] (Office) {OFFICE}
-	[nop]
-		[exec] (LibreOffice Calc) {libreoffice --calc}
+	[submenu] (Multimedia)
+		[exec] (GIMP Image Editor) {gimp}
+		[exec] (Eye of MATE Image Viewer) {eom}
+		[exec] (Mate Color Select) {mate-color-select}
+		[exec] (MPV Media Player) {mpv --player-operation-mode=pseudo-gui -- %U}
+		[exec] (Volume Control) {mate-volume-control}
+	[end]
+
+	[submenu] (Office)
+		[exec] (LibreOffice) {libreoffice}
 		[exec] (LibreOffice Writer) {libreoffice --writer}
-		[exec] (Printer Manager) {system-config-printer}
-	[nop]
+		[exec] (LibreOffice Calc) {libreoffice --calc}
+		[exec] (LibreOffice Impress) {libreoffice --impress}
+		[exec] (LibreOffice Draw) {libreoffice --draw}
+		[exec] (LibreOffice Math) {libreoffice --math}
+		[exec] (Atril Document Viewer) {atril}
+		[exec] (MATE Dictionary) {mate-dictionary}
 	[end]
 
-	[submenu] (System) {SYSTEM}
-	[nop]
-		[exec] (Appearance) {lxappearance}
-		[exec] (Gparted) {sudo gparted}
-		[exec] (Task Manager) {xfce4-taskmanager}
-		[exec] (Edit Autostart) {xdg-open ~/.fluxbox/startup}
-		[exec] (Edit Init) {xdg-open ~/.fluxbox/init}
-		[exec] (Edit Keybinds) {xdg-open ~/.fluxbox/keys}
-		[exec] (Edit Menu) {xdg-open ~/.fluxbox/menu}
-		[restart] (Reload Fluxbox)
-	[nop]
+	[submenu] (Settings)
+		[exec] (MATE Control Center) {matecc}
+		[exec] (Appearance) {mate-appearance-properties}
+		[exec] (Displays) {mate-display-properties}
+		[exec] (Keyboard) {mate-keyboard-properties}
+		[exec] (Mouse) {mate-settings-mouse}
+		[exec] (Power Management) {mate-power-preferences}
+		[exec] (Screensaver) {mate-screensaver-preferences}
+		[exec] (Session Properties) {mate-session-properties}
+	[end]
+
+	[submenu] (System)
+		[exec] (MATE Terminal) {mate-terminal}
+		[exec] (Fish Shell) {mate-terminal -e fish}
+		[exec] (Caja File Manager) {caja}
+		[exec] (Ranger File Manager) {mate-terminal -e ranger}
+		[exec] (MATE System Monitor) {mate-system-monitor}
+		[exec] (MATE System Log) {mate-system-log}
+		[exec] (Disk Usage Analyzer) {mate-disk-usage-analyzer}
+		[exec] (GParted) {gparted}
 	[end]
 
 	[separator]
-
-	[submenu] (Exit) {EXIT}
-	[nop]
-		[exit] (Logout)
-		[exec] (Sleep) {systemctl suspend}
-		[exec] (Reboot) {systemctl reboot}
-		[exec] (Poweroff) {systemctl poweroff}
-	[nop]
+	[submenu] (Fluxbox)
+		[submenu] (Styles)
+			[submenu] (User)
+				[stylesmenu] (User Styles) {~/.fluxbox/styles}
+			[end]
+			[submenu] (System)
+				[stylesmenu] (System Styles) {/usr/share/fluxbox/styles}
+			[end]
+		[end]
+		[workspaces] (Workspaces)
+		[reconfig] (Reconfigure)
+		[restart] (Restart)
 	[end]
 
-[nop]
-[endencoding]
+	[separator]
+	[submenu] (Exit)
+		[exit] (Logout)
+		[exec] (Suspend) {systemctl suspend}
+		[exec] (Hibernate) {systemctl hibernate}
+		[exec] (Restart) {systemctl reboot}
+		[exec] (Poweroff) {systemctl poweroff}
+	[end]
 [end]

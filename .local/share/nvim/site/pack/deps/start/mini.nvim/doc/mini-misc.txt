@@ -1,0 +1,431 @@
+*mini.misc* Miscellaneous functions
+
+MIT License Copyright (c) 2021 Evgeni Chasnovski
+
+------------------------------------------------------------------------------
+                                                                      *MiniMisc*
+Features the following functions:
+- |MiniMisc.bench_time()| to benchmark function execution time.
+  Useful in combination with `stat_summary()`.
+
+- |MiniMisc.log_add()|, |MiniMisc.log_show()| and other helper functions to work
+  with a special in-memory log array. Useful when debugging Lua code.
+
+- |MiniMisc.put()| and |MiniMisc.put_text()| to pretty print its arguments
+  into command line and current buffer respectively.
+
+- |MiniMisc.resize_window()| to resize current window to its editable width.
+
+- |MiniMisc.safely()| to execute a function on a condition and warn on error.
+  Useful to organize |init.lua| in fail-safe sections with simple lazy loading.
+
+- |MiniMisc.setup_auto_root()| to set up automated change of current directory.
+
+- |MiniMisc.setup_termbg_sync()| to set up terminal background synchronization
+  (removes possible "frame" around current Neovim instance).
+
+- |MiniMisc.setup_restore_cursor()| to set up automated restoration of
+  cursor position on file reopen.
+
+- |MiniMisc.stat_summary()| to compute summary statistics of numerical array.
+  Useful in combination with `bench_time()`.
+
+- |MiniMisc.tbl_head()| and |MiniMisc.tbl_tail()| to return "first" and "last"
+  elements of table.
+
+- |MiniMisc.zoom()| to zoom in and out of a buffer, making it full screen
+  in a floating window.
+
+- And more.
+
+# Setup ~
+
+This module doesn't need setup, but it can be done to improve usability.
+Setup with `require('mini.misc').setup({})` (replace `{}` with your
+`config` table). It will create global Lua table `MiniMisc` which you can
+use for scripting or manually (with `:lua MiniMisc.*`).
+
+See |MiniMisc.config| for `config` structure and default values.
+
+This module doesn't have runtime options, so using `vim.b.minimisc_config`
+will have no effect here.
+
+------------------------------------------------------------------------------
+                                                              *MiniMisc.setup()*
+                           `MiniMisc.setup`({config})
+Module setup
+
+Parameters ~
+{config} `(table|nil)` Module config table. See |MiniMisc.config|.
+
+Usage ~
+>lua
+  require('mini.misc').setup() -- use default config
+  -- OR
+  require('mini.misc').setup({}) -- replace {} with your config table
+<
+------------------------------------------------------------------------------
+                                                               *MiniMisc.config*
+                               `MiniMisc.config`
+Defaults ~
+>lua
+  MiniMisc.config = {
+    -- Array of fields to make global (to be used as independent variables)
+    make_global = { 'put', 'put_text' },
+  }
+<
+------------------------------------------------------------------------------
+                                                         *MiniMisc.bench_time()*
+                     `MiniMisc.bench_time`({f}, {n}, {...})
+Execute `f` several times and time how long it took
+
+Parameters ~
+{f} `(function)` Function which execution to benchmark.
+{n} `(number|nil)` Number of times to execute `f(...)`. Default: 1.
+{...} `(any)` Arguments when calling `f`.
+
+Return ~
+`(...)` Table with durations (in seconds; up to nanoseconds) and
+  output of (last) function execution.
+
+------------------------------------------------------------------------------
+                                                   *MiniMisc.get_gutter_width()*
+                     `MiniMisc.get_gutter_width`({win_id})
+Compute width of gutter (info column on the left of the window)
+
+Parameters ~
+{win_id} `(number|nil)` Window identifier (see |win_getid()|) for which gutter
+  width is computed. Default: 0 for current.
+
+------------------------------------------------------------------------------
+                                                            *MiniMisc.log_add()*
+                  `MiniMisc.log_add`({desc}, {state}, {opts})
+Add an entry to the in-memory log array
+
+Useful when trying to debug a Lua code (like Neovim config or plugin).
+Use this instead of ad-hoc `print()` statements.
+
+Each entry is a table with the following fields:
+- <desc> `(any)` - entry description. Usually a string describing a place
+  in the code.
+- <state> `(any)` - data about current state. Usually a table.
+- <timestamp> `(number)` - a timestamp of when the entry was added. A number of
+  milliseconds since the in-memory log was initiated (after |MiniMisc.setup()|
+  or |MiniMisc.log_clear()|). Useful during profiling.
+
+Parameters ~
+{desc} `(any)` Entry description.
+{state} `(any)` Data about current state.
+{opts} `(table|nil)` Options. Possible fields:
+  - <deepcopy> - (boolean) Whether to create a copy of tables in {state}.
+    Usually helpful to record the exact state during code execution and avoid
+    side effects of tables being changed in-place. Default `true`.
+
+Usage ~
+>lua
+  local t = { a = 1 }
+  MiniMisc.log_add('before', { t = t }) -- Will show `t = { a = 1 }` state
+  t.a = t.a + 1
+  MiniMisc.log_add('after', { t = t })  -- Will show `t = { a = 2 }` state
+
+  -- Use `:lua MiniMisc.log_show()` or `:=MiniMisc.log_get()` to see the log
+<
+See also ~
+- |MiniMisc.log_get()| to get log array
+- |MiniMisc.log_show()| to show log array in the dedicated buffer
+- |MiniMisc.log_clear()| to clear the log array
+
+------------------------------------------------------------------------------
+                                                            *MiniMisc.log_get()*
+                              `MiniMisc.log_get`()
+Get log array
+
+Return ~
+`(table[])` Log array. Returned as is, without |vim.deepcopy()|.
+
+See also ~
+- |MiniMisc.log_add()| to add to the log array
+
+------------------------------------------------------------------------------
+                                                           *MiniMisc.log_show()*
+                             `MiniMisc.log_show`()
+Show log array in a scratch buffer
+
+See also ~
+- |MiniMisc.log_add()| to add to the log array
+
+------------------------------------------------------------------------------
+                                                          *MiniMisc.log_clear()*
+                             `MiniMisc.log_clear`()
+Clear log array
+
+This also sets a new starting point for entry timestamps.
+
+See also ~
+- |MiniMisc.log_add()| to add to the log array
+
+------------------------------------------------------------------------------
+                                                                *MiniMisc.put()*
+                             `MiniMisc.put`({...})
+Print Lua objects in command line
+
+Parameters ~
+{...} `(any)` Any number of objects to be printed each on separate line.
+
+------------------------------------------------------------------------------
+                                                           *MiniMisc.put_text()*
+                           `MiniMisc.put_text`({...})
+Print Lua objects in current buffer
+
+Parameters ~
+{...} `(any)` Any number of objects to be printed each on separate line.
+
+------------------------------------------------------------------------------
+                                                      *MiniMisc.resize_window()*
+                `MiniMisc.resize_window`({win_id}, {text_width})
+Resize window to have exact number of editable columns
+
+Parameters ~
+{win_id} `(number|nil)` Window identifier (see |win_getid()|) to be resized.
+  Default: 0 for current.
+{text_width} `(number|nil)` Number of editable columns resized window will
+  display. Default: first element of |'colorcolumn'| or otherwise |'textwidth'|
+  (using screen width as its default but not more than 79).
+
+------------------------------------------------------------------------------
+                                                             *MiniMisc.safely()*
+                         `MiniMisc.safely`({when}, {f})
+Execute a function on a condition and warn on error
+
+Input function is executed exactly once. Its possible error is captured and is
+shown as a |vim.notify()| warning.
+
+Useful to organize |init.lua| in fail-safe sections with simple lazy loading.
+
+Parameters ~
+{when} `(string)` When to execute a function. One of:
+  - `'now'` - immediately.
+  - `'later'` - queue to be executed soon without blocking the execution of next
+    code in file. Queued functions are executed in order they are added.
+  - `'delay:<number>'` - after a specified delay with |vim.defer_fn()|.
+  - `'event:<events>'` - on whichever specified event is triggered first.
+  - `'event:<events>~<patterns>` - same as above, but events must match
+    specified |autocmd-pattern|.
+  - `'filetype:<filetypes>'` - same as `'event:FileType~<filetypes>'`, but follow
+    successful function execution with |filetype-detect| for all normal buffers
+    (if new |ftdetect| scripts were added) and sourcing |ftplugin| (for buffers
+    matching `<filetypes>`). Intended to be used for loading "language plugins".
+{f} `(function)` Function to execute (without arguments).
+
+Usage ~
+>lua
+  MiniMisc.safely('later', function()
+    vim.notify('This will be executed after the next "now" call')
+  end)
+  MiniMisc.safely('now', function() error('This will be a warning') end)
+
+  MiniMisc.safely('event:InsertEnter', function()
+    require('mini.completion').setup()
+  end)
+  MiniMisc.safely('event:CmdlineEnter~/', function()
+    vim.notify('Start searching for the first time')
+  end)
+
+  MiniMisc.safely('filetype:tex,plaintex', function()
+    -- Load plugin to improve writing LaTeX
+  end)
+<
+------------------------------------------------------------------------------
+                                                    *MiniMisc.setup_auto_root()*
+                `MiniMisc.setup_auto_root`({names}, {fallback})
+Set up automated change of current directory
+
+What it does:
+- Creates autocommand which on every |BufEnter| event with |MiniMisc.find_root()|
+  finds root directory for current buffer file and sets |current-directory|
+  to it (using |chdir()|).
+- Resets |'autochdir'| to `false`.
+
+Parameters ~
+{names} `(table|function|nil)` Forwarded to |MiniMisc.find_root()|.
+{fallback} `(function|nil)` Forwarded to |MiniMisc.find_root()|.
+
+Usage ~
+>lua
+  require('mini.misc').setup()
+  MiniMisc.setup_auto_root()
+<
+------------------------------------------------------------------------------
+                                                          *MiniMisc.find_root()*
+              `MiniMisc.find_root`({buf_id}, {names}, {fallback})
+Find root directory
+
+Based on a buffer name (full path to file opened in a buffer) find a root
+directory. If buffer is not associated with file, returns `nil`.
+
+Root directory is a directory containing at least one of pre-defined files.
+It is searched using |vim.fs.find()| with `upward = true` starting from
+directory of current buffer file until first occurrence of root file(s).
+
+Notes:
+- Uses directory path caching to speed up computations. This means that no
+  changes in root directory will be detected after directory path was already
+  used in this function. Reload Neovim to account for that.
+
+Parameters ~
+{buf_id} `(number|nil)` Buffer identifier (see |bufnr()|) to use.
+  Default: 0 for current.
+{names} `(table|function|nil)` Array of file names or a callable used to
+  identify a root directory. Forwarded to |vim.fs.find()|.
+  Default: `{ '.git', 'Makefile' }`.
+{fallback} `(function|nil)` Callable fallback to use if no root is found
+  with |vim.fs.find()|. Will be called with a buffer path and should return
+  a valid directory path.
+
+------------------------------------------------------------------------------
+                                                  *MiniMisc.setup_termbg_sync()*
+                      `MiniMisc.setup_termbg_sync`({opts})
+Set up terminal background synchronization
+
+What it does:
+- Checks if terminal emulator supports OSC 11 control sequence through
+  appropriate `stdout`. Stops if not.
+- Creates autocommands for |ColorScheme| and |VimResume| events, which
+  change terminal background to have same color as |guibg| of |hl-Normal|.
+- Creates autocommands for |VimLeavePre| and |VimSuspend| events which set
+  terminal background back to its original color.
+- Synchronizes background immediately to allow not depend on loading order.
+
+Primary use case is to remove possible "frame" around current Neovim instance
+which appears if Neovim's |hl-Normal| background color differs from what is
+used by terminal emulator itself.
+
+Works only on Neovim>=0.10.
+
+Parameters ~
+{opts} `(table|nil)` Options. Possible fields:
+  - <explicit_reset> `(boolean)` - whether to reset terminal background by
+    explicitly setting it to the color it had when this function was called.
+    Set to `true` if terminal emulator doesn't support OSC 111 control sequence.
+    Default: `false`.
+
+------------------------------------------------------------------------------
+                                               *MiniMisc.setup_restore_cursor()*
+                    `MiniMisc.setup_restore_cursor`({opts})
+Restore cursor position on file open
+
+When reopening a file this will make sure the cursor is placed back to the
+position where you left before. This implements |restore-cursor| in a nicer way.
+File should have a recognized file type (see |'filetype'|) and be opened in
+a normal buffer (see |'buftype'|).
+
+Note: it relies on file mark data stored in |'shadafile'| (see |shada-f|).
+Be sure to enable it.
+
+Parameters ~
+{opts} `(table|nil)` Options. Possible fields:
+  - <center> - (boolean) Center the window after we restored the cursor.
+    Default: `true`.
+  - <ignore_filetype> - Array with file types to be ignored (see |'filetype'|).
+    Default: `{ "gitcommit", "gitrebase" }`.
+
+Usage ~
+>lua
+  require('mini.misc').setup_restore_cursor()
+<
+------------------------------------------------------------------------------
+                                                       *MiniMisc.stat_summary()*
+                          `MiniMisc.stat_summary`({t})
+Compute summary statistics of numerical array
+
+This might be useful to compute summary of time benchmarking with
+|MiniMisc.bench_time()|.
+
+Parameters ~
+{t} `(table)` Array (table suitable for `ipairs`) of numbers.
+
+Return ~
+`(table)` Table with summary values under following keys (may be
+  extended in the future): <maximum>, <mean>, <median>, <minimum>, <n>
+  (number of elements), <sd> (sample standard deviation).
+
+------------------------------------------------------------------------------
+                                                           *MiniMisc.tbl_head()*
+                         `MiniMisc.tbl_head`({t}, {n})
+Return "first" elements of table as decided by `pairs`
+
+Note: order of elements might vary.
+
+Parameters ~
+{t} `(table)` Input table.
+{n} `(number|nil)` Maximum number of first elements. Default: 5.
+
+Return ~
+`(table)` Table with at most `n` first elements of `t` (with same keys).
+
+------------------------------------------------------------------------------
+                                                           *MiniMisc.tbl_tail()*
+                         `MiniMisc.tbl_tail`({t}, {n})
+Return "last" elements of table as decided by `pairs`
+
+This function makes two passes through elements of `t`:
+- First to count number of elements.
+- Second to construct result.
+
+Note: order of elements might vary.
+
+Parameters ~
+{t} `(table)` Input table.
+{n} `(number|nil)` Maximum number of last elements. Default: 5.
+
+Return ~
+`(table)` Table with at most `n` last elements of `t` (with same keys).
+
+------------------------------------------------------------------------------
+                                                *MiniMisc.use_nested_comments()*
+                    `MiniMisc.use_nested_comments`({buf_id})
+Add possibility of nested comment leader
+
+This works by parsing |'commentstring'| buffer option, extracting
+non-whitespace comment leader (symbols on the left of commented line), and
+locally modifying |'comments'| option (by prepending `n:<leader>`). Does
+nothing if |'commentstring'| is empty or has comment symbols both in front
+and back (like `/*%s*/`).
+
+Nested comment leader added with this function is useful for formatting
+nested comments. For example, have in Lua "first-level" comments with `--`
+and "second-level" comments with `----`. With nested comment leader second
+type can be formatted with `gq` in the same way as first one.
+
+Recommended usage is with |autocmd|: >lua
+
+  local use_nested_comments = function() MiniMisc.use_nested_comments() end
+  vim.api.nvim_create_autocmd('BufEnter', { callback = use_nested_comments })
+<
+Note: for most filetypes |'commentstring'| option is added only when buffer
+with this filetype is entered, so using non-current `buf_id` can not lead
+to desired effect.
+
+Parameters ~
+{buf_id} `(number|nil)` Buffer identifier (see |bufnr()|) in which function
+  will operate. Default: 0 for current.
+
+------------------------------------------------------------------------------
+                                                               *MiniMisc.zoom()*
+                      `MiniMisc.zoom`({buf_id}, {config})
+Zoom in and out of a buffer, making it full screen in a floating window
+
+This function is useful when working with multiple windows but temporarily
+needing to zoom into one to see more of the code from that buffer. Call it
+again (without arguments) to zoom out.
+
+Parameters ~
+{buf_id} `(number|nil)` Buffer identifier (see |bufnr()|) to be zoomed.
+  Default: 0 for current.
+{config} `(table|nil)` Optional config for window (as for |nvim_open_win()|).
+
+Return ~
+`(boolean)` Whether current buffer is zoomed in.
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:

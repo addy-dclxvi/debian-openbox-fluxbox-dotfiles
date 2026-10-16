@@ -1,2 +1,0 @@
-UUID=a8107a83-bc85-46f2-b981-285524e80fab / ext4 noatime,nodiratime,errors=remount-ro 0 1
-UUID=D815-9F64 /boot/efi vfat umask=0077 0 1

@@ -1,0 +1,59 @@
+[general]
+live_config_reload = true
+
+[window]
+dimensions = { columns = 112, lines = 28 }
+padding = { x = 32, y = 32 }
+
+[font]
+size = 8
+
+[font.normal]
+family = "CommitMono"
+style = "Regular"
+
+[font.bold]
+family = "CommitMono"
+style = "Bold"
+
+[font.italic]
+family = "CommitMono"
+style = "Italic"
+
+[font.bold_italic]
+family = "CommitMono"
+style = "Bold Italic"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+foreground = "#575757"
+background = "#efefef"
+
+[colors.normal]
+black = "#d4d4d4"
+red = "#981f53"
+green = "#387200"
+yellow = "#927300"
+blue = "#0082a5"
+magenta = "#773293"
+cyan = "#019482"
+white = "#878787"
+
+[colors.bright]
+black = "#b9b9b9"
+red = "#981f53"
+green = "#387200"
+yellow = "#927300"
+blue = "#0082a5"
+magenta = "#773293"
+cyan = "#019482"
+white = "#6e6e6e"
+
+[keyboard]
+bindings = [
+{ key = "ArrowUp", mods = "Control|Shift", action = "ScrollLineUp" },
+{ key = "ArrowDown", mods = "Control|Shift", action = "ScrollLineDown" }
+]
+

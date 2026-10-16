@@ -1,0 +1,80 @@
+return {
+  ["/home/user"] = {
+    ["/home/user"] = {
+      count = 1,
+      latest = 1791719859
+    },
+    ["/home/user/.config/nvim/init.lua"] = {
+      count = 4,
+      latest = 1791719865
+    },
+    ["/home/user/.config/nvim/init.lua_"] = {
+      count = 1,
+      latest = 1791610678
+    },
+    ["/home/user/.vimrc"] = {
+      count = 9,
+      latest = 1791797655
+    },
+    ["/home/user/.xsessionrc"] = {
+      count = 1,
+      latest = 1791689856
+    }
+  },
+  ["/home/user/.config/alacritty"] = {
+    ["/home/user/.config/alacritty/alacritty.toml"] = {
+      count = 8,
+      latest = 1791805229
+    }
+  },
+  ["/home/user/.config/fish/functions"] = {
+    ["/home/user/.config/fish/functions/fish_prompt.fish"] = {
+      count = 3,
+      latest = 1791640007
+    }
+  },
+  ["/home/user/.config/nvim"] = {
+    ["/home/user/.config/nvim/init.lua"] = {
+      count = 153,
+      latest = 1791814130
+    },
+    ["/home/user/.config/nvim/init.lua_"] = {
+      count = 30,
+      latest = 1791810610
+    }
+  },
+  ["/home/user/.config/ranger/colorschemes"] = {
+    ["/home/user/.config/ranger/colorschemes/tofu.py"] = {
+      count = 2,
+      latest = 1791731046
+    }
+  },
+  ["/home/user/.fluxbox"] = {
+    ["/home/user/.fluxbox/init"] = {
+      count = 1,
+      latest = 1792154167
+    }
+  },
+  ["/home/user/.local/share/nvim/site/pack/deps/start/mini.nvim/lua/mini"] = {
+    ["/home/user/.local/share/nvim/site/pack/deps/start/mini.nvim/lua/mini/colors.lua"] = {
+      count = 1,
+      latest = 1791720000
+    },
+    ["/home/user/.local/share/nvim/site/pack/deps/start/mini.nvim/lua/mini/hues.lua"] = {
+      count = 1,
+      latest = 1791719930
+    }
+  },
+  ["/home/user/Downloads/debian-openbox-fluxbox-dotfiles/.fluxbox"] = {
+    ["/home/user/Downloads/debian-openbox-fluxbox-dotfiles/.fluxbox/init"] = {
+      count = 1,
+      latest = 1792154143
+    }
+  },
+  ["/home/user/Downloads/i3-starterpack"] = {
+    ["/home/user/Downloads/i3-starterpack/README.md"] = {
+      count = 3,
+      latest = 1791621204
+    }
+  }
+}

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Command to stop screenrecording from my record script
-# I usually launch this using rofi or dmenu
-# Cheers! Addy
-
-killall -9 ffmpeg
-pkill ffmpeg

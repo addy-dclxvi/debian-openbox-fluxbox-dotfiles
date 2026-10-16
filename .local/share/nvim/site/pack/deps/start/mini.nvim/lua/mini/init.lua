@@ -1,0 +1,427 @@
+--- *mini.nvim* Collection of minimal, independent and fast Lua modules
+---
+--- MIT License Copyright (c) 2021 Evgeni Chasnovski
+
+--- |mini.nvim| is a collection of minimal, independent, and fast Lua modules
+--- dedicated to improve Neovim (version 0.10 and higher) experience. Each
+--- module can be considered as a separate sub-plugin.
+---
+--- Table of contents:
+---
+---   General principles .......................... |mini.nvim-general-principles|
+---   Module list ........................................ |mini.nvim-module-list|
+---   Disabling recipes ............................ |mini.nvim-disabling-recipes|
+---   Buffer-local config ........................ |mini.nvim-buffer-local-config|
+---   Plugin color schemes ............................. |mini.nvim-color-schemes|
+---   Extend and create a/i textobjects ................................ |mini.ai|
+---   Align text interactively ...................................... |mini.align|
+---   Animate common Neovim actions ............................... |mini.animate|
+---   Base16 colorscheme creation .................................. |mini.base16|
+---   Common configuration presets ................................. |mini.basics|
+---   Go forward/backward with square brackets .................. |mini.bracketed|
+---   Remove buffers ............................................ |mini.bufremove|
+---   Show next key clues ............................................ |mini.clue|
+---   Command line tweaks ......................................... |mini.cmdline|
+---   Tweak and save any color scheme .............................. |mini.colors|
+---   Comment lines ............................................... |mini.comment|
+---   Completion and signature help ............................ |mini.completion|
+---   Autohighlight word under cursor .......................... |mini.cursorword|
+---   Plugin manager ................................................. |mini.deps|
+---   Work with diff hunks ........................................... |mini.diff|
+---   Generate Neovim help files ...................................... |mini.doc|
+---   Extra mini.nvim functionality ................................. |mini.extra|
+---   Navigate and manipulate file system ........................... |mini.files|
+---   Fuzzy matching ................................................ |mini.fuzzy|
+---   Git integration ................................................. |mini.git|
+---   Highlight patterns in text ............................... |mini.hipatterns|
+---   Generate configurable color scheme ............................. |mini.hues|
+---   Icon provider ................................................. |mini.icons|
+---   Visualize and work with indent scope .................... |mini.indentscope|
+---   Get user input ................................................ |mini.input|
+---   Jump to next/previous single character ......................... |mini.jump|
+---   Jump within visible lines .................................... |mini.jump2d|
+---   Special key mappings ......................................... |mini.keymap|
+---   Window with buffer text overview ................................ |mini.map|
+---   Miscellaneous functions ........................................ |mini.misc|
+---   Move any selection in any direction ............................ |mini.move|
+---   Show notifications ........................................... |mini.notify|
+---   Text edit operators ....................................... |mini.operators|
+---   Autopairs ..................................................... |mini.pairs|
+---   Pick anything .................................................. |mini.pick|
+---   Session management ......................................... |mini.sessions|
+---   Manage and expand snippets ................................. |mini.snippets|
+---   Split and join arguments .................................. |mini.splitjoin|
+---   Start screen ................................................ |mini.starter|
+---   Statusline ............................................... |mini.statusline|
+---   Surround actions ........................................... |mini.surround|
+---   Tabline ..................................................... |mini.tabline|
+---   Test Neovim plugins ............................................ |mini.test|
+---   Trailspace (highlight and remove) ........................ |mini.trailspace|
+---   Track and reuse file system visits ........................... |mini.visits|
+---@tag mini.nvim-table-of-contents
+
+--- Design ~
+--- Each module is designed to solve a particular problem targeting balance
+--- between feature-richness (handling as many edge-cases as possible) and
+--- simplicity of implementation/support. Granted, not all of them ended up
+--- with the same balance, but it is the goal nevertheless.
+---
+--- Independence ~
+--- Modules are independent of each other and can be run without external
+--- dependencies. Although some of them may need dependencies for full experience.
+---
+--- Structure ~
+--- Each module is a submodule for a placeholder "mini" module. For example,
+--- "surround" module should be referred to as "mini.surround". As later will
+--- be explained, this plugin can also be referred to as "MiniSurround".
+---
+--- Setup ~
+--- - Each module you want to use should be enabled separately with
+---   `require(<name of module>).setup({})`. Possibly replace `{}` with your
+---   config table or omit altogether to use defaults. You can supply only
+---   parts of config, the rest will be inferred from defaults.
+---
+--- - Call to module's `setup()` always creates a global Lua object with
+---   coherent camel-case name: `require('mini.surround').setup()` creates
+---   `_G.MiniSurround`. This allows for a simpler usage of plugin available
+---   from `v:lua` like `v:lua.MiniSurround`. Considering this, "module" and
+---   "Lua object" names can be used interchangeably:
+---   `mini.surround` and `MiniSurround` will mean the same thing.
+---
+--- - Each supplied `config` table (after extending with default values) is
+---   stored in `config` field of global object. Like `MiniSurround.config`.
+---
+--- - Values of `config`, which affect runtime activity, can be changed on the
+---   fly to have effect. For example, `MiniSurround.config.n_lines` can be
+---   changed during runtime; but changing `MiniSurround.config.mappings` won't
+---   have any effect (as mappings are created once during `setup()`).
+---
+--- - If module works best with some specific non-default option value, it is
+---   set during `setup()`. If the value is not essential to module's functionality,
+---   it is done only if user or another plugin hasn't set it beforehand (no
+---   matter the value).
+---
+--- Buffer local configuration ~
+--- Each module can be additionally configured to use certain runtime config
+--- settings locally to buffer. See |mini.nvim-buffer-local-config| for more
+--- information.
+---
+--- Buffer names ~
+--- All module-related buffers are named according to the following format:
+--- `mini<module-name>://<buffer-number>/<useful-info>` (forward slashes are
+--- used on any platform; `<useful-info>` may be empty). This structure allows
+--- creating identifiable, reasonably unique, and useful buffer names.
+--- For example, |mini.files| buffers are created per displayed directory/file with
+--- names like `minifiles://10/path/to/displayed/directory`.
+---
+--- Disabling ~
+--- Each module's core functionality can be disabled globally or locally to
+--- buffer. See "Disabling" section in module's help page for more details.
+--- See |mini.nvim-disabling-recipes| for common recipes.
+---
+--- Silencing ~
+--- Each module can be configured to not show non-error feedback globally or
+--- locally to buffer. See "Silencing" section in module's help for more details.
+---
+--- Highlighting ~
+--- Appearance of module's output is controlled by certain set of highlight
+--- groups (see |highlight-groups|). By default they usually link to some
+--- semantically close built-in highlight group. Use |:highlight| command or
+--- |nvim_set_hl()| Lua function to customize highlighting. To see a more
+--- calibrated look, use |mini.hues|, |mini.base16|, or plugin's colorschemes.
+---
+--- Stability ~
+--- Each module upon release is considered to be relatively stable: both in
+--- terms of setup and functionality. Any non-bugfix backward-incompatible
+--- change will be released gradually as much as possible.
+---
+--- Not filetype and language specific ~
+--- Including functionality which needs several filetype/language specific
+--- implementations is an explicit no-goal of this project. This is mostly due
+--- to the potential increase in maintenance to keep implementation up to date.
+--- However, any part which might need filetype/language specific tuning should
+--- be designed to allow it by letting user set proper buffer options and/or
+--- local configuration.
+---@tag mini.nvim-general-principles
+
+--- - |mini.ai| - extend and create `a`/`i` textobjects (like in `di(` or
+---   `va"`). It enhances some builtin |text-objects| (like |a(|, |a)|, |a'|,
+---   and more), creates new ones (like `a*`, `a<Space>`, `af`, `a?`, and
+---   more), and allows user to create their own (like based on treesitter, and
+---   more). Supports dot-repeat, `v:count`, different search methods,
+---   consecutive application, and customization via Lua patterns or functions.
+---   Has builtins for brackets, quotes, function call, argument, tag, user
+---   prompt, and any punctuation/digit/whitespace character.
+---
+--- - |mini.align| - align text interactively (with or without instant preview).
+---   Allows rich and flexible customization of both alignment rules and user
+---   interaction. Works with charwise, linewise, and blockwise selections in
+---   both Normal mode (on textobject/motion; with dot-repeat) and Visual mode.
+---
+--- - |mini.animate| - animate common Neovim actions. Has "works out of the box"
+---   builtin animations for cursor movement, scroll, resize, window open and
+---   close. All of them can be customized and enabled/disabled independently.
+---
+--- - |mini.base16| - fast implementation of base16 theme for manually supplied
+---   palette. Supports 30+ plugin integrations. Has unique palette generator
+---   which needs only background and foreground colors.
+---
+--- - |mini.basics| - common configuration presets. Has configurable presets for
+---   options, mappings, and autocommands. It doesn't change option or mapping
+---   if it was manually created.
+---
+--- - |mini.bracketed| - go forward/backward with square brackets. Among others,
+---   supports variety of non-trivial targets: comments, files on disk, indent
+---   changes, tree-sitter nodes, linear undo states, yank history entries.
+---
+--- - |mini.bufremove| - buffer removing (unshow, delete, wipeout) while saving
+---   window layout.
+---
+--- - |mini.clue| - show next key clues. Implements custom key query process with
+---   customizable opt-in triggers, next key descriptions (clues), hydra-like
+---   submodes, window delay/config. Provides clue sets for some built-in
+---   concepts: `g`/`z` keys, window commands, etc.
+---
+--- - |mini.cmdline| - command line tweaks. Adds autocompletion with customizable
+---   delay, autocorrection for words with fixed candidates, and autopeek command
+---   range in a floating window with customizable context size.
+---
+--- - |mini.colors| - tweak and save any color scheme. Can create colorscheme
+---   object with methods to invert/set/modify/etc.
+---   lightness/saturation/hue/temperature/etc. of foreground/background/all
+---   colors, infer cterm attributes, add transparency, save to a file and more.
+---   Has functionality for interactive experiments and animation of
+---   transition between color schemes.
+---
+--- - |mini.comment| - fast and familiar per-line code commenting.
+---
+--- - |mini.completion| - async (with customizable "debounce" delay) "two-stage
+---   chain completion": first builtin LSP, then configurable fallback. Also
+---   has functionality for completion item info and function signature (both
+---   in floating window appearing after customizable delay).
+---
+--- - |mini.cursorword| - automatic highlighting of word under cursor (displayed
+---   after customizable delay). Current word under cursor can be highlighted
+---   differently.
+---
+--- - |mini.deps| - plugin manager for plugins outside of |mini.nvim|. Uses Git and
+---   built-in packages to install, update, clean, and snapshot plugins.
+---
+--- - |mini.diff| - visualize difference between buffer text and its reference
+---   interactively (with colored signs or line numbers). Uses Git index as
+---   default reference. Provides toggleable overview in text area, built-in
+---   apply/reset/textobject/goto mappings.
+---
+--- - |mini.doc| - generation of help files from EmmyLua-like annotations.
+---   Allows flexible customization of output via hook functions. Used for
+---   documenting this plugin.
+---
+--- - |mini.extra| - extra mini.nvim functionality. Contains |mini.pick| pickers,
+---   |mini.ai| textobjects, and more.
+---
+--- - |mini.files| - navigate and manipulate file system. A file explorer with
+---   column view capable of manipulating file system by editing text. Can
+---   create/delete/rename/copy/move files/directories inside and across
+---   directories. For full experience needs enabled |mini.icons| module (but works
+---   without it).
+---
+--- - |mini.fuzzy| - functions for fast and simple fuzzy matching. It has
+---   not only functions to perform fuzzy matching of one string to others, but
+---   also a sorter for `nvim-telescope/telescope.nvim`.
+---
+--- - |mini.git| - Git integration (https://git-scm.com/). Implements tracking of
+---   Git related data (root, branch, etc.), |:Git| command for better integration
+---   with running Neovim instance, and various helpers to explore Git history.
+---
+--- - |mini.hipatterns| - highlight patterns in text with configurable highlighters
+---   (pattern and/or highlight group can be string or callable).
+---   Works asynchronously with configurable debounce delay.
+---
+--- - |mini.hues| - generate configurable color scheme. Takes only background
+---   and foreground colors as required arguments. Can adjust number of hues
+---   for non-base colors, saturation, accent color, plugin integration.
+---
+--- - |mini.icons| - icon provider with fixed set of highlight groups.
+---   Supports various categories, icon and style customizations, caching for
+---   performance. Integrates with Neovim's filetype matching.
+---
+--- - |mini.indentscope| - visualize and operate on indent scope. Supports
+---   customization of debounce delay, animation style, and different
+---   granularity of options for scope computing algorithm.
+---
+--- - |mini.input| - get user input with fully customizable key and view handling.
+---   Can show as floating window, statusline/tabline/winbar, virtual line/text.
+---   Provides |vim.ui.input()| implementation.
+---
+--- - |mini.jump| - minimal and fast module for smarter jumping to a single
+---   character.
+---
+--- - |mini.jump2d| - minimal and fast Lua plugin for jumping (moving cursor)
+---   within visible lines via iterative label filtering. Supports custom jump
+---   targets (spots), labels, hooks, allowed windows and lines, and more.
+---
+--- - |mini.keymap| - utilities to make special key mappings: multi-step actions
+---   (with built-in steps for "smart" <Tab>, <S-Tab>, <CR>, <BS>),
+---   combos (more general version of "better escape" like behavior).
+---
+--- - |mini.map| - window with buffer text overview, scrollbar, and highlights.
+---   Allows configurable symbols for line encode and scrollbar, extensible
+---   highlight integration (with pre-built ones for builtin search, diagnostic,
+---   git line status), window properties, and more.
+---
+--- - |mini.misc| - collection of miscellaneous useful functions. Like `put()`
+---   and `put_text()` which print Lua objects to command line and current
+---   buffer respectively.
+---
+--- - |mini.move| - move any selection in any direction. Supports any Visual
+---   mode (charwise, linewise, blockwise) and Normal mode (current line) for
+---   all four directions (left, right, down, up). Respects `count` and undo.
+---
+--- - |mini.notify| - show one or more highlighted notifications in a single window.
+---   Provides both low-level functions (add, update, remove, clear) and maker
+---   of |vim.notify()| implementation. Sets up automated LSP progress updates.
+---
+--- - |mini.operators| - various text edit operators: replace, exchange,
+---   multiply, sort, evaluate. Creates mappings to operate on textobject,
+---   line, and visual selection. Supports |[count]| and dot-repeat.
+---
+--- - |mini.pairs| - autopairs plugin which has minimal defaults and
+---   functionality to do per-key expression mappings.
+---
+--- - |mini.pick| - general purpose interactive non-blocking picker with
+---   toggleable preview. Has fast default matching with fuzzy/exact/grouped
+---   modes. Provides most used built-in pickers for files, pattern matches,
+---   buffers, etc. For full experience needs enabled |mini.icons| module (but
+---   works without it).
+---
+--- - |mini.sessions| - session management (read, write, delete) which works
+---   using |:mksession|. Implements both global (from configured directory) and
+---   local (from current directory) sessions.
+---
+--- - |mini.snippets| - manage and expand snippets. Supports only syntax from LSP
+---   specification. Provides flexible loaders to manage snippet files, exact and
+---   fuzzy prefix matching, interactive selection, and rich interactive snippet
+---   session experience with dynamic tabstop visualization.
+---
+--- - |mini.splitjoin| - split and join arguments (regions inside brackets
+---   between allowed separators). Has customizable pre and post hooks.
+---   Works inside comments.
+---
+--- - |mini.starter| - minimal, fast, and flexible start screen. Displayed items
+---   are fully customizable both in terms of what they do and how they look
+---   (with reasonable defaults). Item selection can be done using prefix query
+---   with instant visual feedback.
+---
+--- - |mini.statusline| - minimal and fast statusline. Has ability to use custom
+---   content supplied with concise function (using module's provided section
+---   functions) along with builtin default. For full experience needs
+---   enabled |mini.diff|, |mini.git|, and |mini.icons| modules (but works without
+---   any of them).
+---
+--- - |mini.surround| - fast and feature-rich surround plugin. Add, delete,
+---   replace, find, highlight surrounding (like pair of parenthesis, quotes,
+---   etc.). Supports dot-repeat, `v:count`, different search methods,
+---   "last"/"next" extended mappings, customization via Lua patterns or
+---   functions, and more. Has builtins for brackets, function call, tag, user
+---   prompt, and any alphanumeric/punctuation/whitespace character.
+---
+--- - |mini.test| - framework for writing extensive Neovim plugin tests.
+---   Supports hierarchical tests, hooks, parametrization, filtering (like from
+---   current file or cursor position), screen tests, "busted-style" emulation,
+---   customizable reporters, and more. Designed to be used with provided
+---   wrapper for managing child Neovim processes.
+---
+--- - |mini.tabline| - minimal tabline which always shows listed (see |'buflisted'|)
+---   buffers. Allows showing extra information section in case of multiple vim
+---   tabpages. For full experience needs enabled |mini.icons| module (but works
+---   without it).
+---
+--- - |mini.trailspace| - automatic highlighting of trailing whitespace with
+---   functionality to remove it.
+---
+--- - |mini.visits| - track and reuse file system visits. Tracks data about each
+---   file/directory visit (after delay) and stores it (only) locally. This can be
+---   used to get a list of "recent"/"frequent"/"frecent" visits.
+---   Allows persistently adding labels to visits enabling flexible workflow.
+---@tag mini.nvim-module-list
+
+--- Each module's core functionality can be disabled globally or buffer-locally
+--- by creating appropriate global or buffer-scoped variables equal to |v:true|.
+--- Functionality is disabled if at least one of |g:| or |b:| variables is `v:true`.
+---
+--- Variable names have the same structure: `{g,b}:mini*_disable` where `*` is
+--- module's lowercase name. For example, `g:minianimate_disable` disables
+--- |mini.animate| globally and `b:minianimate_disable` - for current buffer.
+--- Note: in this section disabling |mini.animate| is used as example;
+--- everything holds for other module variables.
+---
+--- Considering high number of different scenarios and customization intentions,
+--- writing exact rules for disabling module's functionality is left to user.
+---
+--- # Manual disabling ~
+--- >lua
+---   -- Disable globally
+---   vim.g.minianimate_disable = true
+---
+---   -- Disable for current buffer
+---   vim.b.minianimate_disable = true
+---
+---   -- Toggle (disable if enabled, enable if disabled)
+---   vim.g.minianimate_disable = not vim.g.minianimate_disable -- globally
+---   vim.b.minianimate_disable = not vim.b.minianimate_disable -- for buffer
+--- <
+--- # Automated disabling ~
+---
+--- Automated disabling is suggested to be done inside autocommands: >lua
+---
+---   -- Disable for a certain filetype (for example, "lua")
+---   local f = function(args) vim.b[args.buf].minianimate_disable = true end
+---   vim.api.nvim_create_autocmd('Filetype', { pattern = 'lua', callback = f })
+---
+---   -- Enable only for certain filetypes (for example, "lua" and "help")
+---   local f = function(args)
+---     local ft = vim.bo[args.buf].filetype
+---     if ft == 'lua' or ft == 'help' then return end
+---     vim.b[args.buf].minianimate_disable = true
+---   end
+---   vim.api.nvim_create_autocmd('Filetype', { callback = f })
+---
+---   -- Disable in Visual mode
+---   local f_en = function(args) vim.b[args.buf].minianimate_disable = false end
+---   local enable_opts = { pattern = '[vV\x16]*:*', callback = f_en }
+---   vim.api.nvim_create_autocmd('ModeChanged', enable_opts)
+---
+---   local f_dis = function(args) vim.b[args.buf].minianimate_disable = true end
+---   local disable_opts = { pattern = '*:[vV\x16]*', callback = f_dis }
+---   vim.api.nvim_create_autocmd('ModeChanged', disable_opts)
+---
+---   -- Disable in Terminal buffer
+---   local f = function(args) vim.b[args.buf].minianimate_disable = true end
+---   vim.api.nvim_create_autocmd('TermOpen', { callback = f })
+--- <
+---@tag mini.nvim-disabling-recipes
+
+--- Each module can be additionally configured locally to buffer by creating
+--- appropriate buffer-scoped variable with values to override. It affects only
+--- runtime options and not those used once during setup (like most `mappings`).
+---
+--- Variable names have the same structure: `b:mini*_config` where `*` is
+--- module's lowercase name. For example, `b:minianimate_config` can store
+--- information about how |mini.animate| will act inside current buffer. Its
+--- value should be a table with same structure as module's `config`. Example: >lua
+---
+---   -- Disable scroll animation in current buffer
+---   vim.b.minianimate_config = { scroll = { enable = false } }
+--- <
+--- Considering high number of different scenarios and customization intentions,
+--- writing exact rules for module's buffer local configuration is left to
+--- user. It is done in similar fashion to |mini.nvim-disabling-recipes|.
+---@tag mini.nvim-buffer-local-config
+
+--- - Color schemes based on |mini.hues|: |MiniHues-color-schemes|.
+--- - Color schemes based on |mini.base16|: |MiniBase16-color-schemes|.
+---@tag mini.nvim-color-schemes
+
+vim.notify([[Do not `require('mini')` directly. Setup every module separately.]])
+
+return {}

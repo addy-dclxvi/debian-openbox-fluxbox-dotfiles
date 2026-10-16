@@ -1,0 +1,91 @@
+*mini.trailspace* Trailspace (highlight and remove)
+
+MIT License Copyright (c) 2021 Evgeni Chasnovski
+
+------------------------------------------------------------------------------
+                                                                *MiniTrailspace*
+Features:
+- Highlighting is done only in modifiable buffer by default, only in Normal
+  mode, and stops in Insert mode and when leaving window.
+
+- Trim all trailing whitespace with |MiniTrailspace.trim()|.
+
+- Trim all trailing empty lines with |MiniTrailspace.trim_last_lines()|.
+
+# Setup ~
+
+This module needs a setup with `require('mini.trailspace').setup({})`
+(replace `{}` with your `config` table). It will create global Lua table
+`MiniTrailspace` which you can use for scripting or manually (with
+`:lua MiniTrailspace.*`).
+
+See |MiniTrailspace.config| for `config` structure and default values.
+
+You can override runtime config settings locally to buffer inside
+`vim.b.minitrailspace_config` which should have same structure as
+`MiniTrailspace.config`. See |mini.nvim-buffer-local-config| for more details.
+
+# Highlight groups ~
+*MiniTrailspace-hl-groups*
+
+- `MiniTrailspace` - highlight group for trailing space.
+
+To change any highlight group, set it directly with |nvim_set_hl()|.
+
+# Disabling ~
+
+To disable, set `vim.g.minitrailspace_disable` (globally) or
+`vim.b.minitrailspace_disable` (for a buffer) to `true`. Considering high
+number of different scenarios and customization intentions, writing exact
+rules for disabling module's functionality is left to user. See
+|mini.nvim-disabling-recipes| for common recipes. Note: after disabling
+there might be highlighting left; it will be removed after next
+highlighting update (see |events| and `MiniTrailspace` |:augroup|).
+
+------------------------------------------------------------------------------
+                                                        *MiniTrailspace.setup()*
+                        `MiniTrailspace.setup`({config})
+Module setup
+
+Parameters ~
+{config} `(table|nil)` Module config table. See |MiniTrailspace.config|.
+
+Usage ~
+>lua
+  require('mini.trailspace').setup() -- use default config
+  -- OR
+  require('mini.trailspace').setup({}) -- replace {} with your config table
+<
+------------------------------------------------------------------------------
+                                                         *MiniTrailspace.config*
+                            `MiniTrailspace.config`
+Defaults ~
+>lua
+  MiniTrailspace.config = {
+    -- Highlight only in normal buffers (ones with empty 'buftype'). This is
+    -- useful to not show trailing whitespace where it usually doesn't matter.
+    only_in_normal_buffers = true,
+  }
+<
+------------------------------------------------------------------------------
+                                                    *MiniTrailspace.highlight()*
+                          `MiniTrailspace.highlight`()
+Highlight trailing whitespace in current window
+
+------------------------------------------------------------------------------
+                                                  *MiniTrailspace.unhighlight()*
+                         `MiniTrailspace.unhighlight`()
+Unhighlight trailing whitespace in current window
+
+------------------------------------------------------------------------------
+                                                         *MiniTrailspace.trim()*
+                            `MiniTrailspace.trim`()
+Trim trailing whitespace
+
+------------------------------------------------------------------------------
+                                              *MiniTrailspace.trim_last_lines()*
+                       `MiniTrailspace.trim_last_lines`()
+Trim last blank lines
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:

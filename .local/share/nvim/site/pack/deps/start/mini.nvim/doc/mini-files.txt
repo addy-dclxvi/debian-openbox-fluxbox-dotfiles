@@ -1,0 +1,1018 @@
+*mini.files* Navigate and manipulate file system
+
+MIT License Copyright (c) 2023 Evgeni Chasnovski
+
+------------------------------------------------------------------------------
+                                                                     *MiniFiles*
+Features:
+- Navigate file system using column view (Miller columns) to display nested
+  directories. See |MiniFiles-navigation| for overview.
+
+- Opt-in preview of file or directory under cursor.
+
+- Manipulate files and directories by editing text buffers: create, delete,
+  rename (all three are LSP aware), copy, move.
+  See |MiniFiles-manipulation| for an overview.
+
+- Use as default file explorer instead of `netrw`.
+
+- Configurable:
+    - Filter/prefix/sort of file system entries.
+    - Mappings used for common explorer actions.
+    - UI options: whether to show preview of file/directory under cursor, etc.
+    - Bookmarks for quicker navigation.
+
+What it doesn't do:
+- Try to be replacement of system file explorer. It is mostly designed to
+  be used within Neovim to quickly explore file system structure, open
+  files, and perform some quick file system edits.
+
+- Work on remote locations. Only local file system is supported.
+
+- Provide built-in interactive toggle of content `filter` and `sort`.
+  See |MiniFiles-examples| for some common examples.
+
+- Provide out of the box extra information like git or diagnostic status.
+  This can be achieved by setting |extmarks| on appropriate event(s)
+  (see |MiniFiles-events|)
+
+Notes:
+- This module is written and thoroughly tested on Linux. Support for other
+  platform/OS (like Windows or MacOS) is a goal, but there is no guarantee.
+
+- This module silently reacts to not enough permissions:
+    - In case of missing file, check its or its parent read permissions.
+    - In case of no manipulation result, check write permissions.
+
+# Dependencies ~
+
+Suggested dependencies (provide extra functionality, will work without them):
+
+- Enabled |mini.icons| module to show icons near file/directory names.
+  Falls back to [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+  plugin or uses default icons.
+
+# Setup ~
+
+This module needs a setup with `require('mini.files').setup({})` (replace
+`{}` with your `config` table). It will create global Lua table `MiniFiles`
+which you can use for scripting or manually (with `:lua MiniFiles.*`).
+
+See |MiniFiles.config| for available config settings.
+
+You can override runtime config settings (like mappings or window options)
+locally to buffer inside `vim.b.minifiles_config` which should have same
+structure as `MiniFiles.config`. See |mini.nvim-buffer-local-config| for
+more details.
+
+# Comparisons ~
+
+- [nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua):
+    - Provides tree view of file system, while this module uses column view.
+    - File system manipulation is done with custom set of mappings for each
+      action, while this module is designed to do that by editing text.
+    - Has more out of the box functionality with extra configuration, while
+      this module has not (by design).
+
+- [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim):
+    - Uses single window to show information only about currently explored
+      directory, while this module uses column view to show whole currently
+      explored branch.
+    - Also uses text editing to manipulate file system entries.
+    - Can work for remote file systems, while this module can not (by design).
+    - Both provide LSP integration.
+
+- [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim):
+    - Compares to this module mostly the same as `nvim-tree/nvim-tree.lua`.
+
+# Highlight groups ~
+*MiniFiles-hl-groups*
+
+- `MiniFilesBorder` - border of regular windows.
+- `MiniFilesBorderModified` - border of windows showing modified buffer.
+- `MiniFilesCursorLine` - cursor line in explorer windows.
+- `MiniFilesDirectory` - text and icon representing directory.
+- `MiniFilesFile` - text representing file.
+- `MiniFilesNormal` - basic foreground/background highlighting.
+- `MiniFilesTitle` - title of regular windows.
+- `MiniFilesTitleFocused` - title of focused window.
+
+To change any highlight group, set it directly with |nvim_set_hl()|.
+
+# Disabling ~
+
+This plugin provides only manually started functionality, so no disabling
+is available.
+
+------------------------------------------------------------------------------
+                                                          *MiniFiles-navigation*
+Every navigation starts by calling |MiniFiles.open()|, either directly or via
+mapping (see its help for examples of some common scenarios). It will show
+an explorer consisting of side-by-side floating windows with the following
+principles:
+
+- Explorer shows one branch of nested directories at a time.
+
+- Explorer consists from several windows:
+
+    - Each window displays entries of a single directory in a modifiable
+      scratch buffer.
+
+    - Windows are organized left to right: for any particular window the left
+      neighbor is its parent directory and right neighbor - its child.
+
+- Explorer windows are the viewport to some part of current branch, meaning
+  that their opening/closing does not affect the branch. This matters, for
+  example, if there are more elements in the branch than can be shown windows.
+
+- Every buffer line represents separate file system entry following certain
+  format (not visible for users by default; set |'conceallevel'| to 0 to see it)
+
+- Once directory is shown, its buffer is not updated automatically following
+  external file system changes. Manually use |MiniFiles.synchronize()| for that.
+
+After opening explorer, in-buffer navigation is done the same way as any
+regular buffer, except without some keys reserved for built-in actions.
+
+Most common ways to navigate are:
+
+- Press `j` to move cursor onto next (lower) entry in current directory.
+- Press `k` to move cursor onto previous (higher) entry in current directory.
+- Press `l` to expand entry under cursor (see "Go in" action).
+- Press `h` to focus on parent directory (see "Go out" action).
+
+Cursor positions in each directory buffer are tracked and saved during
+navigation. This allows for more convenient repeated navigation to some
+previously visited branch.
+
+Available built-in actions (see "Details" for more information): >
+
+ | Action      | Keys | Description                                    |
+ |-------------|------|------------------------------------------------|
+ | Close       |  q   | Close explorer                                 |
+ |-------------|------|------------------------------------------------|
+ | Go in       |  l   | Expand entry (show directory or open file)     |
+ |-------------|------|------------------------------------------------|
+ | Go in plus  |  L   | Expand entry plus extra action                 |
+ |-------------|------|------------------------------------------------|
+ | Go out      |  h   | Focus on parent directory                      |
+ |-------------|------|------------------------------------------------|
+ | Go out plus |  H   | Focus on parent directory plus extra action    |
+ |-------------|------|------------------------------------------------|
+ | Go to mark  |  '   | Jump to bookmark (waits for single key id)     |
+ |-------------|------|------------------------------------------------|
+ | Set mark    |  m   | Set bookmark (waits for single key id)         |
+ |-------------|------|------------------------------------------------|
+ | Reset       | <BS> | Reset current explorer                         |
+ |-------------|------|------------------------------------------------|
+ | Reveal cwd  |  @   | Reset current current working directory        |
+ |-------------|------|------------------------------------------------|
+ | Show help   |  g?  | Show help window                               |
+ |-------------|------|------------------------------------------------|
+ | Synchronize |  =   | Synchronize user edits and/or external changes |
+ |-------------|------|------------------------------------------------|
+ | Trim left   |  <   | Trim left part of branch                       |
+ |-------------|------|------------------------------------------------|
+ | Trim right  |  >   | Trim right part of branch                      |
+ |-------------|------|------------------------------------------------|
+<
+Details:
+
+- "Go in":
+    - Always opens file in the latest window before `MiniFiles.open()` call.
+    - Never closes explorer.
+    - Works in linewise Visual mode to expand multiple entries.
+
+- "Go in plus" is regular "Go in" but closes explorer after opening a file.
+
+- "Go out plus" is regular "Go out" but trims right part of branch.
+
+- "Set mark" and "Go to mark" both wait for user to press a single character
+  of a bookmark id. Example: `ma` sets directory path of focused window as
+  bookmark "a"; `'a` jumps (sets as whole branch) to bookmark "a".
+  Special bookmark `'` always points to path before the latest bookmark jump.
+
+- "Reset" focuses only on "anchor" directory (the one used to open current
+  explorer) and resets all stored directory cursor positions.
+
+- "Reveal cwd" extends branch to include |current-directory|.
+  If it is not an ancestor of the current branch, nothing is done.
+
+- "Show help" results into new window with helpful information about current
+  explorer (like buffer mappings and bookmarks). Press `q` to close it.
+
+- "Synchronize" parses user edits in directory buffers, applies them (after
+  confirmation), and updates all directory buffers with the most relevant
+  file system information. Can also be used without user edits to show up
+  to date file system entries.
+  See |MiniFiles-manipulation| for more info about file system manipulation.
+
+- "Trim left" and "Trim right" trim parts of the whole branch, not only its
+  currently visible parts.
+
+Notes:
+
+- Each action has exported function with more details about it.
+
+- Keys can be configured with `mappings` table of |MiniFiles.config|.
+
+------------------------------------------------------------------------------
+                                                        *MiniFiles-manipulation*
+File system manipulation is done by editing text inside directory buffers,
+which are shown inside dedicated window(s). See |MiniFiles-navigation| for
+more information about navigating to a particular directory.
+
+General workflow:
+
+- Navigate to the directory in which manipulation should be done.
+
+- Edit buffer in the way representing file system action.
+
+- Repeat previous steps until all necessary file system actions are recorded.
+  Note: even if directory buffer is hidden, its modifications are preserved,
+  so you can navigate in and out of directory with modified buffer.
+
+- Execute |MiniFiles.synchronize()| (default key is `=`). This will prompt
+  confirmation dialog listing all file system actions (per directory) it is
+  about to perform. READ IT CAREFULLY.
+
+- Confirm by pressing `y` / `<CR>` (apply edits and update buffers) or
+  don't confirm by pressing `n` / `<Esc>` (update buffers without applying edits).
+
+Note: prefer small and not related steps with more frequent synchronization
+over single complex manipulation. There are (known) cases which won't work.
+
+# How does it work ~
+
+All manipulation functionality is powered by creating and keeping track of
+path indexes: text of the form `/xxx` (`xxx` is the number path index) placed
+at the start of every line representing file system entry.
+
+By default they are hidden as concealed text (along with prefix separators)
+for more convenience but you can see them by setting |'conceallevel'| to 0.
+DO NOT modify text to the left of entry name.
+
+During synchronization, actual text for entry name is compared to path index
+at that line (if present) to deduce which file system action to perform.
+Note that order of text manipulation steps does not affect performed actions.
+
+# Supported file system actions ~
+
+## Create ~
+
+- Create file by creating new line with file name (including extension).
+
+- Create directory by creating new line with directory name followed by `/`.
+
+- Create file or directory inside nested directories by creating new line
+  with text like `dir/nested-dir/` or `dir/nested-dir/file`.
+  Always use `/` on any OS.
+
+## Delete ~
+
+- Delete file or directory by deleting WHOLE LINE describing it.
+
+- If `options.permanent_delete` is `true`, delete is permanent. Otherwise
+  file system entry is moved to a module-specific trash directory
+  (see |MiniFiles.config| for more details).
+
+## Rename ~
+
+- Rename file or directory by editing its name (not icon or path index to
+  the left of it).
+
+- With default mappings for `h` / `l` it might be not convenient to rename
+  only part of an entry. You can adopt any of the following approaches:
+    - Use different motions, like |$|, |e|, |f|, etc.
+    - Go into Insert mode and navigate inside it.
+    - Change mappings to be more suited for manipulation and not navigation.
+      See "Mappings" section in |MiniFiles.config|.
+
+- It is not needed to end directory name with `/`.
+
+- Appending `/` to a file name will delete it and create empty directory
+  with the same name.
+
+- Cyclic renames ("a" to "b" and "b" to "a") are not supported.
+
+## Copy ~
+
+- Copy file or directory by copying WHOLE LINE describing it and pasting
+  it inside buffer of target directory.
+
+- Change of target path is allowed. Edit only entry name in target location
+  (not icon or path index to the left of it).
+
+- Copying inside same parent directory is supported only if target path has
+  different name.
+
+- Copying inside child directory is supported.
+
+## Move ~
+
+- Move file or directory by cutting WHOLE LINE describing it and then
+  pasting it inside target directory.
+
+- Change of target path is allowed. Edit only entry name in target location
+  (not icon or path index to the left of it).
+
+- Moving directory inside itself is not supported.
+
+# LSP integration ~
+
+Create, delete, and rename are LSP aware (on Neovim>=0.11): the information
+is forwarded to all active LSP servers for them to perform additional actions.
+This means that LSP servers can, for example, update imports after renaming
+a file or populate a file with a boilerplate code after creation.
+
+The actual changes depend entirely on the LSP server and whether it supports
+relevant methods:
+- `workspace/will{Create,Delete,Rename}Files` before a file system action.
+- `workspace/did{Create,Delete,Rename}Files` after a file system action.
+
+It can be disabled by setting `options.lsp_timeout = 0` in |MiniFiles.config|.
+
+------------------------------------------------------------------------------
+                                                              *MiniFiles-events*
+To allow user customization and integration of external tools, certain |User|
+autocommand events are triggered under common circumstances.
+
+# UI events ~
+
+- `MiniFilesExplorerOpen` - just after explorer finishes opening.
+
+- `MiniFilesExplorerClose` - just before explorer starts closing.
+
+- `MiniFilesBufferCreate` - when buffer is created to show a particular
+  directory/file. Triggered once per path during explorer session.
+  Can be used to create buffer-local mappings.
+
+- `MiniFilesBufferUpdate` - when path buffer is updated with new content.
+  Can be used for integrations to set useful |extmarks|.
+
+- `MiniFilesWindowOpen` - when new window is opened. Can be used to set
+  window-local settings (like border, |'winblend'|, etc.)
+
+- `MiniFilesWindowUpdate` - when a window is updated. Triggers VERY frequently.
+  At least after every cursor movement and "go in" / "go out" action.
+
+Callback for each buffer/window UI event will receive <data> field
+(see |nvim_create_autocmd()|) with the following information:
+
+- <buf_id> - index of target buffer.
+- <win_id> - index of target window. Can be `nil`, like in
+  `MiniFilesBufferCreate` and buffer's first `MiniFilesBufferUpdate` as
+  they are triggered before window is created.
+
+# File action events ~
+
+- `MiniFilesActionCreate` - after entry is successfully created.
+
+- `MiniFilesActionDelete` - after entry is successfully deleted.
+
+- `MiniFilesActionRename` - after entry is successfully renamed.
+
+- `MiniFilesActionCopy` - after entry is successfully copied.
+
+- `MiniFilesActionMove` - after entry is successfully moved.
+
+Callback for each file action event will receive `data` field
+(see |nvim_create_autocmd()|) with the following information:
+
+- <action> - string with action name.
+- <from> - full path of entry before action (`nil` for "create" action).
+- <to> - full path of entry after action (`nil` for permanent "delete" action).
+
+------------------------------------------------------------------------------
+                                                            *MiniFiles-examples*
+# Toggle explorer ~
+
+Use a combination of |MiniFiles.open()| and |MiniFiles.close()|: >lua
+
+  local minifiles_toggle = function(...)
+    if not MiniFiles.close() then MiniFiles.open(...) end
+  end
+<
+# Customize windows ~
+
+For most of the common customizations using `MiniFilesWindowOpen` event
+autocommand is the suggested approach: >lua
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesWindowOpen',
+    callback = function(args)
+      local win_id = args.data.win_id
+
+      -- Customize window-local settings
+      vim.wo[win_id].winblend = 50
+      local config = vim.api.nvim_win_get_config(win_id)
+      config.border, config.title_pos = 'double', 'right'
+      vim.api.nvim_win_set_config(win_id, config)
+    end,
+  })
+<
+However, some parts (like window title and height) of window config are later
+updated internally. Use `MiniFilesWindowUpdate` event for them: >lua
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesWindowUpdate',
+    callback = function(args)
+      local config = vim.api.nvim_win_get_config(args.data.win_id)
+
+      -- Ensure fixed height
+      config.height = 10
+
+      -- Ensure no title padding
+      local n = #config.title
+      config.title[1][1] = config.title[1][1]:gsub('^ ', '')
+      config.title[n][1] = config.title[n][1]:gsub(' $', '')
+
+      vim.api.nvim_win_set_config(args.data.win_id, config)
+    end,
+  })
+<
+# Customize icons ~
+
+Use different directory icon (if you don't use |mini.icons|): >lua
+
+  local my_prefix = function(fs_entry)
+    if fs_entry.fs_type == 'directory' then
+      -- NOTE: it is usually a good idea to use icon followed by space
+      return ' ', 'MiniFilesDirectory'
+    end
+    return MiniFiles.default_prefix(fs_entry)
+  end
+
+  require('mini.files').setup({ content = { prefix = my_prefix } })
+<
+Show no icons: >lua
+
+  require('mini.files').setup({ content = { prefix = function() end } })
+<
+# Create mapping to show/hide dot-files ~
+
+Create an autocommand for `MiniFilesBufferCreate` event which calls
+|MiniFiles.refresh()| with explicit `content.filter` functions: >lua
+
+  local show_dotfiles = true
+
+  local filter_show = function(fs_entry) return true end
+
+  local filter_hide = function(fs_entry)
+    return not vim.startswith(fs_entry.name, '.')
+  end
+
+  local toggle_dotfiles = function()
+    show_dotfiles = not show_dotfiles
+    local new_filter = show_dotfiles and filter_show or filter_hide
+    MiniFiles.refresh({ content = { filter = new_filter } })
+  end
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesBufferCreate',
+    callback = function(args)
+      local buf_id = args.data.buf_id
+      -- Tweak left-hand side of mapping to your liking
+      vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
+    end,
+  })
+<
+# Create mappings to modify target window via split ~
+
+Combine |MiniFiles.get_explorer_state()| and |MiniFiles.set_target_window()|: >lua
+
+  local map_split = function(buf_id, lhs, direction)
+    local rhs = function()
+      -- Make new window and set it as target
+      local cur_target = MiniFiles.get_explorer_state().target_window
+      local new_target = vim.api.nvim_win_call(cur_target, function()
+        vim.cmd(direction .. ' split')
+        return vim.api.nvim_get_current_win()
+      end)
+
+      MiniFiles.set_target_window(new_target)
+
+      -- This intentionally doesn't act on file under cursor in favor of
+      -- explicit "go in" action (`l` / `L`). To immediately open file,
+      -- add appropriate `MiniFiles.go_in()` call instead of this comment.
+    end
+
+    -- Adding `desc` will result into `show_help` entries
+    local desc = 'Split ' .. direction
+    vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+  end
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesBufferCreate',
+    callback = function(args)
+      local buf_id = args.data.buf_id
+      -- Tweak keys to your liking
+      map_split(buf_id, '<C-s>', 'belowright horizontal')
+      map_split(buf_id, '<C-v>', 'belowright vertical')
+      map_split(buf_id, '<C-t>', 'tab')
+    end,
+  })
+<
+# Create mappings which use data from entry under cursor ~
+
+Use |MiniFiles.get_fs_entry()|: >lua
+
+  -- Set focused directory as current working directory
+  local set_cwd = function()
+    local path = (MiniFiles.get_fs_entry() or {}).path
+    if path == nil then return vim.notify('Cursor is not on valid entry') end
+    vim.fn.chdir(vim.fs.dirname(path))
+  end
+
+  -- Yank in register full path of entry under cursor
+  local yank_path = function()
+    local path = (MiniFiles.get_fs_entry() or {}).path
+    if path == nil then return vim.notify('Cursor is not on valid entry') end
+    vim.fn.setreg(vim.v.register, path)
+  end
+
+  -- Open path with system default handler (useful for non-text files)
+  local ui_open = function() vim.ui.open(MiniFiles.get_fs_entry().path) end
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesBufferCreate',
+    callback = function(args)
+      local b = args.data.buf_id
+      vim.keymap.set('n', 'g~', set_cwd,   { buffer = b, desc = 'Set cwd' })
+      vim.keymap.set('n', 'gX', ui_open,   { buffer = b, desc = 'OS open' })
+      vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+    end,
+  })
+<
+# Set custom bookmarks ~
+
+Use |MiniFiles.set_bookmark()| inside `MiniFilesExplorerOpen` event: >lua
+
+  local set_mark = function(id, path, desc)
+    MiniFiles.set_bookmark(id, path, { desc = desc })
+  end
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesExplorerOpen',
+    callback = function()
+      set_mark('c', vim.fn.stdpath('config'), 'Config') -- path
+      set_mark('w', vim.fn.getcwd, 'Working directory') -- callable
+      set_mark('~', '~', 'Home directory')
+    end,
+  })
+<
+------------------------------------------------------------------------------
+                                                             *MiniFiles.setup()*
+                          `MiniFiles.setup`({config})
+Module setup
+
+Parameters ~
+{config} `(table|nil)` Module config table. See |MiniFiles.config|.
+
+Usage ~
+>lua
+  require('mini.files').setup() -- use default config
+  -- OR
+  require('mini.files').setup({}) -- replace {} with your config table
+<
+------------------------------------------------------------------------------
+                                                              *MiniFiles.config*
+                               `MiniFiles.config`
+Defaults ~
+>lua
+  MiniFiles.config = {
+    -- Customization of shown content
+    content = {
+      -- Predicate for which file system entries to show
+      filter = nil,
+      -- Highlight group to use for a file system entry
+      highlight = nil,
+      -- Prefix text and highlight to show to the left of file system entry
+      prefix = nil,
+      -- Order in which to show file system entries
+      sort = nil,
+    },
+
+    -- Module mappings created only inside explorer.
+    -- Use `''` (empty string) to not create one.
+    mappings = {
+      close       = 'q',
+      go_in       = 'l',
+      go_in_plus  = 'L',
+      go_out      = 'h',
+      go_out_plus = 'H',
+      mark_goto   = "'",
+      mark_set    = 'm',
+      reset       = '<BS>',
+      reveal_cwd  = '@',
+      show_help   = 'g?',
+      synchronize = '=',
+      trim_left   = '<',
+      trim_right  = '>',
+    },
+
+    -- General options
+    options = {
+      -- Whether to delete permanently or move into module-specific trash
+      permanent_delete = true,
+      -- Whether to use for editing directories
+      use_as_default_explorer = true,
+      -- Timeout for synchronous LSP integration requests
+      lsp_timeout = 1000,
+    },
+
+    -- Customization of explorer windows
+    windows = {
+      -- Maximum number of windows to show side by side
+      max_number = math.huge,
+      -- Whether to show preview of file/directory under cursor
+      preview = false,
+      -- Width of focused window
+      width_focus = 50,
+      -- Width of non-focused window
+      width_nofocus = 15,
+      -- Width of preview window
+      width_preview = 25,
+    },
+  }
+<
+# Content ~
+
+`content.filter` is a predicate which takes file system entry data as input
+and returns `true`-ish value if it should be shown.
+Uses |MiniFiles.default_filter()| by default.
+
+A file system entry data is a table with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+`content.highlight` describes how file system entry name should be highlighted.
+Takes file system entry data as input and returns a highlight group name.
+Uses |MiniFiles.default_highlight()| by default.
+
+`content.prefix` describes what text (prefix) to show to the left of file
+system entry name (if any) and how to highlight it. It also takes file
+system entry data as input and returns tuple of text and highlight group
+name to be used to highlight prefix. See |MiniFiles-examples| for common
+examples of how to use it.
+Note: due to how lines are parsed to detect user edits for file system
+manipulation, output of `content.prefix` should not contain `/` character.
+Uses |MiniFiles.default_prefix()| by default.
+
+`content.sort` describes in which order directory entries should be shown
+in directory buffer. Takes as input and returns as output an array of file
+system entry data. Note: technically, it can be used to filter and modify
+its elements as well.
+Uses |MiniFiles.default_sort()| by default.
+
+# Mappings ~
+
+`mappings` table can be used to customize buffer-local mappings created in each
+directory buffer for built-in actions. Entry name corresponds to the function
+name of the action, value - right hand side of the mapping. Supply empty
+string to not create a particular mapping.
+
+Default mappings are mostly designed for consistent navigation experience.
+Here are some alternatives: >lua
+
+  -- Close explorer after opening file with `l`
+  mappings = {
+    go_in = 'L',
+    go_in_plus = 'l',
+  }
+
+  -- Don't use `h`/`l` for easier cursor navigation during text edit
+  mappings = {
+    go_in = 'L',
+    go_in_plus = '',
+    go_out = 'H',
+    go_out_plus = '',
+  }
+<
+# Options ~
+
+`options.use_as_default_explorer` is a boolean indicating whether this module
+will be used as a default file explorer to edit directory (instead of `netrw`).
+Note: to work with directory in |arglist|, do not lazy load this module.
+
+`options.permanent_delete` is a boolean indicating whether to perform
+permanent delete or move into special trash directory.
+This is a module-specific variant of "remove to trash".
+Target directory is `mini.files/trash` inside standard path of Neovim data
+directory (execute `:echo stdpath('data')` to see its path in your case).
+
+`options.lsp_timeout` is a number that defines a timeout for synchronous
+LSP integration requests (see |MiniFiles-manipulation|).
+Set to 0 to disable LSP integration.
+
+# Windows ~
+
+`windows.max_number` is a maximum number of windows allowed to be open
+simultaneously. For example, use value 1 to always show single window.
+There is no constraint by default.
+
+`windows.preview` is a boolean indicating whether to show preview of
+file/directory under cursor. Notes:
+- It is always shown, even if current line is for not yet existing path.
+- File preview is highlighted if its size is small enough (less than 1K
+  bytes per line or 1M bytes in total).
+
+`windows.width_focus`, `windows.width_nofocus` and `windows.width_preview`
+are number of columns used as `width` for the corresponding window type.
+
+------------------------------------------------------------------------------
+                                                              *MiniFiles.open()*
+                 `MiniFiles.open`({path}, {use_latest}, {opts})
+Open file explorer
+
+Common ways to use this function: >lua
+
+  -- Open current working directory in a last used state
+  MiniFiles.open()
+
+  -- Fresh explorer in current working directory
+  MiniFiles.open(nil, false)
+
+  -- Open directory of current file (in last used state) focused on the file
+  MiniFiles.open(vim.api.nvim_buf_get_name(0))
+
+  -- Fresh explorer in directory of current file
+  MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+
+  -- Open last used `path` (per tabpage)
+  -- Current working directory for the first time
+  MiniFiles.open(MiniFiles.get_latest_path())
+<
+Parameters ~
+{path} `(string|nil)` A valid file system path used as anchor.
+  If it is a path to directory, used directly.
+  If it is a path to file, its parent directory is used as anchor while
+  explorer will focus on the supplied file.
+  Default: path of |current-directory|.
+{use_latest} `(boolean|nil)` Whether to load explorer state from history
+  (based on the supplied anchor path). Default: `true`.
+{opts} `(table|nil)` Table of options overriding |MiniFiles.config| and
+  `vim.b.minifiles_config` for this particular explorer session.
+
+------------------------------------------------------------------------------
+                                                           *MiniFiles.refresh()*
+                          `MiniFiles.refresh`({opts})
+Refresh explorer
+
+Notes:
+- If in `opts` at least one of `content` entry is not `nil`, all directory
+  buffers are forced to update.
+
+Parameters ~
+{opts} `(table|nil)` Table of options overriding local options of active
+  explorer session.
+
+------------------------------------------------------------------------------
+                                                       *MiniFiles.synchronize()*
+                           `MiniFiles.synchronize`()
+Synchronize explorer
+
+- Parse user edits in directory buffers.
+- Convert edits to file system actions and apply them after confirmation.
+  Choosing "No" skips application while "Cancel" stops synchronization.
+- Update all directory buffers with the most relevant file system information.
+  Can be used without user edits to account for external file system changes.
+
+Return ~
+`(boolean)` Whether synchronization was done.
+
+------------------------------------------------------------------------------
+                                                             *MiniFiles.reset()*
+                              `MiniFiles.reset`()
+Reset explorer
+
+- Show single window focused on anchor directory (which was used as first
+  argument for |MiniFiles.open()|).
+- Reset all tracked directory cursors to point at first entry.
+
+------------------------------------------------------------------------------
+                                                             *MiniFiles.close()*
+                              `MiniFiles.close`()
+Close explorer
+
+Return ~
+`(boolean|nil)` Whether closing was done or `nil` if there was nothing to close.
+
+------------------------------------------------------------------------------
+                                                             *MiniFiles.go_in()*
+                           `MiniFiles.go_in`({opts})
+Go in entry under cursor
+
+Depends on entry under cursor:
+- If directory, focus on it in the window to the right.
+- If file, open it in the window which was current during |MiniFiles.open()|.
+  Explorer is not closed after that.
+
+Parameters ~
+{opts} `(table|nil)` Options. Possible fields:
+  - <close_on_file> `(boolean)` - whether to close explorer after going
+    inside a file. Powers the `go_in_plus` mapping.
+    Default: `false`.
+
+------------------------------------------------------------------------------
+                                                            *MiniFiles.go_out()*
+                              `MiniFiles.go_out`()
+Go out to parent directory
+
+- Focus on window to the left showing parent of current directory.
+
+------------------------------------------------------------------------------
+                                                         *MiniFiles.trim_left()*
+                            `MiniFiles.trim_left`()
+Trim left part of branch
+
+- Remove all branch paths to the left of currently focused one. This also
+  results into current window becoming the most left one.
+
+------------------------------------------------------------------------------
+                                                        *MiniFiles.trim_right()*
+                            `MiniFiles.trim_right`()
+Trim right part of branch
+
+- Remove all branch paths to the right of currently focused one. This also
+  results into current window becoming the most right one.
+
+------------------------------------------------------------------------------
+                                                        *MiniFiles.reveal_cwd()*
+                            `MiniFiles.reveal_cwd`()
+Reveal current working directory
+
+- Prepend branch with parent paths until current working directory is reached.
+  Do nothing if not inside it.
+
+------------------------------------------------------------------------------
+                                                         *MiniFiles.show_help()*
+                            `MiniFiles.show_help`()
+Show help window
+
+- Open window with helpful information about currently shown explorer and
+  focus on it. To close it, press `q`.
+
+------------------------------------------------------------------------------
+                                                      *MiniFiles.get_fs_entry()*
+                   `MiniFiles.get_fs_entry`({buf_id}, {line})
+Get file system entry data
+
+Parameters ~
+{buf_id} `(number|nil)` Buffer identifier of valid directory buffer.
+  Default: current buffer.
+{line} `(number|nil)` Line number of entry for which to return information.
+  Default: cursor line.
+
+Return ~
+`(table|nil)` Table of file system entry data with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+Returns `nil` if there is no proper file system entry path at the line.
+
+------------------------------------------------------------------------------
+                                                *MiniFiles.get_explorer_state()*
+                        `MiniFiles.get_explorer_state`()
+Get state of active explorer
+
+Return ~
+`(table|nil)` Table with explorer state data or `nil` if no active explorer.
+  State data is a table with the following fields:
+  - <anchor> `(string)` - anchor directory path (see |MiniFiles.open()|).
+  - <bookmarks> `(table)` - map from bookmark id (single character) to its data:
+    table with <path> and <desc> fields (see |MiniFiles.set_bookmark()|).
+  - <branch> `(table)` - array of nested paths for currently opened branch.
+  - <depth_focus> `(number)` - an index in <branch> for currently focused path.
+  - <target_window> `(number)` - identifier of target window.
+  - <windows> `(table)` - array with data about currently opened windows.
+    Each element is a table with <win_id> (window identifier) and <path> (path
+    shown in the window) fields.
+
+See also ~
+- |MiniFiles.set_bookmark()|
+- |MiniFiles.set_branch()|
+- |MiniFiles.set_target_window()|
+
+------------------------------------------------------------------------------
+                                                 *MiniFiles.set_target_window()*
+                    `MiniFiles.set_target_window`({win_id})
+Set target window
+
+Parameters ~
+{win_id} `(number)` Window identifier inside which file will be opened.
+
+------------------------------------------------------------------------------
+                                                        *MiniFiles.set_branch()*
+                    `MiniFiles.set_branch`({branch}, {opts})
+Set branch
+
+Set which paths to display. Preview (if enabled) is applied afterwards.
+
+Parameters ~
+{branch} `(table)` Array of strings representing actually present on disk paths.
+  Each consecutive pair should represent direct parent-child paths.
+  Should contain at least one directory path.
+  May end with file path (will be previewed).
+  Relative paths are resolved using |current-directory|.
+{opts} `(table|nil)` Options. Possible fields:
+  - <depth_focus> `(number)` - an index in `branch` for path to focus. Will
+    be normalized to fit inside `branch`. Default: index of deepest directory.
+
+See also ~
+|MiniFiles.get_explorer_state()|
+
+------------------------------------------------------------------------------
+                                                      *MiniFiles.set_bookmark()*
+                 `MiniFiles.set_bookmark`({id}, {path}, {opts})
+Set bookmark
+
+Parameters ~
+{id} `(string)` Single character bookmark id.
+{path} `(string|function)` Path of a present on disk directory to set as
+  a bookmark's path. If callable, should return such path.
+{opts} `(table|nil)` Options. Possible fields:
+  - <desc> `(string)` - bookmark description (used in help window).
+
+------------------------------------------------------------------------------
+                                                   *MiniFiles.get_latest_path()*
+                         `MiniFiles.get_latest_path`()
+Get latest used anchor path
+
+Note: if latest used `path` argument for |MiniFiles.open()| was for file,
+this will return its parent (as it was used as anchor path).
+
+------------------------------------------------------------------------------
+                                                    *MiniFiles.default_filter()*
+                     `MiniFiles.default_filter`({fs_entry})
+Default filter of file system entries
+
+Currently does not filter anything out.
+
+Parameters ~
+{fs_entry} `(table)` Table with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+Return ~
+`(boolean)` Always `true`.
+
+------------------------------------------------------------------------------
+                                                    *MiniFiles.default_prefix()*
+                     `MiniFiles.default_prefix`({fs_entry})
+Default prefix of file system entries
+
+- If set up |mini.icons|, use |MiniIcons.get()| for "directory"/"file" category.
+- Otherwise:
+    - For directory return fixed icon and "MiniFilesDirectory" group name.
+    - For file try to use `get_icon()` from `nvim-tree/nvim-web-devicons`.
+      If missing, return fixed icon and `MiniFilesFile` group name.
+
+Parameters ~
+{fs_entry} `(table)` Table with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+Return ~
+`(...)` Icon and highlight group name. For more details, see |MiniFiles.config|
+  and |MiniFiles-examples|.
+
+------------------------------------------------------------------------------
+                                                      *MiniFiles.default_sort()*
+                     `MiniFiles.default_sort`({fs_entries})
+Default sort of file system entries
+
+Sort directories and files separately (alphabetically ignoring case) and
+put directories first.
+
+Parameters ~
+{fs_entries} `(table)` Array of file system entry data.
+  Each one is a table with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+Return ~
+`(table)` Sorted array of file system entries.
+
+------------------------------------------------------------------------------
+                                                 *MiniFiles.default_highlight()*
+                   `MiniFiles.default_highlight`({fs_entry})
+Default file system entry highlight
+
+Returns `'MiniFilesDirectory'` for directory and `'MiniFilesFile'` otherwise.
+
+Parameters ~
+{fs_entry} `(table)` Table with the following fields:
+  - <fs_type> `(string)` - one of "file" or "directory".
+  - <name> `(string)` - basename of an entry (including extension).
+  - <path> `(string)` - full path of an entry.
+
+Return ~
+`(string)` Highlight group name.
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:

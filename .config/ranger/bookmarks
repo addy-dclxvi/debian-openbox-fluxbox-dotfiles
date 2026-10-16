@@ -1,7 +1,6 @@
-c:/home/addy/.config
-o:/home/addy/.config/openbox
-a:/media/addy/Media/anime
-m:/media/addy/Media/movie
-t:/media/addy/Media/tv-series
-s:/media/addy/Media/musik
-':/home/addy
+':/home/user
+c:/home/user/.config
+a:/media/user/Toshiba/anime
+m:/media/user/Toshiba/movie
+t:/media/user/Toshiba/tv-series
+s:/media/user/Toshiba/music

@@ -1,0 +1,424 @@
+                                                                        *M.User*
+                                    `M.User`
+Test for `@class`, `@field`, and `@type`
+
+Class ~
+{User}
+
+Fields ~
+{login} `(string)` User login.
+{password} `(string)` User password.
+{address} `(optional)` `(string)` User address (should expand to optional).
+
+Type ~
+`(table)`
+
+------------------------------------------------------------------------------
+                                                                           *f()*
+                                 `f`({x}, {y})
+Test `@diagnostic` (should be ignored in output) and `@overload`
+
+Parameters ~
+{x} `(string)` Variable.
+
+Overload ~
+`fun(x: string)`
+
+------------------------------------------------------------------------------
+                                                                       *M.fun()*
+                               `M.fun`({a}, {b})
+Test for `@seealso` and `@usage`
+
+Usage ~
+`M.fun(1, 2)`
+
+See also ~
+|test-f| |f-test-different-line|
+
+------------------------------------------------------------------------------
+                                                                 *test-f* *f-test*
+                                                         *f-test-different-line*
+Test for `@signature` and `@tag`
+
+`@signature` should override default title inference where it is placed.
+`@tag` should enclose non-whitespace group separately.
+
+                                `fun`({x}, {y})
+
+------------------------------------------------------------------------------
+Test for smart empty line append
+Some text
+  
+------------------------------------------------------------------------------
+                                                                 *important-tag*
+Test for smart empty line before tag
+>lua
+  -- This is code block
+<
+------------------------------------------------------------------------------
+Test for `@text`
+
+Parameters ~
+{a} `(string)`
+
+This illustrates some code:
+>
+  require('mini.doc').setup()
+<
+
+==============================================================================
+------------------------------------------------------------------------------
+Test `@alias` section
+
+------------------------------------------------------------------------------
+Parameters ~
+{x}   `(fun(type: string, data: any))`
+{y} `(table<string,number>)` Another data structure.
+  Its description spans over multiple lines.
+{z} `(var_three)` Should be enclosed as custom classes are allowed.
+
+------------------------------------------------------------------------------
+Aliases also expand inside text:   fun(type: string, data: any)
+
+------------------------------------------------------------------------------
+Test of `MiniDoc.current.aliases`
+
+{
+  ["%bad_name*"] = "This alias has bad name and should still work.",
+  var_one = "  fun(type: string, data: any)",
+  var_three = "This alias shouldn't be applied to previous line as it is defined after it.",
+  var_two = "table<string,number> Another data structure.\n  Its description spans over multiple lines."
+}
+
+------------------------------------------------------------------------------
+Aliases should not be replaced when they are obviously not meant to
+
+Parameters ~
+{a1} `(aaaClass)` Should not be replaced
+{a2} `(aaa_bbb1)` Should not be replaced
+{a3} `(ccc_bbb1)` Should not be replaced
+
+None of these should be replaced: aaaA _bbb1_ other.ccc_
+
+Return ~
+`(aaaClass)`
+Return ~
+`(aaa_bbb1)`
+Return ~
+`(ccc_bbb1)`
+
+All next ones should be replaced as they are inside allowed syntax
+
+{b1} `(number?)`
+{b2} `(string?)`
+{b3} `(table?)`
+
+{c1} `(number|string|table)`
+{c2} `(number[])`
+{c3} `([number,string,table])`
+{c4} `({[number]:string})`
+{c5} `(table<number,string>)`
+{c6} `({key1:number,key2:string})`
+{c7} `(fun(arg1:number,arg2:string):table)`
+
+Union types should try to "smartly" add parenthesis
+
+{d1}  `(number|nil)`
+{D1}  `(string | table)`
+{d2}  `((number|nil)?)`
+{D2}  `((string | table)?)`
+{d3}  `((number|nil)[])`
+{D3}  `((string | table)[])`
+{d4}  `([(number|nil),(string | table)])`
+{D4}  `([(string | table),(number|nil)])`
+{d5}  `([(number|nil), (string | table)])`
+{D5}  `([(string | table), (number|nil)])`
+{d6}  `([ (number|nil), string | table ])`
+{D6}  `([ (string | table), number|nil ])`
+{d7}  `([ number|nil , string | table ])`
+{d8}  `({[(number|nil)]:(string | table)})`
+{D8}  `({[(string | table)]:(number|nil)})`
+{d9}  `({ [(number|nil)]: string | table })`
+{D9}  `({ [(string | table)]: number|nil })`
+{d10} `(table<(number|nil),(string | table)>)`
+{D10} `(table<(string | table),(number|nil)>)`
+{d11} `(table<(number|nil), (string | table)>)`
+{D11} `(table<(string | table), (number|nil)>)`
+{d12} `({key1:(number|nil),key2:(string | table)})`
+{D12} `({key1:(string | table),key2:(number|nil)})`
+{d13} `({ key1:(number|nil), key2:(string | table) })`
+{D13} `({ key1:(string | table), key2:(number|nil) })`
+{d14} `({ key1: (number|nil), key2: string | table })`
+{d15} `(fun(arg1:(number|nil),arg2:(string | table)):(number|nil))`
+{D15} `(fun(arg1:(string | table),arg2:(number|nil)):(string | table))`
+{d16} `(fun(arg1: (number|nil), arg2: (string | table)): number|nil)`
+{D16} `(fun(arg1: (string | table), arg2: (number|nil)): string | table)`
+
+------------------------------------------------------------------------------
+                                                                           *aaa*
+There should not be replacements in some special cases
+
+Parameters ~
+{aaa} `(aaa)` Parameter name should not be replaced.
+
+Class ~
+{aaa} Class name should not be replaced
+Fields ~
+{aaa} `(aaa)` Field name should not be replaced.
+
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Tests of `@eval` section
+
+Generic case
+
+This string is evaluated using local variable. 1 + 1 = 2
+
+------------------------------------------------------------------------------
+                                                                         *M.tab*
+                                    `M.tab`
+Usage of `MiniDoc.afterlines_to_code()` and `MiniDoc.current.eval_section`
+>lua
+  M.tab = {
+    -- Some functional setting
+        a = <function; should be padded>,
+    -- A very important setting
+    b = 2,
+    c = {
+      d = 3,
+      e = 4,
+    },
+    
+  }
+<
+
+==============================================================================
+------------------------------------------------------------------------------
+Tests for `@param` section
+
+------------------------------------------------------------------------------
+Test for general cases
+
+Parameters ~
+{b} `(number)` Number.
+{a} `(string)` Some string. Multiline description:
+  - Item 1.
+  - Item 2.
+{c} `(table)`
+{d}
+{x} %%%`(bad_name)`!! Actual formatting is not defined
+
+------------------------------------------------------------------------------
+Test for expanding `?` to `(optional)`
+
+Parameters ~
+{x} `(optional)` `(string)` This should add `(optional)`
+{y} `(string?)` This should not add `(optional)` as `?` is not after first word.
+{abc} `(string)` Having ? inside comment shouldn't trigger `(optional)`.
+
+------------------------------------------------------------------------------
+Test for enclosing type
+
+Parameters ~
+{a} `(number)` Should work.
+{b} `(number[])` Should work.
+{B} `(number[]?)` Should work.
+{c} `(number|nil)` Should work.
+{C} `(number | nil)` Should work.
+{d} `(number | number[])` Should work.
+{e} `(number | nil)` Should not be doubly enclosed in ().
+{f} `([number, string])` Should work.
+{F} `([number, string[]])` Should work.
+{g} `({[string]:number})` Should work.
+{G} `({ [string]: number })` Should work.
+{h} `({key1:string,key2:number})` Should work.
+{H} `({ key1: string, key2: number })` Should work.
+{i} `(table<string, number>)` Should work.
+{j} `(fun(a: string, b:number))` Should work.
+{k} `(fun(a: string, b:number): table)` Should work.
+{K} `(fun(a: string, b:number):table)` Should work.
+{l} `(fun(a: string): string | nil)` Should work.
+{L} `(fun(a: string):string | nil)` Should work.
+{m} `(fun(a: string): (string | nil))` Should work.
+{M} `(fun(a: string):(string | nil))` Should work.
+{n} `(fun(a: string): [number, string])` Should work.
+{N} `(fun(a: string):[number, string])` Should work.
+{o} `(fun(a: string): { key1: string })` Should work.
+{O} `(fun(a: string):{ key1: string })` Should work.
+{p} `(fun(a: string): table<string, number>)` Should work.
+{P} `(fun(a: string):table<string, number>)` Should work.
+{q} `(fun(a: string): NUMBER | OTHER)` Should work.
+{Q} `(fun(a: string):NUMBER | OTHER)` Should work.
+{r} `(NUMBER)` Should still work as custom classes are allowed.
+{R} `(My_Class.child)` Should still work as custom classes are allowed.
+{s} `(NUMBER|nil)` Should still work as custom classes are allowed.
+{S} `(My_Class.child|nil)` Should still work as custom classes are allowed.
+{t} `(NUMBER | nil)` Should still work as custom classes are allowed.
+{T} `(My_Class.child | nil)` Should still work as custom classes are allowed.
+{u} `(NUMBER | nil)` Should not be doubly enclosed in ().
+{v} `(number[] | (string | nil) | [number, string])` Should work.
+{w} `(number | string)` Should ignore |later| special[] characters?
+{x} `((number) | (string))` Should still enclose in parenthesis.
+{a_function} `(function)` Should enclose second `function`.
+{function_a} `(function)` Should enclose second `function`.
+{a_function_a} `(function)` Should enclose second `function`.
+{afunction} `(function)` Should enclose second `function`.
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Tests for `@return` section
+
+------------------------------------------------------------------------------
+Test for general cases
+
+Return ~
+`(number)` Some number.
+
+------------------------------------------------------------------------------
+Test for expanding `?` to `(optional)`
+
+Return ~
+`(number)` `(optional)`
+Return ~
+`(boolean)` `(optional)` Second ? shouldn't trigger anything.
+
+------------------------------------------------------------------------------
+Test for enclosing type
+
+Return ~
+`(number)` Should work.
+Return ~
+`(number[])` Should work.
+Return ~
+`(number[])` `(optional)` Should work.
+Return ~
+`(number|nil)` Should work.
+Return ~
+`(number | nil)` Should work.
+Return ~
+`(number | number[])` Should work.
+Return ~
+`(number | nil)` Should not be doubly enclosed in ().
+Return ~
+`([number, string])` Should work.
+Return ~
+`([number, string[]])` Should work.
+Return ~
+`({[string]:number})` Should work.
+Return ~
+`({ [string]: number })` Should work.
+Return ~
+`({key1:string,key2:number})` Should work.
+Return ~
+`({ key1: string, key2: number })` Should work.
+Return ~
+`(table<string, number>)` Should work.
+Return ~
+`(fun(a: string, b:number))` Should work.
+Return ~
+`(fun(a: string, b:number): table)` Should work.
+Return ~
+`(fun(a: string, b:number):table)` Should work.
+Return ~
+`(fun(a: string): string | nil)` Should work.
+Return ~
+`(fun(a: string):string | nil)` Should work.
+Return ~
+`(fun(a: string): (string | nil))` Should work.
+Return ~
+`(fun(a: string):(string | nil))` Should work.
+Return ~
+`(fun(a: string): [number, string])` Should work.
+Return ~
+`(fun(a: string):[number, string])` Should work.
+Return ~
+`(fun(a: string): { key1: string })` Should work.
+Return ~
+`(fun(a: string):{ key1: string })` Should work.
+Return ~
+`(fun(a: string): table<string, number>)` Should work.
+Return ~
+`(fun(a: string):table<string, number>)` Should work.
+Return ~
+`(fun(a: string): NUMBER | OTHER)` Should work.
+Return ~
+`(fun(a: string):NUMBER | OTHER)` Should work.
+Return ~
+`(NUMBER)` Should still work as custom classes are allowed.
+Return ~
+`(My_Class.child)` Should still work as custom classes are allowed.
+Return ~
+`(NUMBER|nil)` Should still work as custom classes are allowed.
+Return ~
+`(My_Class.child|nil)` Should still work as custom classes are allowed.
+Return ~
+`(NUMBER | nil)` Should still work as custom classes are allowed.
+Return ~
+`(My_Class.child | nil)` Should still work as custom classes are allowed.
+Return ~
+`(NUMBER | nil)` Should not be doubly enclosed in ().
+Return ~
+`(number[] | (string | nil) | [number, string])` Should work.
+Return ~
+`(number | string)` Should ignore |later| special[] characters?
+Return ~
+`((number) | (string))` Should still enclose in parenthesis.
+Return ~
+`(...)` Should work.
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Test `@toc` and `@toc_entry` sections
+
+Table of contents:
+  aaa (no alias replacement) ........................................... |aaa|
+      Entry #1 .............................................................
+  Entry #2: ................................................................
+  This time it is
+  multiline
+  Entry #3 .................................................. |toc-entry-with|
+                                                               |multiline-tag|
+  Entry #4: .......................................... |toc-second-entry-with|
+  Multiline with                                             |multiline-tag-2|
+  three lines
+  ............................................ |toc-entry-without-description|
+  Entry #6 (without tag) ...................................................
+  Entry #7: A very-very-very-very-very-very-very-very-very-very long description ...
+
+------------------------------------------------------------------------------
+TOC entry with leading spaces
+
+------------------------------------------------------------------------------
+Multiline TOC entry
+
+------------------------------------------------------------------------------
+                                                                *toc-entry-with*
+                                                                 *multiline-tag*
+TOC entry with multiline tag
+
+------------------------------------------------------------------------------
+                                                         *toc-second-entry-with*
+                                                               *multiline-tag-2*
+TOC entry with multiline tag and entry
+
+------------------------------------------------------------------------------
+                                                 *toc-entry-without-description*
+TOC entry without description
+
+------------------------------------------------------------------------------
+TOC entry without tag
+
+------------------------------------------------------------------------------
+TOC entry with very long description
+
+------------------------------------------------------------------------------
+Test of `MiniDoc.current.toc`
+
+Number of current TOC entries: 8
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
