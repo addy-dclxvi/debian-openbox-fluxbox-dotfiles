@@ -131,3 +131,22 @@ or *~/.fluxbox/keys* file
 if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
 - My Wifi interface is wlp2s0 & my ethernet interface is enp1s0 (Aspire A514),
 if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
+
+## Update 16 October 2026
+![1](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/nvim.png)
+![2](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/cmus.png)
+![3](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/ranger.png)
+![4](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/menu.png)
+![5](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/mpv.png)
+
+I put this dotfiles in [trixie-fluxbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-fluxbox)
+
+- **Terminal** Alacritty
+- **Text Editor** Neovim. I'm not a programmer so there is no fancy things like LSP & Linting Engine here.
+Just a basic text editing setup. The only plugin I use is Mini Neovim.
+I save a copy of the plugin in this repository because I use Debian Stable. The Neovim version here is frozen.
+Just in case Mini Neovim requirement need a new Neovim version, I can restore the older version.
+- **File Manager** Ranger
+- **Music Player** Cmus
+- **Media Player** MPV
+
