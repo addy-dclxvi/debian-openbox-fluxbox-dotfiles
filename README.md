@@ -145,7 +145,7 @@ I put this dotfiles in [trixie-fluxbox](https://github.com/addy-dclxvi/debian-op
 - **Text Editor** Neovim. I'm not a programmer so there is no fancy things like LSP & Linting Engine here.
 Just a basic text editing setup. The only plugin I use is Mini Neovim.
 I save a copy of the plugin in this repository because I use Debian Stable. The Neovim version here is frozen.
-Just in case Mini Neovim requirement need a new Neovim version, I can restore the older version.
+Just in case Mini Neovim requirement needs a new Neovim version, I can restore the older version.
 - **File Manager** Ranger
 - **Music Player** Cmus
 - **Media Player** MPV
