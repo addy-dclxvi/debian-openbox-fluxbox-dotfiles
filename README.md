@@ -158,5 +158,6 @@ Just in case Mini Neovim requirement needs a new Neovim version, I can restore t
 ![5](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/mpv.png)
 ![6](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/gimp.png)
 ![7](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/startpage.png)
+![8](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/menu.png)
 
 I put this dotfiles in [trixie-openbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox)
