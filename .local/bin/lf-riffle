@@ -1,0 +1,17 @@
+#!/bin/sh
+[ -z "$1" ] && exit 0
+
+case $(file -ib "$1") in
+	text/*|application/*xml*|application/*json*|application/toml*|\
+	application/x-sh*|application/x-envoy*)
+		nvim "$1" ;;
+	image/*)
+		/usr/libexec/imv/imv "$1" >/dev/null 2>&1 & ;;
+	video/*|audio/*)
+		mpv "$1" >/dev/null 2>&1 & ;;
+	application/pdf*|application/epub+zip*|image/vnd.djvu*|\
+	application/postscript*)
+		zathura "$1" >/dev/null 2>&1 & ;;
+	*)
+		xdg-open "$1" >/dev/null 2>&1 & ;;
+esac

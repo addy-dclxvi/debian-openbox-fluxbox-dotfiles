@@ -1,0 +1,43 @@
+configuration {
+	font: "Poppins Medium 8";
+	show-icons: false;
+}
+
+* {
+	background-color: #efefef;
+	text-color: #575757;
+}
+
+window {
+	background-color: #efefef;
+	border: 1px solid;
+	border-color: #efefef;
+}
+
+listview {
+	background-color: #efefef;
+	columns: 1;
+	scrollbar: false;
+	border: 1px solid 0px 0px;
+	border-color: #d4d4d4;
+}
+
+element {
+	background-color: #efefef;
+	text-color: #575757;
+}
+
+element normal.normal {
+	background-color: #efefef;
+	text-color: #575757;
+}
+
+element alternate.normal {
+	background-color: #efefef;
+	text-color: #575757;
+}
+
+element selected.normal {
+	background-color: #d4d4d4;
+	text-color: #575757;
+}

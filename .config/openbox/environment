@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# to make typing command can be done without writing the full path
+export PATH="${PATH}:$HOME/.local/bin"
+export PATH="${PATH}:/sbin"
+export PATH="${PATH}:/usr/libexec"
+
+# default apps
+export EDITOR=nvim
+export SHELL=/usr/bin/fish
+export TERM=alacritty
+export TERMINAL=alacritty
+
+# i use english for desktop language
+export LANG=en_US.utf8
+export LC_COLLATE=C
+
+# but using indonesian for office suite
+export LC_ADDRESS=id_ID.utf8
+export LC_CTYPE=id_ID.utf8
+export LC_IDENTIFICATION=id_ID.utf8
+export LC_MEASUREMENT=id_ID.utf8
+export LC_MESSAGES=id_ID.utf8
+export LC_MONETARY=id_ID.utf8
+export LC_NAME=id_ID.utf8
+export LC_NUMERIC=id_ID.utf8
+export LC_PAPER=id_ID.utf8
+export LC_TELEPHONE=id_ID.utf8
+export LC_TIME=id_ID.utf8

@@ -1,0 +1,9 @@
+#!/bin/sh
+export FIFO_UEBERZUG="/tmp/lf-ueberzug-$$"
+rm -f "$FIFO_UEBERZUG"
+mkfifo "$FIFO_UEBERZUG"
+ueberzug layer -s < "$FIFO_UEBERZUG" -p json &
+exec 3> "$FIFO_UEBERZUG"
+lf "$@"
+exec 3>&-
+rm -f "$FIFO_UEBERZUG"

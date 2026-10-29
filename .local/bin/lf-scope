@@ -1,0 +1,27 @@
+#!/bin/sh
+file="$1"
+width="$2"
+height="$3"
+x="$4"
+y="$5"
+
+case $(file -ib "$file") in
+	image/*)
+		if [ -n "$FIFO_UEBERZUG" ]; then
+			printf '{"action": "add", "identifier": "preview", ' \
+				> "$FIFO_UEBERZUG"
+			printf '"x": %d, "y": %d, "width": %d, "height": %d, ' \
+				"$x" "$y" "$width" "$height" >> "$FIFO_UEBERZUG"
+			printf '"scaler": "contain", "path": "%s"}\n' \
+				"$file" >> "$FIFO_UEBERZUG"
+			exit 1
+		fi
+		;;
+	text/*|application/*xml*|application/*json*|application/toml*|\
+	application/x-sh*|application/x-envoy*)
+		cat "$file"
+		;;
+	*)
+		file -b "$file"
+		;;
+esac

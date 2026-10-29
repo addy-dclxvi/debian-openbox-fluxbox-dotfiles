@@ -1,0 +1,23 @@
+#!/bin/sh
+export LESSCHARSET=utf-8
+
+b=$(printf '\033[1m')
+c=$(printf '\033[1;36m')
+r=$(printf '\033[0m')
+
+LFRC="${XDG_CONFIG_HOME:-$HOME/.config}/lf/lfrc"
+TMP_HELP="$(mktemp)"
+
+{
+	printf "%s==================================================%s\n" "$c" "$r"
+	printf "%s            DYNAMIC LF KEYBINDINGS                %s\n" "$b" "$r"
+	printf "%s==================================================%s\n\n" "$c" "$r"
+
+	grep '^map ' "$LFRC" | while read -r _ key cmd; do
+		printf "  %s%-14s%s %s\n" "$b" "$key" "$r" "$cmd"
+	done
+} > "$TMP_HELP"
+
+# The < /dev/tty ensures less receives your keystrokes while reading from the file
+less -R "$TMP_HELP" < /dev/tty
+rm -f "$TMP_HELP"

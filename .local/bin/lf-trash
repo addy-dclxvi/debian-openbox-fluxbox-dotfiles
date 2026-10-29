@@ -1,0 +1,14 @@
+#!/bin/sh
+TRASH_DIR="$HOME/.local/share/Trash/files"
+mkdir -p "$TRASH_DIR"
+
+if [ -z "$1" ]; then
+	exit 1
+fi
+
+printf "Move '%s' to trash? [y/N] " "$1"
+read -r answer
+case "$answer" in
+	[Yy]*) mv "$1" "$TRASH_DIR/" ;;
+	*) exit 0 ;;
+esac

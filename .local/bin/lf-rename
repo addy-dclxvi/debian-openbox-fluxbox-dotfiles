@@ -1,0 +1,61 @@
+#!/bin/sh
+[ -z "$fx" ] && exit 0
+
+tmp_orig="$(mktemp)"
+tmp_new="$(mktemp)"
+tmp_dir="$(mktemp)"
+
+printf "%s\n" "$fx" | while IFS= read -r file; do
+	[ -z "$file" ] && continue
+	dirname "$file" >> "$tmp_dir"
+	basename "$file" >> "$tmp_orig"
+done
+
+cp "$tmp_orig" "$tmp_new"
+nvim "$tmp_new"
+
+lines_orig=$(wc -l < "$tmp_orig")
+lines_new=$(wc -l < "$tmp_new")
+
+if [ "$lines_orig" -ne "$lines_new" ]; then
+	printf "Error: Line count mismatch. Aborting.\n" >&2
+	sleep 3
+	rm -f "$tmp_orig" "$tmp_new" "$tmp_dir"
+	exit 1
+fi
+
+exec 3< "$tmp_orig"
+exec 4< "$tmp_new"
+exec 5< "$tmp_dir"
+
+while IFS= read -r orig <&3 && IFS= read -r new <&4 && IFS= read -r dir <&5
+do
+	[ "$orig" = "$new" ] && continue
+
+	if [ -z "$new" ]; then
+		printf "Error: Empty filename detected.\n" >&2
+		sleep 3
+		break
+	fi
+
+	case "$new" in
+		*/*)
+			printf "Error: '/' in filename '%s'.\n" "$new" >&2
+			sleep 3
+			break
+			;;
+	esac
+
+	if [ -e "${dir}/${new}" ]; then
+		printf "Error: Target '%s' exists.\n" "${dir}/${new}" >&2
+		sleep 3
+		break
+	fi
+
+	mv -- "${dir}/${orig}" "${dir}/${new}"
+done
+
+exec 3<&-
+exec 4<&-
+exec 5<&-
+rm -f "$tmp_orig" "$tmp_new" "$tmp_dir"

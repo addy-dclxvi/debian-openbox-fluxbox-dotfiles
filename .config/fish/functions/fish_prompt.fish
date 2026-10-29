@@ -65,6 +65,7 @@ alias ls "ls --group-directories-first --color \
 --human-readable --size --sort=name -v"
 alias lsl "ls --group-directories-first --color \
 --human-readable --size --sort=name -l -v"
+alias lf "lf-ueberzug"
 alias clone "git clone --depth 1"
 alias merge "xrdb ~/.Xresources"
 alias search "apt-cache search"

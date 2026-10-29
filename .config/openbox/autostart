@@ -1,0 +1,12 @@
+#!/bin/sh
+
+/usr/bin/gnome-keyring-daemon --start --components=pkcs11 &
+/usr/bin/gnome-keyring-daemon --start --components=secrets &
+/usr/bin/gnome-keyring-daemon --start --components=ssh &
+/usr/bin/mate-power-manager &
+/usr/libexec/mate-settings-daemon &
+/usr/libexec/polkit-mate-authentication-agent-1 &
+dunst &
+picom &
+polybar &
+xwallpaper --tile ~/.wallpaper.png

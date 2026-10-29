@@ -1,0 +1,108 @@
+# Basic configurations
+set anchorfind false
+set autoquit false
+set cleaner lf-cleaner
+set dircounts false
+set dirfirst true
+set drawbox true
+set errorfmt ""
+set filesep "\n"
+set findlen 1
+set globsearch false
+set hidden true
+set hiddenfiles ".*"
+set history true
+set icons false
+set ifs ""
+set ignorecase true
+set ignoredia false
+set incsearch false
+set info size:time
+set period 0
+set previewer lf-scope
+set ratios 1:2:3
+set reverse false
+set roundbox false
+set scrolloff 8
+set shell sh
+set shellopts ""
+set smartcase true
+set sortby natural
+set tabstop 4
+set timefmt "• 2 Jan 2006 at 15:04"
+set truncatechar "•"
+set waitmsg "Press any key to continue"
+set wrapscroll false
+
+# Custom commands placed in ~/.local/bin/
+cmd help $lf-help
+cmd extract $lf-extract "$f"
+cmd mkdir $mkdir -p -- "$*"
+cmd open $lf-riffle "$f"
+cmd open-with $eval "$* \"\$f\""
+cmd touch $touch -- "$*"
+cmd trash $lf-trash "$f"
+cmd reload-config $lf -remote "send $id source ~/.config/lf/lfrc" ; lf -remote "send $id reload"
+
+# Navigation
+map <backspace2> updir
+map <backspace> updir
+map <c-h> updir
+map <enter> open
+map <c-m> open
+map l open
+
+# Commands mapping
+map <delete> trash
+map <del> trash
+map D trash
+map x extract
+
+# Prompts
+map a push :mkdir<space>
+map A push :touch<space>
+map r push :open-with<space>
+
+# UI & Reloading
+map <f-5> reload-config
+map R reload
+map c clear
+map <space> toggle
+map v invert
+
+# Standard Keys
+map ` !true
+map " mark-remove
+map ' mark-load
+map , find-prev
+map / search
+map ; find-next
+map <f-2> rename
+map B $lf-rename
+map F find-back
+map G bottom
+map N search-prev
+map dd cut
+map e $nvim "$f"
+map f find
+map gc cd ~/.config
+map gg top
+map gt cd ~/.local/share/Trash/files
+map h updir
+map i $less "$f"
+map j down
+map k up
+map m mark-save
+map n search-next
+map p paste
+map q quit
+map y yank
+map za set sortby access
+map zc set sortby ctime
+map zh set hidden!
+map zn set sortby natural
+map zr set reverse!
+map zs set sortby size
+map zt set sortby time
+map zx set sortby ext
+map <f-3> help
