@@ -150,3 +150,13 @@ Just in case Mini Neovim requirement needs a new Neovim version, I can restore t
 - **Music Player** Cmus
 - **Media Player** MPV
 
+## Update 29 October 2026
+![1](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/nvim.png)
+![2](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/cmus.png)
+![3](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/lf.png)
+![4](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/rofi.png)
+![5](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/mpv.png)
+![6](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/gimp.png)
+![7](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/startpage.png)
+
+I put this dotfiles in [trixie-openbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox)
