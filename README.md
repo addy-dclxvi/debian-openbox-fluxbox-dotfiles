@@ -133,6 +133,7 @@ if you find them in the configuration file, replace with your own. Use `ip a` to
 if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
 
 ## Update 16 October 2026
+Most of packages list mentioned above are obsolete, a lot of changes.
 ![1](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/nvim.png)
 ![2](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/cmus.png)
 ![3](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/ranger.png)
@@ -160,4 +161,4 @@ Just in case Mini Neovim requirement needs a new Neovim version, I can restore t
 ![7](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/startpage.png)
 ![8](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/menu.png)
 
-I put this dotfiles in [trixie-openbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox)
+I put this dotfiles in [trixie-openbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox). And The CLI File Manager is now `lf` with `ueberzug`.
