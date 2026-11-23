@@ -1,164 +1,189 @@
+# debian-openbox-fluxbox-dotfiles
+
+Personal dotfiles and setup notes for running **Openbox** and **Fluxbox** on Debian across two laptops. I'm sharing these configurations mainly as a reference and personal backup—feel free to borrow whatever you find useful!
+
 ## Preview
-### ThinkPad X230 Debian Openbox
-![openbox](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/openbox.jpg)
-<br />
-### Aspire A514 Debian Fluxbox
-![fluxbox](https://raw.githubusercontent.com/addy-dclxvi/dotfiles/master/.preview/fluxbox.jpg)
-<br />
-## Details
-### Both ThinkPad X230 & Aspire A514
-- **Distro** Debian Buster
-- **Display Server** X11
-- **Display Manager** LightDM
-- **Greeter** LightDM GTK Greeter
-- **Desktop Environment** None
-- **Launcher** Rofi
-- **Terminal** URxvt
-- **Compositor** Compton
-- **GTK Theme** Arc
-- **Icons** Faba
-- **Cursor** Breeze
-- **Web Browser** Chromium VA-API
-- **VA-API Driver** i965-va-driver
-- **Encoder/Decoder** ffmpeg
-- **Task Manager** HTOP
-- **Power Manager** TLP
-- **Image Viewer** Viewnior
-- **Sound Mixer** PulseAudio
-- **Policy Kit Frontend** Gnome Polkit
-- **Notification Daemon** Dunst
-- **Pager** Less
-- **CLI Shell** Fish
-- **CLI File Manager** Ranger
-- **CLI Image Viewer** Caca
-- **CLI Text Editor** Vim
-- **GUI Text Editor** Geany
-- **Graphic Editor** GIMP
-- **Vector Drawer** Inkscape
-- **Screenshooter** scrot
-- **Wallpaper Handler** Hsetroot
-- **Brightness Manager** xbacklight
-- **Music Player** Audacious
-- **Office Suite** LibreOffice
-- **Printer Driver** GutenPrint
 
-### ThinkPad X230
-- **Non-free Drivers** Broadcom Bluetooth & Intel Wifi
-- **WM** Openbox
-- **Panel** i3status piped to Lemonbar
-- **Start Menu** LXMenu-Data piped to Openbox-Menu
-- **File Manager** PCManFM, GVFS, LibMTP
-- **System Tray** Trayer
-- **Archiver** XArchiver
-- **Video Player** MPV
-- **Network Manager** WICD
+### ThinkPad X230 — Debian Openbox
+![ThinkPad X230 Debian Openbox](https://raw.githubusercontent.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/master/.preview/openbox.jpg)
 
-### Aspire A514
-- **Non-free Drivers** Realtek Audio & Atheros Wifi
-- **WM** Fluxbox
-- **Panel** Fluxbox Toolbar (Tray icon theme is
-[Diminished](https://github.com/addy-dclxvi/diminished-tray-icons))
-- **Start Menu** Fluxbox Menu (*~/.fluxbox/menu* edited manually)
-- **File Manager** Thunar, Thunar Volman, Tumblr, GVFS, LibMTP
-- **Archiver** File Roller
-- **PDF Reader** Evince
-- **Video Player** Parole
-- **Battery Applet** Xfce4 Power Manager
-- **Clipboard Manager** Clipit
-- **Sound Applet** PNMixer
-- **Network Applet** nm-applet
+### Aspire A514 — Debian Fluxbox
+![Aspire A514 Debian Fluxbox](https://raw.githubusercontent.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/master/.preview/fluxbox.jpg)
+
+## System & Software Stack
+
+*(Originally configured on Debian Buster; see the [October 2026 updates](#update--october-16-2026) below for newer Debian Trixie branches.)*
+
+### Shared Setup (Both ThinkPad X230 & Aspire A514)
+
+| Component | Package / Tool |
+| :--- | :--- |
+| **Distro** | Debian Buster |
+| **Display Server** | X11 |
+| **Display Manager** | LightDM |
+| **Greeter** | LightDM GTK Greeter |
+| **Desktop Environment** | None |
+| **Launcher** | Rofi |
+| **Terminal** | URxvt (`rxvt-unicode`) |
+| **Compositor** | Compton |
+| **GTK Theme** | Arc |
+| **Icons** | Faba |
+| **Cursor** | Breeze |
+| **Web Browser** | Chromium (with VA-API) |
+| **VA-API Driver** | `i965-va-driver` |
+| **Encoder / Decoder** | FFmpeg (`ffmpeg`) |
+| **Task Manager** | `htop` |
+| **Power Manager** | TLP |
+| **Image Viewer** | Viewnior |
+| **Sound Mixer** | PulseAudio |
+| **Polkit Frontend** | GNOME Polkit |
+| **Notification Daemon** | Dunst |
+| **Pager** | `less` |
+| **CLI Shell** | Fish |
+| **CLI File Manager** | Ranger |
+| **CLI Image Viewer** | `libcaca` (`cacaview`) |
+| **CLI Text Editor** | Vim |
+| **GUI Text Editor** | Geany |
+| **Graphics Editor** | GIMP |
+| **Vector Editor** | Inkscape |
+| **Screenshot Tool** | `scrot` |
+| **Wallpaper Setter** | `hsetroot` |
+| **Brightness Control** | `xbacklight` |
+| **Music Player** | Audacious |
+| **Office Suite** | LibreOffice |
+| **Printer Driver** | Gutenprint |
+
+### Machine-Specific Components
+
+| Component | ThinkPad X230 | Aspire A514 |
+| :--- | :--- | :--- |
+| **Non-free Drivers** | Broadcom Bluetooth & Intel Wi-Fi | Realtek Audio & Atheros Wi-Fi |
+| **Window Manager** | Openbox | Fluxbox |
+| **Panel** | `i3status` piped to Lemonbar | Fluxbox Toolbar (tray icons: [Diminished](https://github.com/addy-dclxvi/diminished-tray-icons)) |
+| **Application Menu** | `lxmenu-data` piped to `openbox-menu` | Fluxbox Menu (`~/.fluxbox/menu`, edited manually) |
+| **File Manager** | PCManFM, GVfs, `libmtp` | Thunar, `thunar-volman`, Tumbler, GVfs, `libmtp` |
+| **Archive Manager** | Xarchiver | File Roller |
+| **PDF Viewer** | — | Evince |
+| **Video Player** | `mpv` | Parole |
+| **Network Manager / Applet** | Wicd | `nm-applet` |
+| **Battery Applet** | — | Xfce4 Power Manager |
+| **Clipboard Manager** | — | ClipIt |
+| **Volume Applet** | — | PNMixer |
+| **System Tray** | `trayer` | Built-in Fluxbox Toolbar tray |
 
 ## How I Restore My Setup
-- Install Debian Buster minimal, without any DE
-- Enable `contrib` and `non-free` repository (*/etc/apt/sources.list*)
-- Connect to the internet
-- Install git
-- Clone this repo `git clone --depth=1 https://github.com/addy-dclxvi/dotfiles ~/.dotfiles`
-- Deploy the dotfiles `cp -a ~/.dotfiles/. ~`
-- Restore the packages `sh ~/.scripts/openboxpack` or `sh ~/.scripts/fluxboxpack`
-- Add user to sudoers using `visudo`
-- Change the systemclock to localtime `timedatectl set-local-rtc 1` then set the time in BIOS
-(because I set my BIOS clock to localtime insted of UTC)
-- Change the default CLI Shell `chsh $(whoami) -s /usr/bin/fish`
-- Edit some system configuration, example in ~/.dotfiles/.system
-- Reboot
-- Fix some errors
-- Start working
 
-## Keybinds & Mousebinds
-### Both Openbox & Fluxbox Are Same
-- **Super + Enter** launch URxvt
-- **Super + D** launch Rofi with wrapper script
-- **Super + Space** launch root menu (like right click on the desktop)
-- **Alt + Tab** switch to next window
-- **Alt + Shift + Tab** switch to previous window
-- **Control + Alt + Left/Right** switch to previous/next workspace
-- **Control + Alt + Up/Down**  switch to previous/next window, just like Alt + Tab
-- **Super + Arrows** "Aero Snap"
-- **Super + 1-4** switch to workspace 1-4
-- **Super + Shift + 1-4** take the current active window to workspace 1-4
-- **Super + Shift + Left/Right** take the current active window to prev/next workspace
-- **Super + Alt + Arrows** switch focus to other window in the desired direction
-- **Super + Control + Arrows** teleport
-- **Super + A** central the current focus window
-- **Super + C** close
-- **Super + Z** minimize
-- **Super + F** maximize
-- **Super + T** toggle the window decoration
-- **Super + U** roll up the window
-- **Super + Shift + Backspace** reload, do this after modify the configuration files
-- **Double Click Titlebar** maximize
-- **Scroll Up Titlebar** roll up window
-- **Scroll Down Titlebar** restore rolled up window
-- **Double Click Desktop** list opened programs,
-so I could survive without a taskbar (Openbox only)
-- **Hold Control While Dragging Window** tabbing mode (Fluxbox only)
-- **Scrol Up/Down on Volume (Panel)** turn up/down the volume
-- ..More keybinds just read the *~/.config/openbox/rc.xml* 
-or *~/.fluxbox/keys* file
+1. Install minimal Debian Buster without a desktop environment.
+2. Enable the `contrib` and `non-free` repositories in `/etc/apt/sources.list`.
+3. Connect to the internet.
+4. Install Git (`sudo apt install git`).
+5. Clone this repository:
+   ```bash
+   git clone --depth=1 [https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles.git](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles.git) ~/.dotfiles
+   ```
+6. Copy the dotfiles into your home directory:
+   ```bash
+   cp -a ~/.dotfiles/. ~
+   ```
+7. Install the required packages using the helper script for your window manager:
+   ```bash
+   sh ~/.scripts/openboxpack
+   # or for Fluxbox:
+   sh ~/.scripts/fluxboxpack
+   ```
+8. Add your user to `sudoers` using `visudo` (if `sudo` wasn't configured during installation).
+9. Set the system clock to local time (`timedatectl set-local-rtc 1`) and adjust the BIOS clock accordingly (I keep my BIOS clock on local time instead of UTC).
+10. Change your default login shell to Fish:
+    ```bash
+    chsh -s /usr/bin/fish
+    ```
+11. Review and apply the system configuration examples in `~/.dotfiles/.system`.
+12. Reboot, troubleshoot any small quirks that come up, and start working!
 
-### Mouse Action on Lemonbar (Openbox only)
-- **Click on Disk (Panel)** launch PCManFM 
-- **Click on Volume (Panel)** open Pavucontrol 
-- **Click on SSID (Panel)** open WICD
-- **Click on CPU Load (Panel)** open HTOP
+## Keybindings & Mouse Actions
 
+### Shared Keybindings (Openbox & Fluxbox)
+
+| Shortcut | Action |
+| :--- | :--- |
+| `Super + Enter` | Launch URxvt |
+| `Super + D` | Launch Rofi (via wrapper script) |
+| `Super + Space` | Open the root menu (same as right-clicking the desktop) |
+| `Alt + Tab` | Switch to the next window |
+| `Alt + Shift + Tab` | Switch to the previous window |
+| `Ctrl + Alt + Left/Right` | Switch to the previous or next workspace |
+| `Ctrl + Alt + Up/Down` | Switch to the previous or next window (same as `Alt + Tab`) |
+| `Super + Arrow` | Snap window to screen edges ("Aero Snap") |
+| `Super + 1–4` | Switch to workspaces 1–4 |
+| `Super + Shift + 1–4` | Move the focused window to workspaces 1–4 |
+| `Super + Shift + Left/Right` | Move the focused window to the previous or next workspace |
+| `Super + Alt + Arrow` | Move focus to another window in the chosen direction |
+| `Super + Ctrl + Arrow` | Teleport (move) the focused window in the chosen direction |
+| `Super + A` | Center the focused window |
+| `Super + C` | Close the focused window |
+| `Super + Z` | Minimize (iconify) the focused window |
+| `Super + F` | Maximize the focused window |
+| `Super + T` | Toggle window decorations (titlebar and borders) |
+| `Super + U` | Roll up (shade) the focused window |
+| `Super + Shift + Backspace` | Reload window manager configuration (run after editing config files) |
+
+For the full list of keybindings, check `~/.config/openbox/rc.xml` or `~/.fluxbox/keys`.
+
+### Mouse Actions
+
+| Action | Behavior |
+| :--- | :--- |
+| **Double-click titlebar** | Maximize window |
+| **Scroll up on titlebar** | Roll up (shade) window |
+| **Scroll down on titlebar** | Unroll (unshade) window |
+| **Double-click desktop** *(Openbox only)* | Show a list of open windows (handy for navigating without a taskbar) |
+| **Hold `Ctrl` + drag window** *(Fluxbox only)* | Group windows into tabs |
+| **Scroll up/down on volume (panel)** | Increase or decrease volume |
+
+### Lemonbar Click Actions (Openbox Only)
+
+| Panel Module | Action |
+| :--- | :--- |
+| **Disk** | Open PCManFM |
+| **Volume** | Open `pavucontrol` |
+| **SSID** | Open Wicd |
+| **CPU Load** | Open `htop` |
 
 ## Notes
-- If you want to use this configuration, inspect the code before use.
-- If you find "addy" in the configuration file, replace it with your own username.
-- My Wifi interface is wlp3s0 & my ethernet interface is enp0s25 (ThinkPad X230),
-if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
-- My Wifi interface is wlp2s0 & my ethernet interface is enp1s0 (Aspire A514),
-if you find them in the configuration file, replace with your own. Use `ip a` to find yours.
 
-## Update 16 October 2026
-Most of packages list mentioned above are obsolete, a lot of changes.
-![1](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/nvim.png)
-![2](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/cmus.png)
-![3](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/ranger.png)
-![4](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/menu.png)
-![5](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/mpv.png)
+- If you plan to use these dotfiles, please inspect the configuration files before applying them.
+- Replace any occurrences of `addy` in the configuration files with your own username.
+- Network interface names depend on your hardware—if you spot them in the config files, replace them with yours (run `ip a` to check your interface names):
+  - **ThinkPad X230:** Wi-Fi is `wlp3s0`, Ethernet is `enp0s25`
+  - **Aspire A514:** Wi-Fi is `wlp2s0`, Ethernet is `enp1s0`
 
-I put this dotfiles in [trixie-fluxbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-fluxbox)
+---
 
-- **Terminal** Alacritty
-- **Text Editor** Neovim. I'm not a programmer so there is no fancy things like LSP & Linting Engine here.
-Just a basic text editing setup. The only plugin I use is Mini Neovim.
-I save a copy of the plugin in this repository because I use Debian Stable. The Neovim version here is frozen.
-Just in case Mini Neovim requirement needs a new Neovim version, I can restore the older version.
-- **File Manager** Ranger
-- **Music Player** Cmus
-- **Media Player** MPV
+## Update — October 16, 2026
 
-## Update 29 October 2026
-![1](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/nvim.png)
-![2](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/cmus.png)
-![3](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/lf.png)
-![4](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/rofi.png)
-![5](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/mpv.png)
-![6](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/gimp.png)
-![7](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/startpage.png)
-![8](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/menu.png)
+Most of the package list above is now outdated, as quite a lot has changed! I've pushed this updated setup to the [`trixie-fluxbox`](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-fluxbox) branch.
 
-I put this dotfiles in [trixie-openbox](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox). And The CLI File Manager is now `lf` with `ueberzug`.
+![Neovim](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/nvim.png)
+![cmus](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/cmus.png)
+![Ranger](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/ranger.png)
+![Menu](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/menu.png)
+![mpv](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-fluxbox/preview/mpv.png)
+
+- **Terminal:** Alacritty
+- **Text Editor:** Neovim — I'm not a programmer, so there's nothing fancy like LSPs or linters here; just a lightweight setup for basic text editing. The only plugin I use is `mini.nvim`. Because I use Debian Stable (where Neovim stays on a fixed version), I keep a backup copy of the plugin in this repository so I can restore a compatible release if upstream ever bumps its minimum Neovim requirement.
+- **File Manager:** Ranger
+- **Music Player:** `cmus`
+- **Media Player:** `mpv`
+
+## Update — October 29, 2026
+
+I've pushed the updated Openbox configuration to the [`trixie-openbox`](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox) branch. The CLI file manager is now `lf` paired with `ueberzug` for image previews.
+
+![Neovim](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/nvim.png)
+![cmus](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/cmus.png)
+![lf](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/lf.png)
+![Rofi](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/rofi.png)
+![mpv](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/mpv.png)
+![GIMP](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/gimp.png)
+![Startpage](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/startpage.png)
+![Menu](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/blob/trixie-openbox/preview/menu.png)
