@@ -1,6 +1,7 @@
 # Introduction
 
 *Initial Commit 2 January 2020*
+
 Personal dotfiles and setup notes for running **Openbox** and **Fluxbox** on Debian across two laptops. I'm sharing these configurations mainly as a reference and personal backup—feel free to borrow whatever you find useful!
 
 ## Preview
