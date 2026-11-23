@@ -1,5 +1,6 @@
-# debian-openbox-fluxbox-dotfiles
+# Introduction
 
+*Initial Commit 2 January 2020*
 Personal dotfiles and setup notes for running **Openbox** and **Fluxbox** on Debian across two laptops. I'm sharing these configurations mainly as a reference and personal backup—feel free to borrow whatever you find useful!
 
 ## Preview
@@ -159,7 +160,7 @@ For the full list of keybindings, check `~/.config/openbox/rc.xml` or `~/.fluxbo
 
 ---
 
-## Update — October 16, 2026
+## Update — 16 October 2026
 
 Most of the package list above is now outdated, as quite a lot has changed! I've pushed this updated setup to the [`trixie-fluxbox`](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-fluxbox) branch.
 
@@ -175,7 +176,7 @@ Most of the package list above is now outdated, as quite a lot has changed! I've
 - **Music Player:** `cmus`
 - **Media Player:** `mpv`
 
-## Update — October 29, 2026
+## Update — 29 October 2026
 
 I've pushed the updated Openbox configuration to the [`trixie-openbox`](https://github.com/addy-dclxvi/debian-openbox-fluxbox-dotfiles/tree/trixie-openbox) branch. The CLI file manager is now `lf` paired with `ueberzug` for image previews.
 
